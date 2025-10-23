@@ -1,0 +1,46 @@
+services:
+
+  nginx:
+    container_name: until_nginx
+    build: ./nginx
+    volumes:
+      - ../app:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      CERT_NAME: default
+    depends_on:
+      - php
+
+  php:
+    container_name: until_php
+    build: ./php
+    volumes:
+      - ../app:/var/www/html
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: until_mysql
+    build: 
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./mysql:/mysql
+    ports:
+      - "33306:3306"
+
+
+networks:
+  default:
+    external: true
+    name: sakura-network
+
