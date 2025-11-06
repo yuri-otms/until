@@ -3,15 +3,16 @@ services:
   web:
     container_name: until_web
     build:
-      context: ./docker/php
+      context: ./php
       dockerfile: Dockerfile
     ports:
       - "8001:80"
     environment:
       TZ: 'Asia/Tokyo'
     volumes:
-      - ./app:/var/www
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ../app:/var/www
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+
   mysql:
     container_name: until_mysql
     build: 
