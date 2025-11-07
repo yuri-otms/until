@@ -1,11 +1,11 @@
 import {
     HomeCard,
     HomeCardHeader,
-    HomeCardFooter,
     HomeCardTitle,
     HomeCardDescription,
     HomeCardContent
 } from '@/components/ui/home-card';
+import { ContentButton } from '@/components/ui/content-button';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Index(
@@ -13,7 +13,7 @@ export default function Index(
 
     return (
         <>
-            <Head title="Welcome">
+            <Head title="">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link
                     href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
@@ -40,11 +40,50 @@ export default function Index(
                     <main className="w-full">
                         <p className="p-2">80歳になる2065年まで40年続けるサイトです。</p>
                         <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>プロフィール</HomeCardTitle>
+                                <HomeCardDescription>
+                                    不登校、ひきこもり、長期無職、対人恐怖（社交不安障害）、短期離職の繰り返しから、自分の夢を叶える方法を模索しています。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
 
+                            </HomeCardContent>
                         </HomeCard>
-                        <h2 className="text-2xl pt-1 pb-1 border-b border-[#0a0a0a]">プロフィール</h2>
-                        <p className="p-2">不登校、ひきこもり、長期無職、対人恐怖（社交不安障害）、短期離職の繰り返しから、自分の夢を叶える方法を模索しています。</p>
-                        <h2 className="text-2xl border-b border-[#c41a30]">読み物</h2>
+                        <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>読み物</HomeCardTitle>
+                                <HomeCardDescription>
+                                    外部サイトの内容まとめなどです。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                            </HomeCardContent>
+                        </HomeCard>
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
