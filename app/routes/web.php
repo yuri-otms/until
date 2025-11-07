@@ -10,6 +10,13 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/two', function () {
+    return Inertia::render('index-2', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('two');
+
+
 Route::get('/welcome', function () {
     return Inertia::render('welcome', [
         'canRegister' => Features::enabled(Features::registration()),

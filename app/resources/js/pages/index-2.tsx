@@ -8,7 +8,7 @@ import {
 import { ContentButton } from '@/components/ui/content-button';
 import { Head, Link } from '@inertiajs/react';
 
-export default function Index(
+export default function Index2(
    ) {
 
     return (
@@ -36,7 +36,7 @@ export default function Index(
                         </nav>
                     </div>
                 </header>
-                <div className="flex-grow w-full items-center lg:max-w-4xl pt-16 px-3">
+                <div className="flex-grow w-full items-center lg:max-w-4xl pt-16 px-3 mb-8">
                     <main className="w-full">
                         <p className="p-2">80歳になる2065年まで40年続けるサイトです。</p>
                         <HomeCard>
@@ -56,6 +56,84 @@ export default function Index(
                                     アプリ
                                 </ContentButton>
 
+                            </HomeCardContent>
+                        </HomeCard>
+                        <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>読み物</HomeCardTitle>
+                                <HomeCardDescription>
+                                    外部サイトの内容まとめなどです。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                            </HomeCardContent>
+                        </HomeCard>
+                        <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>読み物</HomeCardTitle>
+                                <HomeCardDescription>
+                                    外部サイトの内容まとめなどです。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                            </HomeCardContent>
+                        </HomeCard>
+                        <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>読み物</HomeCardTitle>
+                                <HomeCardDescription>
+                                    外部サイトの内容まとめなどです。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
                             </HomeCardContent>
                         </HomeCard>
                         <HomeCard>
