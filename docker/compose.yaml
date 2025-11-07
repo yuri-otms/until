@@ -1,0 +1,32 @@
+services:
+
+  web:
+    container_name: until_web
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - "8001:80"
+    environment:
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ../app:/var/www
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+
+  mysql:
+    container_name: until_mysql
+    build: 
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./mysql:/mysql
+    ports:
+      - "33306:3306"
+
+

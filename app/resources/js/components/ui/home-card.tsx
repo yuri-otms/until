@@ -1,0 +1,68 @@
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function HomeCard({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card"
+      className={cn(
+        "flex flex-col py-1",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function HomeCardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn("flex flex-col", className)}
+      {...props}
+    />
+  )
+}
+
+function HomeCardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-title"
+      className={cn("text-2xl pt-1 border-b border-[#0a0a0a]", className)}
+      {...props}
+    />
+  )
+}
+
+function HomeCardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn("p-2", className)}
+      {...props}
+    />
+  )
+}
+
+function HomeCardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-2 grid grid-cols-2 md:grid-cols-4 gap-2", className)}
+      {...props}
+    />
+  )
+}
+
+function HomeCardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn("flex items-center px-6", className)}
+      {...props}
+    />
+  )
+}
+
+export { HomeCard, HomeCardHeader, HomeCardFooter, HomeCardTitle, HomeCardDescription, HomeCardContent }
