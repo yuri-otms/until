@@ -86,10 +86,10 @@ export default function Index(
                         </HomeCard>
                     </main>
                 </div>
-                <footer className="sticky w-full py-2 bg-[#ca4130]">
+                <footer className="sticky w-full py-2 bg-[#ca4130] text-white text-sm">
                     <div className="mx-auto items-center lg:max-w-4xl flex justify-between gap-4 px-3">
                         <div>
-                        footer
+                        @yuri All rights reserved.
                         </div>
                     </div>
                 </footer>
