@@ -76,7 +76,7 @@ export default function Index(
                             <HomeCardContent>
                                 <ContentButton
                                     href="/welcome">
-                                    未経験<br />エンジニア転職
+
                                 </ContentButton>
                                 <ContentButton
                                     href="/welcome">
