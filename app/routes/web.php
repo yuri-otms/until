@@ -8,7 +8,6 @@ Route::get('/', function () {
     return Inertia::render('index', []);
 })->name('home');
 
-
 Route::get('/welcome', function () {
     return Inertia::render('welcome', [
         'canRegister' => Features::enabled(Features::registration()),
