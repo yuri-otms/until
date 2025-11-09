@@ -20,10 +20,10 @@ export default function Index(
                     rel="stylesheet"
                 />
             </Head>
-            <div className="flex min-h-screen flex-col  items-center bg-[#efefef] text-[#1b1b18] dark:bg-[#0a0a0a]">
-                <header className="fixed mb-6 w-full text-lg py-2 bg-[#494544] text-[#FDFDFC]">
-                    <div className="mx-auto items-center lg:max-w-4xl flex justify-between gap-4 px-3">
-                        <h1>80歳まで続けるサイト</h1>
+            <div className="flex min-h-screen flex-col  items-center bg-[#ffffff] text-[#494544] dark:bg-[#040404]">
+                <header className="fixed mb-6 w-full text-lg py-2 text-[#ffffff] bg-[#494544] border ">
+                    <div className="flex justify-between mx-auto items-center lg:max-w-4xl gap-4 px-3 font-bold">
+                        <span><a href="/">80歳まで続けるサイト</a></span>
                         <nav className="justify-end">
                             <Link
                                 href="/welcome"
@@ -39,25 +39,7 @@ export default function Index(
                 <div className="flex-grow w-full items-center lg:max-w-4xl pt-16 px-3">
                     <main className="w-full">
                         <p className="p-2">80歳になる2065年まで40年続けるサイトです。</p>
-                        <HomeCard>
-                            <HomeCardHeader>
-                                <HomeCardTitle>プロフィール</HomeCardTitle>
-                                <HomeCardDescription>
-                                    不登校、ひきこもり、長期無職、対人恐怖（社交不安障害）、短期離職の繰り返しから、自分の夢を叶える方法を模索しています。
-                                </HomeCardDescription>
-                            </HomeCardHeader>
-                            <HomeCardContent>
-                                <ContentButton
-                                    href="/welcome">
-                                    未経験<br />エンジニア転職
-                                </ContentButton>
-                                <ContentButton
-                                    href="/welcome">
-                                    アプリ
-                                </ContentButton>
 
-                            </HomeCardContent>
-                        </HomeCard>
                         <HomeCard>
                             <HomeCardHeader>
                                 <HomeCardTitle>読み物</HomeCardTitle>
@@ -84,9 +66,28 @@ export default function Index(
                                 </ContentButton>
                             </HomeCardContent>
                         </HomeCard>
+                        <HomeCard>
+                            <HomeCardHeader>
+                                <HomeCardTitle>プロフィール</HomeCardTitle>
+                                <HomeCardDescription>
+                                    不登校、ひきこもり、長期無職、対人恐怖（社交不安障害）、短期離職の繰り返しから、自分の夢を叶える方法を模索しています。
+                                </HomeCardDescription>
+                            </HomeCardHeader>
+                            <HomeCardContent>
+                                <ContentButton
+                                    href="/welcome">
+                                    未経験<br />エンジニア転職
+                                </ContentButton>
+                                <ContentButton
+                                    href="/welcome">
+                                    アプリ
+                                </ContentButton>
+
+                            </HomeCardContent>
+                        </HomeCard>
                     </main>
                 </div>
-                <footer className="sticky w-full py-2 bg-[#ca4130] text-white text-sm">
+                <footer className="sticky w-full py-3 bg-[#ca4130] text-white text-sm">
                     <div className="mx-auto items-center lg:max-w-4xl flex justify-between gap-4 px-3">
                         <div>
                         @yuri All rights reserved.
