@@ -21,7 +21,6 @@ class ContentRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(Content::class),
             ],
         ];
     }

@@ -31,8 +31,16 @@ class ContentsController extends Controller
         return to_route('contents.index');
     }
 
-    public function  edit(Request $request): Response
+    public function  edit(Content $content): Response
     {
-        return Inertia::render('contents/edit', []);
+        return Inertia::render('contents/edit', [
+            'content' => $content,
+        ]);
+    }
+
+    public function update(ContentRequest $request, Content $content): RedirectResponse
+    {
+        $content->update($request->validated());
+        return to_route('contents.index');
     }
 }
