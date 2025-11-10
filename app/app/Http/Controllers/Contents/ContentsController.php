@@ -43,4 +43,10 @@ class ContentsController extends Controller
         $content->update($request->validated());
         return to_route('contents.index');
     }
+
+    public function destroy(Content $content): RedirectResponse
+    {
+        $content->delete();
+        return to_route('contents.index');
+    }
 }

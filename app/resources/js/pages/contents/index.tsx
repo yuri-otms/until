@@ -12,6 +12,7 @@ import ContentsLayout from '@/layouts/contents/layout';import {
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
 import { edit } from '@/routes/contents';
+import DeleteContent from '@/components/delete-content';
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -46,10 +47,9 @@ export default function Index({
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
-                                    <LinkButton href={edit(row.id).url} className="bg-green-300">編集
+                                    <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
-                                    <LinkButton href="/" className="bg-red-300">削除
-                                    </LinkButton>
+                                    <DeleteContent contentId={row.id} />
                                 </TableCell>
                             </TableRow>
                         ))
