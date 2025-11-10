@@ -1,4 +1,4 @@
-import { BreadcrumbItem } from "@/types";
+import { type BreadcrumbItem, type Content } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';import {
@@ -19,22 +19,11 @@ const breadcrubms: BreadcrumbItem[] = [
     },
 ];
 
-const data: Payment[] = [
-  {
-    id: 1,
-    name: '未経験エンジニア転職',
-  },
-  {
-    id: 2,
-    name: 'アプリ',
-  }
-]
-export type Payment = {
-  id: number
-  name: string
-}
-
-export default function Contents() {
+export default function Index({
+    contents
+}: {
+    contents: Content[]
+}) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ設定" />
@@ -49,7 +38,7 @@ export default function Contents() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.map((row) => (
+                        {contents.map((row) => (
                             <TableRow
                             key={row.id}
                             >

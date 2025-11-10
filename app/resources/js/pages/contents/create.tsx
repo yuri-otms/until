@@ -1,8 +1,6 @@
 import { BreadcrumbItem } from "@/types";
-import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';
-import { LinkButton } from "@/components/ui/link-button";
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { Label } from '@/components/ui/label';

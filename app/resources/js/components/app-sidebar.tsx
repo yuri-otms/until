@@ -13,12 +13,18 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { LayoutGrid, Settings } from 'lucide-react';
+import { LayoutGrid, Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
 import { index } from '@/routes/contents'
+import { home } from '@/routes'
 
 
 const mainNavItems: NavItem[] = [
+    {
+        title: 'Home',
+        href: home(),
+        icon: House,
+    },
     {
         title: 'ダッシュボード',
         href: dashboard(),

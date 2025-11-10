@@ -1,5 +1,4 @@
 import Heading from '@/components/heading';
-import { Separator } from '@/components/ui/separator';
 import { LinkButton } from '@/components/ui/link-button';
 import { type PropsWithChildren } from 'react';
 

@@ -15,7 +15,9 @@ class ContentsController extends Controller
     //
     public function index(): Response
     {
-        return Inertia::render('contents/index', []);
+        return Inertia::render('contents/index', [
+            'contents' => Content::all(),
+        ]);
     }
 
     public function create(): Response
@@ -25,9 +27,7 @@ class ContentsController extends Controller
 
     public function store(ContentRequest $request): RedirectResponse
     {
-        Content::create([
-            'name' => $request->name,
-        ]);
+        Content::create($request->all());
         return to_route('contents.index');
     }
 
