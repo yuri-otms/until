@@ -17,11 +17,9 @@ export default function ContentsLayout({ children }: PropsWithChildren) {
                     description="各コンテンツの詳細を設定します"
                 />
 
-                <LinkButton href="/" className="bg-cyan-200">新規作成</LinkButton>
+                <LinkButton href="/contents/create" className="bg-black">新規作成</LinkButton>
             </div>
             <div className="flex flex-col lg:flex-row">
-
-                <Separator className="my-6 lg:hidden" />
 
                 <div className="w-full">
                     <section className="space-y-12">
