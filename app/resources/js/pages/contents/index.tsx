@@ -11,7 +11,7 @@ import ContentsLayout from '@/layouts/contents/layout';import {
 } from "@/components/ui/table"
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
-import { edit, create } from '@/routes/contents';
+import { edit, create, destroy } from '@/routes/contents';
 import DeleteContent from '@/components/delete-content';
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -49,7 +49,7 @@ export default function Index({
                                 <TableCell>
                                     <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
-                                    <DeleteContent id={row.id} destroy={destroy.form(row.id)} />
+                                    <DeleteContent　model="コンテンツ" destroy={destroy.form(row.id)} />
                                 </TableCell>
                             </TableRow>
                         ))

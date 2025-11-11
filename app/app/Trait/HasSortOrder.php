@@ -14,10 +14,16 @@ trait HasSortOrder
             DB::table($model->getTable())
                 ->increment('sort_order');
         });
+
+        static::deleted(function (Model $model) {
+            $deletedOrder = $model->sort_order;
+            DB::table($model->getTable())
+                ->where('sort_order', '>', $deletedOrder)
+                ->decrement('sort_order');
+        });
+
     }
 
-    // TODO: 新規作成時、同グループのsort_orderを全て+1する
-    // TODO: 削除時、同グループのsort_orderを全て-1する
 
 
 }

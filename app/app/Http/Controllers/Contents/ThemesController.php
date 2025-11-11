@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Contents;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contents\ContentRequest;
+use App\Http\Requests\Contents\ThemeStoreRequest;
+use App\Http\Requests\Contents\ThemeUpdateRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Theme;
@@ -16,7 +16,8 @@ class ThemesController extends Controller
     public function index(): Response
     {
         return Inertia::render('themes/index', [
-            'themes' => Theme::all(),
+            'themes' => Theme::orderBy('sort_order')
+                        ->get(),
         ]);
     }
 
@@ -25,7 +26,7 @@ class ThemesController extends Controller
         return Inertia::render('themes/create', []);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ThemeStoreRequest $request): RedirectResponse
     {
         Theme::create($request->all());
         return to_route('themes.index');
@@ -38,7 +39,7 @@ class ThemesController extends Controller
         ]);
     }
 
-    public function update(Request $request, Theme $theme): RedirectResponse
+    public function update(ThemeUpdateRequest $request, Theme $theme): RedirectResponse
     {
         $theme->update($request->validated());
         return to_route('themes.index');

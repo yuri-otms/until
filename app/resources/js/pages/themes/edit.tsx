@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Content } from "@/types";
+import { type BreadcrumbItem, type Theme } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { index, update } from '@/routes/themes'
+import { index, create, update } from '@/routes/themes'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -20,16 +20,16 @@ const breadcrubms: BreadcrumbItem[] = [
     }
 ];
 export default function Edit({
-    content
+    theme
 }: {
-    content: Content
+    theme: Theme
 }) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="テーマ新規作成" />
-            <ContentsLayout title="テーマ設定">
+            <ContentsLayout create={create().url} title="テーマ設定">
                 <Form
-                    {...update.form(content.id)}
+                    {...update.form(theme.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
                     disableWhileProcessing
                     className="flex flex-col gap-6"
@@ -41,7 +41,7 @@ export default function Edit({
                                     <Label htmlFor="name">テーマ名</Label>
                                                                                                 <Input
                                     id="name"
-                                    defaultValue={content.name}
+                                    defaultValue={theme.name}
                                     type="text"
                                     required
                                     autoFocus
