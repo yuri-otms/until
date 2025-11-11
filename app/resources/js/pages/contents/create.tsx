@@ -25,18 +25,11 @@ const breadcrubms: BreadcrumbItem[] = [
     }
 ];
 
-const themes: Theme[] = [
-    {
-        id: 1,
-        name: '読み物',
-    },
-    {
-        id: 2,
-        name: 'プロフィール',
-    },
-];
-
-export default function Create() {
+export default function Create({
+    themes
+} : {
+    themes: Theme[]
+}) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />

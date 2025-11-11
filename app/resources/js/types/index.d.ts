@@ -45,6 +45,7 @@ export interface User {
 export interface Content {
     id: number;
     name: string;
+    theme_id: string;
 }
 
 export interface Theme {

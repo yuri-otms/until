@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Content;
+use App\Models\Theme;
 
 class ContentsController extends Controller
 {
@@ -18,13 +19,16 @@ class ContentsController extends Controller
     {
         return Inertia::render('contents/index', [
             'contents' => Content::orderBy('sort_order')
-                            ->get(),
+                            ->get()
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('contents/create', []);
+        return Inertia::render('contents/create', [
+            'themes' => Theme::orderBy('sort_order')
+                        ->get(),
+        ]);
     }
 
     public function store(ContentStoreRequest $request): RedirectResponse
@@ -37,6 +41,8 @@ class ContentsController extends Controller
     {
         return Inertia::render('contents/edit', [
             'content' => $content,
+            'themes' => Theme::orderBy('sort_order')
+                        ->get(),
         ]);
     }
 
