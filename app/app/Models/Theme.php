@@ -7,6 +7,8 @@ use App\Trait\HasSortOrder;
 
 class Theme extends Model
 {
+    protected static ?string $sortScope = '';
+
     use HasSortOrder;
 
     protected $fillable = [

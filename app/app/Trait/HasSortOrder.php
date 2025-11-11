@@ -11,8 +11,13 @@ trait HasSortOrder
         static::creating(function (Model $model) {
             $model->sort_order = 1;
             // 既存のデータのsort_order変更
-            DB::table($model->getTable())
-                ->increment('sort_order');
+            $query = DB::table($model->getTable());
+
+            if (static::$sortScope && $model->{static::$sortScope}) {
+                $query->where(static::$sortScope, $model->{static::$sortScope});
+            }
+
+            $query->increment('sort_order');
         });
 
         static::deleted(function (Model $model) {

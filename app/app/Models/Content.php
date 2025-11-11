@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model
 {
+    protected static ?string $sortScope = 'theme_id';
+
     protected $fillable = [
         'name',
     ];
