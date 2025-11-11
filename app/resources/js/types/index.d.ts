@@ -46,11 +46,13 @@ export interface Content {
     id: number;
     name: string;
     theme_id: string;
+    sort_order: string;
 }
 
 export interface Theme {
     id: number;
     name: string;
+    sort_order: string;
 }
 
 export interface ContentGroup {

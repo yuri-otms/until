@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Content, type ContentGroup } from "@/types";
+import { type BreadcrumbItem, type ContentGroup } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';import {
@@ -52,7 +52,7 @@ export default function Index({
                                 <TableCell>
                                     <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
-                                    <DeleteContent　model="コンテンツ" destroy={destroy.form(row.id)} />
+                                    <DeleteContent model="コンテンツ" destroy={destroy.form(row.id)} />
                                 </TableCell>
                             </TableRow>
                         ))
