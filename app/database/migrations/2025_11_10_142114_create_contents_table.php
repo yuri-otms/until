@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('sort_order');
+            $table->integer('sort_order')->default(0);
             $table->foreignId('themes_id');
             $table->timestamps();
         });

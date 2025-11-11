@@ -25,7 +25,7 @@ class ThemesController extends Controller
         return Inertia::render('themes/create', []);
     }
 
-    public function store(ContentRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         Theme::create($request->all());
         return to_route('themes.index');
@@ -38,7 +38,7 @@ class ThemesController extends Controller
         ]);
     }
 
-    public function update(ContentRequest $request, Theme $theme): RedirectResponse
+    public function update(Request $request, Theme $theme): RedirectResponse
     {
         $theme->update($request->validated());
         return to_route('themes.index');
