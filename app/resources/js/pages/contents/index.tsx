@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Content } from "@/types";
+import { type BreadcrumbItem, type Content, type ContentGroup } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';import {
@@ -22,14 +22,17 @@ const breadcrubms: BreadcrumbItem[] = [
 ];
 
 export default function Index({
-    contents
+    contentGroup
 }: {
-    contents: Content[]
+    contentGroup: ContentGroup[]
 }) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ設定" />
             <ContentsLayout title="コンテンツ設定" create={create().url}>
+            {contentGroup.map((themeRow) => (
+                <div>
+                <h3 className="py-2 font-bold">{themeRow.themeName}</h3>
                 <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableHeader>
@@ -40,7 +43,7 @@ export default function Index({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {contents.map((row) => (
+                        {themeRow.contents.map((row) => (
                             <TableRow
                             key={row.id}
                             >
@@ -57,6 +60,8 @@ export default function Index({
                     </TableBody>
                     </Table>
                 </div>
+                </div>
+            ))}
             </ContentsLayout>
 
         </AppLayout>

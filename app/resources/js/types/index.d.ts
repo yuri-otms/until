@@ -52,3 +52,8 @@ export interface Theme {
     id: number;
     name: string;
 }
+
+export interface ContentGroup {
+    themeName: string;
+    contents: Content[];
+}

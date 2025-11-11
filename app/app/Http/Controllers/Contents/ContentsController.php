@@ -17,9 +17,20 @@ class ContentsController extends Controller
     //
     public function index(): Response
     {
+        $themes = Theme::orderBy('sort_order')
+                        ->get();
+        $contentGroup = [];
+        foreach ($themes as $theme) {
+            $contentGroup[] = [
+                'themeName' => $theme->name,
+                'contents' => Content::query()
+                                ->where('theme_id', $theme->id)
+                                ->orderBy('sort_order')
+                                ->get(),
+            ];
+        }
         return Inertia::render('contents/index', [
-            'contents' => Content::orderBy('sort_order')
-                            ->get()
+            'contentGroup' => $contentGroup
         ]);
     }
 
