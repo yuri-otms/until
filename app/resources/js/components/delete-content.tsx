@@ -9,12 +9,15 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Form } from '@inertiajs/react';
-import { destroy } from '@/routes/contents';
+import { type RouteFormDefinition } from '@/wayfinder';
+
 
 export default function DeleteContent({
-    contentId
+    model,
+    destroy
 }: {
-    contentId: number
+    model: string;
+    destroy : RouteFormDefinition<"post">;
 }) {
 
     return (
@@ -30,14 +33,14 @@ export default function DeleteContent({
                     </DialogTrigger>
                     <DialogContent>
                         <DialogTitle>
-                            コンテンツを削除して良いですか？
+                            {model}を削除して良いですか？
                         </DialogTitle>
                         <DialogDescription>
                            一度削除すると、復元できません。
                         </DialogDescription>
 
                         <Form
-                            {...destroy.form(contentId)}
+                            {...destroy}
                             options={{
                                 preserveScroll: true,
                             }}

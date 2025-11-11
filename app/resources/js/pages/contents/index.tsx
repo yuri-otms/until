@@ -49,7 +49,7 @@ export default function Index({
                                 <TableCell>
                                     <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
-                                    <DeleteContent contentId={row.id} />
+                                    <DeleteContent id={row.id} destroy={destroy.form(row.id)} />
                                 </TableCell>
                             </TableRow>
                         ))

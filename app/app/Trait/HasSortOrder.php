@@ -2,6 +2,7 @@
 
 namespace App\Trait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 trait HasSortOrder
 {
@@ -9,6 +10,9 @@ trait HasSortOrder
     {
         static::creating(function (Model $model) {
             $model->sort_order = 1;
+            // 既存のデータのsort_order変更
+            DB::table($model->getTable())
+                ->increment('sort_order');
         });
     }
 
