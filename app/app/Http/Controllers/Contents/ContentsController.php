@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Contents;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contents\ContentRequest;
+use App\Http\Requests\Contents\ContentStoreRequest;
+use App\Http\Requests\Contents\ContentUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,7 +17,8 @@ class ContentsController extends Controller
     public function index(): Response
     {
         return Inertia::render('contents/index', [
-            'contents' => Content::all(),
+            'contents' => Content::orderBy('sort_order')
+                            ->get(),
         ]);
     }
 
@@ -25,7 +27,7 @@ class ContentsController extends Controller
         return Inertia::render('contents/create', []);
     }
 
-    public function store(ContentRequest $request): RedirectResponse
+    public function store(ContentStoreRequest $request): RedirectResponse
     {
         Content::create($request->all());
         return to_route('contents.index');
@@ -38,7 +40,7 @@ class ContentsController extends Controller
         ]);
     }
 
-    public function update(ContentRequest $request, Content $content): RedirectResponse
+    public function update(ContentUpdateRequest $request, Content $content): RedirectResponse
     {
         $content->update($request->validated());
         return to_route('contents.index');

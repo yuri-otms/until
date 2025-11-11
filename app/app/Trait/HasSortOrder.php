@@ -22,8 +22,14 @@ trait HasSortOrder
 
         static::deleted(function (Model $model) {
             $deletedOrder = $model->sort_order;
-            DB::table($model->getTable())
-                ->where('sort_order', '>', $deletedOrder)
+
+            $query = DB::table($model->getTable());
+
+            if (static::$sortScope && $model->{static::$sortScope}) {
+                $query->where(static::$sortScope, $model->{static::$sortScope});
+            }
+
+            $query->where('sort_order', '>', $deletedOrder)
                 ->decrement('sort_order');
         });
 

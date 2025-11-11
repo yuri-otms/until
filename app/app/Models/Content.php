@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Trait\HasSortOrder;
 
 class Content extends Model
 {
+    use HasSortOrder;
     protected static ?string $sortScope = 'theme_id';
 
     protected $fillable = [
         'name',
+        'sort_order',
+        'theme_id'
     ];
 
     public function theme()

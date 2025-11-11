@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('sort_order')->default(0);
-            $table->foreignId('themes_id');
+            $table->foreignId('theme_id')->default(0);
             $table->timestamps();
         });
     }
