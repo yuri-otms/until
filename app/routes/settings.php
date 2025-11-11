@@ -6,6 +6,7 @@ use App\Http\Controllers\Settings\TwoFactorAuthenticationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Contents\ContentsController;
+use App\Http\Controllers\Contents\ThemesController;
 
 
 Route::middleware('auth')->group(function () {
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resources([
         'contents' => ContentsController::class,
+        'themes' => ThemesController::class,
     ]);
 });
 

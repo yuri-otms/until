@@ -27,7 +27,7 @@ export default function Edit({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
-            <ContentsLayout>
+            <ContentsLayout title="コンテンツ設定">
                 <Form
                     {...update.form(content.id)}
                     resetOnSuccess={['password', 'password_confirmation']}

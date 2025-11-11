@@ -15,7 +15,8 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { LayoutGrid, Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
-import { index } from '@/routes/contents'
+import { index as contentIndex } from '@/routes/contents'
+import { index as themeIndex } from '@/routes/themes'
 import { home } from '@/routes'
 
 
@@ -35,7 +36,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'コンテンツ設定',
-        href: index(),
+        href: contentIndex(),
+        icon: Settings,
+    },
+    {
+        title: 'テーマ設定',
+        href: themeIndex(),
         icon: Settings,
     },
 ];

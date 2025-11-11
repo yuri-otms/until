@@ -46,3 +46,8 @@ export interface Content {
     id: number;
     name: string;
 }
+
+export interface Theme {
+    id: number;
+    name: string;
+}

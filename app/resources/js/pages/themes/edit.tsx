@@ -1,4 +1,4 @@
-import { BreadcrumbItem } from "@/types";
+import { type BreadcrumbItem, type Content } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
@@ -7,26 +7,29 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { store } from '@/routes/contents';
-import { index } from '@/routes/contents'
+import { index, update } from '@/routes/themes'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
-        title: 'コンテンツ設定',
+        title: 'テーマ設定',
         href: index().url,
     },
     {
-        title: '新規作成',
+        title: '編集',
         href: '',
     }
 ];
-export default function Create() {
+export default function Edit({
+    content
+}: {
+    content: Content
+}) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
-            <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定">
+            <Head title="テーマ新規作成" />
+            <ContentsLayout title="テーマ設定">
                 <Form
-                    {...store.form()}
+                    {...update.form(content.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
                     disableWhileProcessing
                     className="flex flex-col gap-6"
@@ -35,9 +38,10 @@ export default function Create() {
                         <>
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">コンテンツ名</Label>
+                                    <Label htmlFor="name">テーマ名</Label>
                                                                                                 <Input
                                     id="name"
+                                    defaultValue={content.name}
                                     type="text"
                                     required
                                     autoFocus
@@ -57,7 +61,7 @@ export default function Create() {
                                         data-test="register-user-button"
                                     >
                                         {processing && <Spinner />}
-                                        新規作成
+                                        更新
                                     </Button>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Content } from "@/types";
+import { type BreadcrumbItem, type Theme } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';import {
@@ -11,36 +11,36 @@ import ContentsLayout from '@/layouts/contents/layout';import {
 } from "@/components/ui/table"
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
-import { edit, create } from '@/routes/contents';
+import { edit, create } from '@/routes/themes';
 import DeleteContent from '@/components/delete-content';
 
 const breadcrubms: BreadcrumbItem[] = [
     {
-        title: 'コンテンツ設定',
+        title: 'テーマ設定',
         href: dashboard().url,
     },
 ];
 
 export default function Index({
-    contents
+    themes
 }: {
-    contents: Content[]
+    themes: Theme[]
 }) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
-            <Head title="コンテンツ設定" />
-            <ContentsLayout title="コンテンツ設定" create={create().url}>
+            <Head title="テーマ設定" />
+            <ContentsLayout title="テーマ設定" create={create().url}>
                 <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableHeader>
                         <TableRow>
                         <TableHead>ID</TableHead>
-                        <TableHead>コンテンツ</TableHead>
+                        <TableHead>テーマ</TableHead>
                         <TableHead>動作</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {contents.map((row) => (
+                        {themes.map((row) => (
                             <TableRow
                             key={row.id}
                             >

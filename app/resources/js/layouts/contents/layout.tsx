@@ -2,7 +2,16 @@ import Heading from '@/components/heading';
 import { LinkButton } from '@/components/ui/link-button';
 import { type PropsWithChildren } from 'react';
 
-export default function ContentsLayout({ children }: PropsWithChildren) {
+interface ContentsLayoutProps {
+    title: string;
+    create: string;
+}
+
+export default function ContentsLayout({
+    children,
+    title,
+    create
+}: PropsWithChildren<ContentsLayoutProps>) {
     // When server-side rendering, we only render the layout on the client...
     if (typeof window === 'undefined') {
         return null;
@@ -12,11 +21,10 @@ export default function ContentsLayout({ children }: PropsWithChildren) {
         <div className="px-4 py-6">
             <div className="flex justify-between">
                 <Heading
-                    title="コンテンツ設定"
+                    title={title}
                     description="各コンテンツの詳細を設定します"
                 />
-
-                <LinkButton href="/contents/create" className="bg-black">新規作成</LinkButton>
+                <LinkButton href={create}>新規作成</LinkButton>
             </div>
             <div className="flex flex-col lg:flex-row">
 

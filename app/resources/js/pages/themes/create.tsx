@@ -8,11 +8,11 @@ import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { store } from '@/routes/contents';
-import { index } from '@/routes/contents'
+import { index } from '@/routes/themes'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
-        title: 'コンテンツ設定',
+        title: 'テーマ設定',
         href: index().url,
     },
     {
@@ -23,8 +23,8 @@ const breadcrubms: BreadcrumbItem[] = [
 export default function Create() {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
-            <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定">
+            <Head title="テーマ新規作成" />
+            <ContentsLayout title="テーマ設定">
                 <Form
                     {...store.form()}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -35,7 +35,7 @@ export default function Create() {
                         <>
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">コンテンツ名</Label>
+                                    <Label htmlFor="name">テーマ名</Label>
                                                                                                 <Input
                                     id="name"
                                     type="text"
