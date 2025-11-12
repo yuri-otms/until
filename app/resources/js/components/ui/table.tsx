@@ -1,4 +1,7 @@
 import * as React from "react"
+import { useDroppable } from "@dnd-kit/core";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities"
 
 import { cn } from "@/lib/utils"
 
@@ -28,13 +31,21 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
-  )
+    const { isOver, setNodeRef } = useDroppable({
+        id: 'droppable',
+    });
+    const style = {
+        color: isOver ? 'green' : undefined,
+    };
+    return (
+            <tbody
+            ref={setNodeRef}
+            style={style}
+            data-slot="table-body"
+            className={cn("[&_tr:last-child]:border-0", className)}
+            {...props}
+            />
+        )
 }
 
 function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
@@ -50,7 +61,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+function TableRow({className, ...props}: React.ComponentProps<"tr">) {
   return (
     <tr
       data-slot="table-row"
@@ -62,6 +73,34 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     />
   )
 }
+
+function TableSortableRow({
+    model_id,
+    className,
+    ...props
+}: React.ComponentProps<"tr"> & {
+    model_id: number;
+}) {
+  const {listeners, setNodeRef, transform} = useSortable({
+    id: model_id,
+  });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+  };
+
+  return (
+    <tr
+      data-slot="table-row"
+      className={cn(
+        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
+        className
+      )}
+       ref={setNodeRef} style={style} {...listeners}
+      {...props}
+    />
+  )
+}
+
 
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
@@ -109,6 +148,7 @@ export {
   TableFooter,
   TableHead,
   TableRow,
+  TableSortableRow,
   TableCell,
   TableCaption,
 }
