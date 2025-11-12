@@ -1,5 +1,4 @@
 import * as React from "react"
-import { useDroppable } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities"
 
@@ -31,16 +30,8 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-    const { isOver, setNodeRef } = useDroppable({
-        id: 'droppable',
-    });
-    const style = {
-        color: isOver ? 'green' : undefined,
-    };
     return (
             <tbody
-            ref={setNodeRef}
-            style={style}
             data-slot="table-body"
             className={cn("[&_tr:last-child]:border-0", className)}
             {...props}
@@ -81,11 +72,11 @@ function TableSortableRow({
 }: React.ComponentProps<"tr"> & {
     model_id: number;
 }) {
-  const {listeners, setNodeRef, transform} = useSortable({
+  const {listeners, setNodeRef, transform, attributes} = useSortable({
     id: model_id,
   });
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Transform.toString(transform)
   };
 
   return (
@@ -95,7 +86,7 @@ function TableSortableRow({
         "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
         className
       )}
-       ref={setNodeRef} style={style} {...listeners}
+      ref={setNodeRef} style={style} {...listeners} {...attributes}
       {...props}
     />
   )

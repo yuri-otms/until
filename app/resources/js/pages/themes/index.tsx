@@ -15,7 +15,7 @@ import { DndContext, type DragOverEvent } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
-import { edit, create, destroy } from '@/routes/themes';
+import { edit, create, destroy, reorder } from '@/routes/themes';
 import DeleteContent from '@/components/delete-content';
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -32,23 +32,20 @@ export default function Index({
     themes: Theme[]
 }) {
     const [ displayedThemes, setThemes ] = useState<Theme[]>(themes);
-    console.log(displayedThemes);
-    console.log(themes);
-    const handleDragOver = (event:DragOverEvent) => {
+    const handleDragEnd = (event:DragOverEvent) => {
         const { active, over } = event;
-
         if (over && active.id != over.id) {
             setThemes((prevThemes) => {
                 const oldIndex = prevThemes.findIndex((theme) => theme.id === active.id);
                 const newIndex = prevThemes.findIndex((theme) => theme.id === over.id);
-                console.log('oldindex=' + oldIndex + ', newindex=' + newIndex);
-                console.log(themes);
+                const changedItem = prevThemes[oldIndex];
+                console.log(changedItem);
                 return arrayMove(prevThemes, oldIndex, newIndex);
             })
-
             // TODO:Laravelに変更するModelId、新しい順番等必要な数字を送る
 
         }
+        console.log(displayedThemes);
     }
 
 
@@ -58,7 +55,7 @@ export default function Index({
             <Head title="テーマ設定" />
             <ContentsLayout title="テーマ設定" create={create().url}>
                 <div className="overflow-hidden rounded-md border">
-                <DndContext onDragOver={handleDragOver}>
+                <DndContext onDragEnd={handleDragEnd}>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -68,9 +65,10 @@ export default function Index({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        <SortableContext items={themes}>
+                        <SortableContext items={displayedThemes}>
                         {displayedThemes.map((row) => (
                             <TableSortableRow
+                            key={row.id}
                             model_id={row.id}
                             >
                                 <TableCell>{row.id}</TableCell>
