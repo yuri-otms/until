@@ -30,6 +30,8 @@ export default function Create({
 } : {
     themes: Theme[]
 }) {
+    const defaultTheme: string = themes[0].id.toString();
+
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
@@ -60,7 +62,7 @@ export default function Create({
                                         className="mt-2"
                                     />
                                     <Label htmlFor="name">テーマ</Label>
-                                    <RadioGroup defaultValue="1" name="theme_id">
+                                    <RadioGroup defaultValue={defaultTheme} name="theme_id">
                                         {themes.map((row) => (
                                             <div className="flex items-center gap-3">
                                                 <RadioGroupItem value={row.id.toString()} id={row.id.toString()} />

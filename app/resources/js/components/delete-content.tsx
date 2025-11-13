@@ -26,8 +26,6 @@ export default function DeleteContent({
                     <DialogTrigger asChild>
                         <Button
                             variant="destructive"
-                            data-test="delete-user-button"
-                            data-dnd-cancel="true"
                             className="hover:cursor-pointer hover:bg-[#dddddd]"
                         >
                             削除
@@ -73,7 +71,6 @@ export default function DeleteContent({
                                         >
                                             <button
                                                 type="submit"
-                                                data-test="confirm-delete-user-button"
                                             >
                                                 削除する
                                             </button>

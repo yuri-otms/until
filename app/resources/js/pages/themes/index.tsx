@@ -12,7 +12,13 @@ import ContentsLayout from '@/layouts/contents/layout';import {
   TableRow,
   TableSortableRow,
 } from "@/components/ui/table"
-import { DndContext, type DragOverEvent } from "@dnd-kit/core";
+import {
+    DndContext,
+    MouseSensor,
+    useSensor,
+    useSensors,
+    type DragOverEvent,
+} from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
@@ -34,6 +40,14 @@ export default function Index({
 }: {
     themes: Theme[]
 }) {
+    const mouseSensor = useSensor(MouseSensor, {
+        activationConstraint: {
+            distance: 5,
+        }
+    })
+
+    const sensors = useSensors(mouseSensor);
+
     const [ displayedThemes, setThemes ] = useState<Theme[]>(themes);
     const handleDragEnd = (event:DragOverEvent) => {
         const { active, over } = event;
@@ -43,25 +57,27 @@ export default function Index({
 
             if (oldIndex === -1 || newIndex === -1) return;
 
+            setThemes((prevThemes) => {
+                return arrayMove(prevThemes, oldIndex, newIndex);
+            })
+
             const changedItem = displayedThemes[oldIndex];
             axios.put(reorder(changedItem.id).url, {
                 oldIndex: oldIndex,
                 newIndex: newIndex,
             });
-            setThemes((prevThemes) => {
-                return arrayMove(prevThemes, oldIndex, newIndex);
-            })
         }
     }
-
-
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="テーマ設定" />
             <ContentsLayout title="テーマ設定" create={create().url}>
                 <div className="overflow-hidden rounded-md border">
-                <DndContext onDragEnd={handleDragEnd}>
+                <DndContext
+                    onDragEnd={handleDragEnd}
+                    sensors={sensors}
+                >
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -81,7 +97,10 @@ export default function Index({
                                 <TableSortableCell model_id={row.id} />
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>
+                                <TableCell
+                                    onClick={(e) => e.stopPropagation()}
+                                    dada-dnd-cancel="true"
+                                    >
                                     <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
                                     <DeleteContent model="テーマ" destroy={destroy.form(row.id)} />
