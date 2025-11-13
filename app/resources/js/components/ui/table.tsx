@@ -1,6 +1,7 @@
 import * as React from "react"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities"
+import { Move } from 'lucide-react';
 
 import { cn } from "@/lib/utils"
 
@@ -72,7 +73,7 @@ function TableSortableRow({
 }: React.ComponentProps<"tr"> & {
     model_id: number;
 }) {
-  const {listeners, setNodeRef, transform, attributes} = useSortable({
+  const {setNodeRef, transform} = useSortable({
     id: model_id,
   });
   const style = {
@@ -86,7 +87,7 @@ function TableSortableRow({
         "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
         className
       )}
-      ref={setNodeRef} style={style} {...listeners} {...attributes}
+      ref={setNodeRef} style={style}
       {...props}
     />
   )
@@ -119,6 +120,30 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   )
 }
 
+function TableSortableCell({
+     model_id, className, ...props
+    }: React.ComponentProps<"td"> & {
+        model_id: number;
+    }) {
+    const {listeners, attributes} = useSortable({
+        id: model_id,
+    });
+    return (
+        <td
+        data-slot="table-cell"
+        {...listeners}
+        {...attributes}
+        className={cn(
+            "p-3 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+            className
+        )}
+        {...props}
+        >
+        <Move className="hover:cursor-grab" data-dnd-hander="true" />
+        </td>
+    )
+}
+
 function TableCaption({
   className,
   ...props
@@ -141,5 +166,6 @@ export {
   TableRow,
   TableSortableRow,
   TableCell,
+  TableSortableCell,
   TableCaption,
 }

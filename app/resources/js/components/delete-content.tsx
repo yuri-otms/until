@@ -27,6 +27,8 @@ export default function DeleteContent({
                         <Button
                             variant="destructive"
                             data-test="delete-user-button"
+                            data-dnd-cancel="true"
+                            className="hover:cursor-pointer hover:bg-[#dddddd]"
                         >
                             削除
                         </Button>

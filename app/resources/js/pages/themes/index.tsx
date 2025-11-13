@@ -6,6 +6,7 @@ import ContentsLayout from '@/layouts/contents/layout';import {
   Table,
   TableBody,
   TableCell,
+  TableSortableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -64,6 +65,7 @@ export default function Index({
                 <Table>
                     <TableHeader>
                         <TableRow>
+                        <TableHead>順番</TableHead>
                         <TableHead>ID</TableHead>
                         <TableHead>テーマ</TableHead>
                         <TableHead>動作</TableHead>
@@ -76,6 +78,7 @@ export default function Index({
                             key={row.id}
                             model_id={row.id}
                             >
+                                <TableSortableCell model_id={row.id} />
                                 <TableCell>{row.id}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
