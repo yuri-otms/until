@@ -16,6 +16,8 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head } from '@inertiajs/react';
 import { edit, create, destroy, reorder } from '@/routes/themes';
+import axios from 'axios';
+
 import DeleteContent from '@/components/delete-content';
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -35,17 +37,20 @@ export default function Index({
     const handleDragEnd = (event:DragOverEvent) => {
         const { active, over } = event;
         if (over && active.id != over.id) {
+            const oldIndex = displayedThemes.findIndex((theme) => theme.id === active.id);
+            const newIndex = displayedThemes.findIndex((theme) => theme.id === over.id);
+
+            if (oldIndex === -1 || newIndex === -1) return;
+
+            const changedItem = displayedThemes[oldIndex];
+            axios.put(reorder(changedItem.id).url, {
+                oldIndex: oldIndex,
+                newIndex: newIndex,
+            });
             setThemes((prevThemes) => {
-                const oldIndex = prevThemes.findIndex((theme) => theme.id === active.id);
-                const newIndex = prevThemes.findIndex((theme) => theme.id === over.id);
-                const changedItem = prevThemes[oldIndex];
-                console.log(changedItem);
                 return arrayMove(prevThemes, oldIndex, newIndex);
             })
-            // TODO:Laravelに変更するModelId、新しい順番等必要な数字を送る
-
         }
-        console.log(displayedThemes);
     }
 
 

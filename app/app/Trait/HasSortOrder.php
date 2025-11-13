@@ -35,6 +35,36 @@ trait HasSortOrder
 
     }
 
+    public function reorder($from, $to, $type = '')
+    {
+        if ($type == 'react') {
+            $from = $from + 1;
+            $to = $to + 1;
+        }
+
+        if ($from == $to) {
+            return;
+        }
+        $query = DB::table($this->getTable())
+                ->where('id', '!=', $this->id);
+        if ($from < $to) {
+            // 順番を下げる
+            $query
+                ->where('sort_order', '>', $from)
+                ->where('sort_order', '<=', $to)
+                ->decrement('sort_order');
+        } else {
+            // 順番を上げる
+            $query
+                ->where('sort_order', '<', $from)
+                ->where('sort_order', '>=', $to)
+                ->increment('sort_order');
+        }
+        return $this->update([
+            'sort_order' => $to
+        ]);
+
+    }
 
 
 }

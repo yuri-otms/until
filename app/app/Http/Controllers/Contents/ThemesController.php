@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Contents;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contents\ThemeStoreRequest;
 use App\Http\Requests\Contents\ThemeUpdateRequest;
@@ -49,5 +50,10 @@ class ThemesController extends Controller
     {
         $theme->delete();
         return to_route('themes.index');
+    }
+
+    public function reorder(Theme $theme, Request $request): void
+    {
+        $theme->reorder($request->input('oldIndex'), $request->input('newIndex'), 'react');
     }
 }
