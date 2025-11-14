@@ -17,13 +17,15 @@ import {
     MouseSensor,
     useSensor,
     useSensors,
+    type DragOverEvent,
 } from "@dnd-kit/core";
-import { SortableContext } from "@dnd-kit/sortable";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import { index, edit, create, destroy } from '@/routes/contents';
+import { index, edit, create, destroy, reorder } from '@/routes/contents';
 import DeleteContent from '@/components/delete-content';
+import axios from 'axios';
 
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -53,6 +55,27 @@ export default function Index({
 
     const [ displayedContents, setContents ] = useState<Content[]>(contents);
 
+    const handleDragEnd = (event:DragOverEvent) => {
+        const { active, over } = event;
+        if (over && active.id != over.id) {
+            const oldIndex = displayedContents.findIndex((item) => item.id === active.id);
+            const newIndex = displayedContents.findIndex((item) => item.id === over.id);
+
+            if (oldIndex === -1 || newIndex === -1) return;
+
+            setContents((prevContents) => {
+                return arrayMove(prevContents, oldIndex, newIndex);
+            })
+
+            const changedItem = displayedContents[oldIndex];
+            axios.put(reorder(changedItem.id).url, {
+                oldIndex: oldIndex,
+                newIndex: newIndex,
+            })
+
+        }
+    }
+
     const handleThemeChange = (newTheme: string) => {
         setSelectedThemeId(newTheme);
         router.get(
@@ -79,6 +102,7 @@ export default function Index({
                     <ThemeSelect themes={themes} activeTheme={activeTheme} onThemeChange={handleThemeChange} />
                     <div className="overflow-hidden rounded-md border">
                     <DndContext
+                        onDragEnd={handleDragEnd}
                         sensors={sensors}
                     >
                     <Table>

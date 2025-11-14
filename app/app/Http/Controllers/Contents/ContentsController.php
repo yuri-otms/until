@@ -70,4 +70,9 @@ class ContentsController extends Controller
     {
         $content->delete();
     }
+
+    public function reorder(Content $content, Request $request): void
+    {
+        $content->reorder($request->input('oldIndex'), $request->input('newIndex'), 'react');
+    }
 }

@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contents/change-theme', [ContentsController::class, 'changeTheme'])->name('contents.change-theme');
 
     Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
+    Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
     Route::resources([
         'contents' => ContentsController::class,
         'themes' => ThemesController::class,
