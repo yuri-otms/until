@@ -60,7 +60,7 @@ export default function Index({
                                     )}
                                 </HomeCardContent>
                             </HomeCard>
-                        )};
+                        )}
                     </main>
                 </div>
                 <footer className="sticky w-full py-3 bg-[#ca4130] text-white text-sm">

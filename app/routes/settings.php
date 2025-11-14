@@ -8,38 +8,43 @@ use Inertia\Inertia;
 use App\Http\Controllers\Admin\ContentsController;
 use App\Http\Controllers\Admin\ThemesController;
 
+Route::prefix('admin')->group(function () {
 
-Route::middleware('auth')->group(function () {
-    Route::redirect('settings', '/settings/profile');
+    Route::middleware(['auth', 'verified'])->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('dashboard');
+        })->name('dashboard');
+    });
 
-    Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('settings/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware('auth')->group(function () {
+        Route::redirect('settings', '/settings/profile');
 
-    Route::get('settings/password', [PasswordController::class, 'edit'])->name('user-password.edit');
+        Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('settings/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::put('settings/password', [PasswordController::class, 'update'])
-        ->middleware('throttle:6,1')
-        ->name('user-password.update');
+        Route::get('settings/password', [PasswordController::class, 'edit'])->name('user-password.edit');
 
-    Route::get('settings/appearance', function () {
-        return Inertia::render('settings/appearance');
-    })->name('appearance.edit');
+        Route::put('settings/password', [PasswordController::class, 'update'])
+            ->middleware('throttle:6,1')
+            ->name('user-password.update');
 
-    Route::get('settings/two-factor', [TwoFactorAuthenticationController::class, 'show'])
-        ->name('two-factor.show');
+        Route::get('settings/appearance', function () {
+            return Inertia::render('admin/settings/appearance');
+        })->name('appearance.edit');
+
+        Route::get('settings/two-factor', [TwoFactorAuthenticationController::class, 'show'])
+            ->name('two-factor.show');
+
+        // 管理画面
+        Route::get('/contents/change-theme', [ContentsController::class, 'changeTheme'])->name('contents.change-theme');
+
+        Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
+        Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
+        Route::resources([
+            'contents' => ContentsController::class,
+            'themes' => ThemesController::class,
+        ]);
+    });
+
 });
-
-Route::middleware(['auth'])->group(function () {
-    Route::redirect('contents', '/contents/index');
-    Route::get('/contents/change-theme', [ContentsController::class, 'changeTheme'])->name('contents.change-theme');
-
-    Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
-    Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
-    Route::resources([
-        'contents' => ContentsController::class,
-        'themes' => ThemesController::class,
-    ]);
-
-});
-

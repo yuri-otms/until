@@ -29,7 +29,7 @@ class ContentsController extends Controller
                         ->orderBy('sort_order')
                         ->get();
 
-        return Inertia::render('contents/index', [
+        return Inertia::render('admin/contents/index', [
             'themes' => $themes,
             'contents' => $contents,
             'theme' => $theme,
@@ -38,7 +38,7 @@ class ContentsController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('contents/create', [
+        return Inertia::render('admin/contents/create', [
             'themes' => Theme::orderBy('sort_order')
                         ->get(),
         ]);
@@ -52,7 +52,7 @@ class ContentsController extends Controller
 
     public function  edit(Content $content): Response
     {
-        return Inertia::render('contents/edit', [
+        return Inertia::render('admin/contents/edit', [
             'content' => $content,
             'themes' => Theme::orderBy('sort_order')
                         ->get(),

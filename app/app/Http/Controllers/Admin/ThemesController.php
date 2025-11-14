@@ -16,7 +16,7 @@ class ThemesController extends Controller
     //
     public function index(): Response
     {
-        return Inertia::render('themes/index', [
+        return Inertia::render('admin/themes/index', [
             'themes' => Theme::orderBy('sort_order')
                         ->get(),
         ]);
@@ -24,7 +24,7 @@ class ThemesController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('themes/create', []);
+        return Inertia::render('admin/themes/create', []);
     }
 
     public function store(ThemeStoreRequest $request): RedirectResponse
@@ -35,7 +35,7 @@ class ThemesController extends Controller
 
     public function  edit(Theme $theme): Response
     {
-        return Inertia::render('themes/edit', [
+        return Inertia::render('admin/themes/edit', [
             'theme' => $theme,
         ]);
     }
