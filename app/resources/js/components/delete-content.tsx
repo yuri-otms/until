@@ -9,16 +9,22 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Form } from '@inertiajs/react';
-import { type RouteFormDefinition } from '@/wayfinder';
+import { onDeleteClick } from '@/types';
 
 
 export default function DeleteContent({
     model,
-    destroy
+    model_id,
+    onDeleteClick
 }: {
     model: string;
-    destroy : RouteFormDefinition<"post">;
+    model_id: number;
+    onDeleteClick : onDeleteClick;
 }) {
+
+    const handleClick = () => {
+        onDeleteClick(model_id);
+    }
 
     return (
 
@@ -40,7 +46,6 @@ export default function DeleteContent({
                         </DialogDescription>
 
                         <Form
-                            {...destroy}
                             options={{
                                 preserveScroll: true,
                             }}
@@ -70,7 +75,7 @@ export default function DeleteContent({
                                             asChild
                                         >
                                             <button
-                                                type="submit"
+                                            onClick={handleClick}
                                             >
                                                 削除する
                                             </button>

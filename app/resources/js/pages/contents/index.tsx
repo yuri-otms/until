@@ -9,6 +9,7 @@ import ContentsLayout from '@/layouts/contents/layout';import {
   TableHead,
   TableHeader,
   TableRow,
+  TableSortableRow,
 } from "@/components/ui/table"
 import { ThemeSelect } from "@/components/theme-select";
 import {
@@ -17,13 +18,12 @@ import {
     useSensor,
     useSensors,
 } from "@dnd-kit/core";
-import { arrayMove, SortableContext } from "@dnd-kit/sortable";
+import { SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 import { index, edit, create, destroy } from '@/routes/contents';
 import DeleteContent from '@/components/delete-content';
-import axios from 'axios'
 
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -51,6 +51,8 @@ export default function Index({
 
     const [ activeTheme, setSelectedThemeId ] = useState(theme.id.toString());
 
+    const [ displayedContents, setContents ] = useState<Content[]>(contents);
+
     const handleThemeChange = (newTheme: string) => {
         setSelectedThemeId(newTheme);
         router.get(
@@ -58,7 +60,15 @@ export default function Index({
             { theme_id : newTheme },
             { preserveScroll: true }
         );
+    }
 
+    const deleteContent = (deleteContent: number) => {
+        router.delete(
+            destroy(deleteContent).url,
+        )
+        setContents((prevContents) => {
+            return prevContents.filter(item => item.id !== deleteContent);
+        })
     }
 
     return (
@@ -81,21 +91,30 @@ export default function Index({
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {contents.map((row) => (
-                                <TableRow
+                            <SortableContext
+                            items={displayedContents}
+                            >
+                            {displayedContents.map((row) => (
+                                <TableSortableRow
                                 key={row.id}
+                                model_id={row.id}
                                 >
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.name}</TableCell>
-                                    <TableCell>
+                                    <TableCell
+                                    dada-dnd-cancel="true"
+                                    >
                                         <LinkButton href={edit(row.id).url} className="bg-black">編集
                                         </LinkButton>
-                                        <DeleteContent model="コンテンツ" destroy={destroy.form(row.id)} />
+                                        <DeleteContent
+                                        model="コンテンツ" onDeleteClick={deleteContent}
+                                        model_id={row.id}/>
                                     </TableCell>
-                                </TableRow>
+                                </TableSortableRow>
                             ))
                             }
+                        </SortableContext>
                         </TableBody>
                         </Table>
                         </DndContext>

@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Content;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Redirect;
 
 class ContentsController extends Controller
 {
@@ -68,6 +69,6 @@ class ContentsController extends Controller
     public function destroy(Content $content): RedirectResponse
     {
         $content->delete();
-        return to_route('contents.index');
+        return Redirect::route('contents.index');
     }
 }

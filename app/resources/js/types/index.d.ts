@@ -56,3 +56,4 @@ export interface Theme {
 }
 
 export type onThemeChange = (newTheme: string) => void;
+export type onDeleteClick = (deleteContent: number) => void;
