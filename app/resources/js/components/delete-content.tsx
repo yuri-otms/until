@@ -8,7 +8,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Form } from '@inertiajs/react';
 import { onDeleteClick } from '@/types';
 
 
@@ -44,46 +43,26 @@ export default function DeleteContent({
                         <DialogDescription>
                            一度削除すると、復元できません。
                         </DialogDescription>
+                            <DialogFooter className="gap-2">
+                                <DialogClose asChild>
+                                    <Button
+                                        variant="secondary"
+                                    >
+                                        キャンセル
+                                    </Button>
+                                </DialogClose>
 
-                        <Form
-                            options={{
-                                preserveScroll: true,
-                            }}
-                            resetOnSuccess
-                            className="space-y-6"
-                        >
-                            {({ resetAndClearErrors, processing }) => (
-                                <>
-                                    <div className="grid gap-2">
-                                    </div>
-
-                                    <DialogFooter className="gap-2">
-                                        <DialogClose asChild>
-                                            <Button
-                                                variant="secondary"
-                                                onClick={() =>
-                                                    resetAndClearErrors()
-                                                }
-                                            >
-                                                キャンセル
-                                            </Button>
-                                        </DialogClose>
-
-                                        <Button
-                                            variant="destructive"
-                                            disabled={processing}
-                                            asChild
-                                        >
-                                            <button
-                                            onClick={handleClick}
-                                            >
-                                                削除する
-                                            </button>
-                                        </Button>
-                                    </DialogFooter>
-                                </>
-                            )}
-                        </Form>
+                                <Button
+                                    variant="destructive"
+                                    asChild
+                                >
+                                    <button
+                                    onClick={handleClick}
+                                    >
+                                        削除する
+                                    </button>
+                                </Button>
+                            </DialogFooter>
                     </DialogContent>
                 </Dialog>
     );

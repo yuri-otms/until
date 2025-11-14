@@ -21,7 +21,7 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { edit, create, destroy, reorder } from '@/routes/themes';
 import axios from 'axios';
 
@@ -49,6 +49,7 @@ export default function Index({
     const sensors = useSensors(mouseSensor);
 
     const [ displayedThemes, setThemes ] = useState<Theme[]>(themes);
+
     const handleDragEnd = (event:DragOverEvent) => {
         const { active, over } = event;
         if (over && active.id != over.id) {
@@ -67,6 +68,15 @@ export default function Index({
                 newIndex: newIndex,
             });
         }
+    }
+
+    const deleteTheme = (deleteTheme: number) => {
+        router.delete(
+            destroy(deleteTheme).url,
+        )
+        setThemes((prevThemes) => {
+            return prevThemes.filter(item => item.id !== deleteTheme)
+        })
     }
 
     return (
@@ -103,7 +113,11 @@ export default function Index({
                                     >
                                     <LinkButton href={edit(row.id).url} className="bg-black">編集
                                     </LinkButton>
-                                    <DeleteContent model="テーマ" destroy={destroy.form(row.id)} />
+                                    <DeleteContent
+                                    model="テーマ"
+                                    model_id={row.id}
+                                    onDeleteClick={deleteTheme}
+                                    />
                                 </TableCell>
                             </TableSortableRow>
                         ))

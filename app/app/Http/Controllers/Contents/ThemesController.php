@@ -46,10 +46,9 @@ class ThemesController extends Controller
         return to_route('themes.index');
     }
 
-    public function destroy(Theme $theme): RedirectResponse
+    public function destroy(Theme $theme): void
     {
         $theme->delete();
-        return to_route('themes.index');
     }
 
     public function reorder(Theme $theme, Request $request): void

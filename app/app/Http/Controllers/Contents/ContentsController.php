@@ -66,9 +66,8 @@ class ContentsController extends Controller
         return to_route('contents.index');
     }
 
-    public function destroy(Content $content): RedirectResponse
+    public function destroy(Content $content): void
     {
         $content->delete();
-        return Redirect::route('contents.index');
     }
 }

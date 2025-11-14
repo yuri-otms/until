@@ -108,8 +108,9 @@ export default function Index({
                                         <LinkButton href={edit(row.id).url} className="bg-black">編集
                                         </LinkButton>
                                         <DeleteContent
-                                        model="コンテンツ" onDeleteClick={deleteContent}
-                                        model_id={row.id}/>
+                                        model="コンテンツ"
+                                        model_id={row.id}onDeleteClick={deleteContent}
+                                        />
                                     </TableCell>
                                 </TableSortableRow>
                             ))
