@@ -15,22 +15,24 @@ use App\Models\Theme;
 class ContentsController extends Controller
 {
     //
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $themes = Theme::orderBy('sort_order')
                         ->get();
-        $contentGroup = [];
-        foreach ($themes as $theme) {
-            $contentGroup[] = [
-                'themeName' => $theme->name,
-                'contents' => Content::query()
-                                ->where('theme_id', $theme->id)
-                                ->orderBy('sort_order')
-                                ->get(),
-            ];
-        }
+
+        $initialThemeId = $themes->first()->id ?? null;
+        $themeId = $request->input('theme_id', $initialThemeId);
+        $theme = Theme::find($themeId);
+
+
+        $contents = Content::where('theme_id', $theme->id)
+                        ->orderBy('sort_order')
+                        ->get();
+
         return Inertia::render('contents/index', [
-            'contentGroup' => $contentGroup
+            'themes' => $themes,
+            'contents' => $contents,
+            'theme' => $theme,
         ]);
     }
 

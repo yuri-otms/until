@@ -55,7 +55,4 @@ export interface Theme {
     sort_order: number;
 }
 
-export interface ContentGroup {
-    themeName: string;
-    contents: Content[];
-}
+export type onThemeChange = (newTheme: string) => void;

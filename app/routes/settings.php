@@ -32,10 +32,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('contents', '/contents/index');
+    Route::get('/contents/change-theme', [ContentsController::class, 'changeTheme'])->name('contents.change-theme');
+
     Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
     Route::resources([
         'contents' => ContentsController::class,
         'themes' => ThemesController::class,
     ]);
+
 });
 
