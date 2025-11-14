@@ -3,11 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
-use App\Http\Controllers\Contents\ContentsController;
+use App\Http\Controllers\Contents\HomeController;
 
-Route::get('/', function () {
-    return Inertia::render('index', []);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/test', function () {
     return Inertia::render('test', []);

@@ -55,5 +55,11 @@ export interface Theme {
     sort_order: number;
 }
 
+export interface ContentGroup {
+    id: number;
+    name: string;
+    contents: Content[];
+}
+
 export type onThemeChange = (newTheme: string) => void;
 export type onDeleteClick = (deleteContent: number) => void;

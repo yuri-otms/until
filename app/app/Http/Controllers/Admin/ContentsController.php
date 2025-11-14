@@ -11,7 +11,6 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Content;
 use App\Models\Theme;
-use Illuminate\Support\Facades\Redirect;
 
 class ContentsController extends Controller
 {
