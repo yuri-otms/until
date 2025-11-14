@@ -5,8 +5,8 @@ use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\TwoFactorAuthenticationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Contents\ContentsController;
-use App\Http\Controllers\Contents\ThemesController;
+use App\Http\Controllers\Admin\ContentsController;
+use App\Http\Controllers\Admin\ThemesController;
 
 
 Route::middleware('auth')->group(function () {

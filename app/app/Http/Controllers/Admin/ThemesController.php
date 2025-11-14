@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Contents;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contents\ThemeStoreRequest;
-use App\Http\Requests\Contents\ThemeUpdateRequest;
+use App\Http\Requests\Admin\ThemeStoreRequest;
+use App\Http\Requests\Admin\ThemeUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;

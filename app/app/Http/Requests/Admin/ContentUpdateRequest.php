@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Contents;
+namespace App\Http\Requests\Admin;
 
 use App\Models\Content;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ThemeUpdateRequest extends FormRequest
+class ContentUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -22,6 +22,10 @@ class ThemeUpdateRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'theme_id' => [
+                'required',
+                'numeric'
+            ] ,
         ];
     }
 

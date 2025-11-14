@@ -66,6 +66,7 @@ export default function Index(
                                 </ContentButton>
                             </HomeCardContent>
                         </HomeCard>
+
                         <HomeCard>
                             <HomeCardHeader>
                                 <HomeCardTitle>プロフィール</HomeCardTitle>

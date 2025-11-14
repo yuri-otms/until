@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Contents;
+namespace App\Http\Requests\Admin;
 
 use App\Models\Content;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ContentStoreRequest extends FormRequest
+class ThemeUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -21,12 +21,7 @@ class ContentStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(Content::class)
             ],
-            'theme_id' => [
-                'required',
-                'numeric'
-            ] ,
         ];
     }
 

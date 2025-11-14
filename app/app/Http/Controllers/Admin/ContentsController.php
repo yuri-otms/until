@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Contents;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contents\ContentStoreRequest;
-use App\Http\Requests\Contents\ContentUpdateRequest;
+use App\Http\Requests\Admin\ContentStoreRequest;
+use App\Http\Requests\Admin\ContentUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
