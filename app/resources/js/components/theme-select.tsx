@@ -2,14 +2,14 @@ import {
   NativeSelect,
   NativeSelectOption,
 } from "@/components/ui/native-select"
-import { type Theme, type onThemeChange } from "@/types"
+import { type Theme, type Content, type onThemeChange } from "@/types"
 
 export function ThemeSelect({
     themes,
     activeTheme,
     onThemeChange
 } : {
-    themes: Theme[];
+    themes: Theme[] | Content[];
     activeTheme: string;
     onThemeChange: onThemeChange;
 }) {

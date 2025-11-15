@@ -26,4 +26,14 @@ class Content extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public static function getContentsOrderByTheme()
+    {
+        return Content::query()
+                    ->join('themes', 'contents.theme_id', '=', 'themes.id')
+                    ->orderBy('themes.sort_order')
+                    ->orderBy('contents.sort_order')
+                    ->select('contents.*')
+                    ->get();
+    }
 }

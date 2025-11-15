@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
 
         Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
         Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
+        Route::put('/categoriess/reorder/{category}/', [CategoriesController::class, 'reorder'])->name('categories.reorder');
         Route::resources([
             'contents' => ContentsController::class,
             'themes' => ThemesController::class,
