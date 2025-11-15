@@ -12,7 +12,9 @@ class Theme extends Model
 
     protected $fillable = [
         'name',
-        'sort_order'
+        'slug',
+        'sort_order',
+        'description'
     ];
 
     public function contents()

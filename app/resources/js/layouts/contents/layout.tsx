@@ -4,7 +4,7 @@ import { type PropsWithChildren } from 'react';
 
 interface ContentsLayoutProps {
     title: string;
-    create: string;
+    create?: string;
 }
 
 export default function ContentsLayout({
@@ -24,7 +24,7 @@ export default function ContentsLayout({
                     title={title}
                     description="各コンテンツの詳細を設定します"
                 />
-                <LinkButton href={create}>新規作成</LinkButton>
+                { create ? <LinkButton href={create}>新規作成</LinkButton> : ''}
             </div>
             <div className="flex flex-col lg:flex-row">
 

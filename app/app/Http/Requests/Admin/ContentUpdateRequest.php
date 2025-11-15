@@ -22,6 +22,11 @@ class ContentUpdateRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+            ],
             'theme_id' => [
                 'required',
                 'numeric'

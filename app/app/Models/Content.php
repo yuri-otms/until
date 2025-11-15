@@ -12,6 +12,7 @@ class Content extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'sort_order',
         'theme_id'
     ];
@@ -19,5 +20,10 @@ class Content extends Model
     public function theme()
     {
         return $this->belongsTo(Theme::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 }

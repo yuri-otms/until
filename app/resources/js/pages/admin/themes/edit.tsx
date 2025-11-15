@@ -6,8 +6,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error';
-import { index, create, update } from '@/routes/themes'
+import { index, update } from '@/routes/themes'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -27,7 +28,7 @@ export default function Edit({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="テーマ新規作成" />
-            <ContentsLayout create={create().url} title="テーマ設定">
+            <ContentsLayout title="テーマ設定">
                 <Form
                     {...update.form(theme.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -39,11 +40,10 @@ export default function Edit({
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">テーマ名</Label>
-                                                                                                <Input
+                                    <Input
                                     id="name"
                                     defaultValue={theme.name}
                                     type="text"
-                                    required
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="name"
@@ -52,6 +52,37 @@ export default function Edit({
                                     />
                                     <InputError
                                         message={errors.name}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="slug">slug</Label>
+                                    <Input
+                                    id="slug"
+                                    defaultValue={theme.slug}
+                                    type="text"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="slug"
+                                    name="slug"
+                                    placeholder="slug"
+                                    />
+                                    <InputError
+                                        message={errors.slug}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="slug">説明</Label>
+                                                                                                                                                                                <Textarea
+                                    id="description"
+                                    defaultValue={theme.description}
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="description"
+                                    name="description"
+                                    placeholder="description"
+                                    />
+                                    <InputError
+                                        message={errors.slug}
                                         className="mt-2"
                                     />
                                     <Button

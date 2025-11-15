@@ -27,7 +27,7 @@ export default function Index({
             <div className="flex min-h-screen flex-col  items-center bg-[#ffffff] text-[#494544] dark:bg-[#040404]">
                 <header className="fixed mb-6 w-full text-lg py-2 text-[#ffffff] bg-[#494544] border ">
                     <div className="flex justify-between mx-auto items-center lg:max-w-4xl gap-4 px-3 font-bold">
-                        <span><a href="/">80歳まで続けるサイト</a></span>
+                        <span><Link href="/">80歳まで続けるサイト</Link></span>
                         <nav className="justify-end">
                             <Link
                                 href="/welcome"
@@ -48,7 +48,7 @@ export default function Index({
                                 <HomeCardHeader>
                                     <HomeCardTitle>{themeRow.name}</HomeCardTitle>
                                     <HomeCardDescription>
-                                        description
+                                        {themeRow.description}
                                     </HomeCardDescription>
                                 </HomeCardHeader>
                                 <HomeCardContent>

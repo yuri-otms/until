@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { store, create } from '@/routes/contents';
+import { store } from '@/routes/contents';
 import { index } from '@/routes/contents'
 
 const breadcrubms: BreadcrumbItem[] = [
@@ -35,7 +35,7 @@ export default function Create({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定" create={create().url}>
+            <ContentsLayout title="コンテンツ設定">
                 <Form
                     {...store.form()}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -50,7 +50,6 @@ export default function Create({
                                     <Input
                                         id="name"
                                         type="text"
-                                        required
                                         autoFocus
                                         tabIndex={1}
                                         autoComplete="name"
@@ -61,7 +60,21 @@ export default function Create({
                                         message={errors.name}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="name">テーマ</Label>
+                                    <Label htmlFor="slug">slug</Label>
+                                    <Input
+                                        id="slug"
+                                        type="text"
+                                        autoFocus
+                                        tabIndex={1}
+                                        autoComplete="slug"
+                                        name="slug"
+                                        placeholder=""
+                                        />
+                                    <InputError
+                                        message={errors.slug}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="theme">テーマ</Label>
                                     <RadioGroup defaultValue={defaultTheme} name="theme_id">
                                         {themes.map((row) => (
                                             <div className="flex items-center gap-3">

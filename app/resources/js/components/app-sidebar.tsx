@@ -17,6 +17,7 @@ import { LayoutGrid, Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
 import { index as contentIndex } from '@/routes/contents'
 import { index as themeIndex } from '@/routes/themes'
+import { index as categoryIndex } from '@/routes/categories'
 import { home } from '@/routes'
 
 
@@ -34,6 +35,11 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
+    {
+        title: 'カテゴリー設定',
+        href: categoryIndex(),
+        icon: Settings,
+    },
     {
         title: 'コンテンツ設定',
         href: contentIndex(),

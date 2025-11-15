@@ -34,7 +34,6 @@ const breadcrubms: BreadcrumbItem[] = [
     },
 ];
 
-
 export default function Index({
     themes
 }: {

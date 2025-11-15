@@ -24,11 +24,12 @@ class ContentsController extends Controller
         $themeId = $request->input('theme_id', $initialThemeId);
         $theme = Theme::find($themeId);
 
-
-        $contents = Content::where('theme_id', $theme->id)
+        $contents = [];
+        if ($theme) {
+            $contents = Content::where('theme_id', $theme->id)
                         ->orderBy('sort_order')
                         ->get();
-
+        }
         return Inertia::render('admin/contents/index', [
             'themes' => $themes,
             'contents' => $contents,

@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { index, update, create } from '@/routes/contents'
+import { index, update } from '@/routes/contents'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -32,7 +32,7 @@ export default function Edit({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定" create={create().url}>
+            <ContentsLayout title="コンテンツ設定">
                 <Form
                     {...update.form(content.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -48,7 +48,6 @@ export default function Edit({
                                     id="name"
                                     defaultValue={content.name}
                                     type="text"
-                                    required
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="name"
@@ -57,6 +56,21 @@ export default function Edit({
                                     />
                                     <InputError
                                         message={errors.name}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="slug">slug</Label>
+                                    <Input
+                                        id="slug"
+                                        defaultValue={content.slug}
+                                        type="text"
+                                        autoFocus
+                                        tabIndex={1}
+                                        autoComplete="slug"
+                                        name="slug"
+                                        placeholder=""
+                                        />
+                                    <InputError
+                                        message={errors.slug}
                                         className="mt-2"
                                     />
                                     <Label htmlFor="name">テーマ</Label>

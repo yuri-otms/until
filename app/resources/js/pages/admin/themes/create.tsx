@@ -6,6 +6,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from "@/components/ui/textarea"
 import InputError from '@/components/input-error';
 import { index, store } from '@/routes/themes'
 
@@ -35,7 +36,7 @@ export default function Create() {
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">テーマ名</Label>
-                                                                                                <Input
+                                                                                                    <Input
                                     id="name"
                                     type="text"
                                     required
@@ -47,6 +48,35 @@ export default function Create() {
                                     />
                                     <InputError
                                         message={errors.name}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="slug">slug</Label>
+                                                                                                    <Input
+                                    id="slug"
+                                    type="text"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="slug"
+                                    name="slug"
+                                    placeholder="slug"
+                                    />
+                                    <InputError
+                                        message={errors.slug}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="slug">説明</Label>
+                                                                                                    <Textarea
+                                    id="description"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="description"
+                                    name="description"
+                                    placeholder="description"
+                                    />
+                                    <InputError
+                                        message={errors.slug}
                                         className="mt-2"
                                     />
                                     <Button
