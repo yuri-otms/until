@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\ContentsController;
 use App\Http\Controllers\Admin\ThemesController;
+use App\Http\Controllers\Admin\CategoriesController;
+
 
 Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', function () {
-            return Inertia::render('dashboard');
+            return Inertia::render('admin/dashboard');
         })->name('dashboard');
     });
 
@@ -44,6 +46,7 @@ Route::prefix('admin')->group(function () {
         Route::resources([
             'contents' => ContentsController::class,
             'themes' => ThemesController::class,
+            'categories' => CategoriesController::class,
         ]);
     });
 
