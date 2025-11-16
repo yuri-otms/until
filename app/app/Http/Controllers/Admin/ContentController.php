@@ -12,7 +12,7 @@ use Inertia\Response;
 use App\Models\Content;
 use App\Models\Theme;
 
-class ContentsController extends Controller
+class ContentController extends Controller
 {
     //
     public function index(Request $request): Response

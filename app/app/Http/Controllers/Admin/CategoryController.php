@@ -12,7 +12,7 @@ use Inertia\Response;
 use App\Models\Content;
 use App\Models\Category;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     public function index(Request $request): Response
     {

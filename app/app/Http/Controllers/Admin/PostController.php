@@ -13,7 +13,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     public function index(Request $request): Response
     {

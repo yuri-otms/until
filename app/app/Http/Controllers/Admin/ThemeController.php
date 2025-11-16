@@ -11,7 +11,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Theme;
 
-class ThemesController extends Controller
+class ThemeController extends Controller
 {
     //
     public function index(): Response

@@ -5,10 +5,10 @@ use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\TwoFactorAuthenticationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Admin\ContentsController;
-use App\Http\Controllers\Admin\ThemesController;
-use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\ThemeController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
 
 Route::prefix('admin')->group(function () {
 
@@ -39,17 +39,17 @@ Route::prefix('admin')->group(function () {
             ->name('two-factor.show');
 
         // 管理画面
-        Route::get('/contents/change-theme', [ContentsController::class, 'changeTheme'])->name('contents.change-theme');
+        Route::get('/contents/change-theme', [ContentController::class, 'changeTheme'])->name('contents.change-theme');
 
-        Route::put('/themes/reorder/{theme}/', [ThemesController::class, 'reorder'])->name('themes.reorder');
-        Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
-        Route::put('/categoriess/reorder/{category}/', [CategoriesController::class, 'reorder'])->name('categories.reorder');
-        Route::put('/posts/reorder/{post}/', [PostsController::class, 'reorder'])->name('posts.reorder');
+        Route::put('/themes/reorder/{theme}/', [ThemeController::class, 'reorder'])->name('themes.reorder');
+        Route::put('/contents/reorder/{content}/', [ContentController::class, 'reorder'])->name('contents.reorder');
+        Route::put('/categoriess/reorder/{category}/', [CategoryController::class, 'reorder'])->name('categories.reorder');
+        Route::put('/posts/reorder/{post}/', [PostController::class, 'reorder'])->name('posts.reorder');
         Route::resources([
-            'themes' => ThemesController::class,
-            'contents' => ContentsController::class,
-            'categories' => CategoriesController::class,
-            'posts' => PostsController::class,
+            'themes' => ThemeController::class,
+            'contents' => ContentController::class,
+            'categories' => CategoryController::class,
+            'posts' => PostController::class,
         ]);
     });
 });

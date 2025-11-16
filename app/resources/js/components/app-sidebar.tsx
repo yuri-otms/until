@@ -13,25 +13,12 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Settings } from 'lucide-react';
+import { Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
 import { index as contentIndex } from '@/routes/contents'
 import { index as themeIndex } from '@/routes/themes'
 import { index as categoryIndex } from '@/routes/categories'
-
-
-// const mainNavItems: NavItem[] = [
-//     {
-//         title: 'Home',
-//         href: home(),
-//         icon: House,
-//     },
-//     {
-//         title: 'ダッシュボード',
-//         href: dashboard(),
-//         icon: LayoutGrid,
-//     },
-// ];
+import { home } from '@/routes/'
 
 const footerNavItems: NavItem[] = [
     {
@@ -48,6 +35,16 @@ const footerNavItems: NavItem[] = [
         title: 'テーマ設定',
         href: themeIndex(),
         icon: Settings,
+    },
+    {
+        title: 'テーマ設定',
+        href: themeIndex(),
+        icon: Settings,
+    },
+    {
+        title: 'Home',
+        href: home(),
+        icon: House,
     },
 ];
 
