@@ -23,7 +23,7 @@ import {
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
-import { index, edit, create, destroy } from '@/routes/posts';
+import { index, edit, create, destroy, reorder } from '@/routes/posts';
 import axios from 'axios';
 
 import DeleteContent from '@/components/delete-content';
@@ -71,11 +71,11 @@ export default function Index({
                 return arrayMove(prevPosts, oldIndex, newIndex);
             })
 
-            // const changedItem = displayedCategories[oldIndex];
-            // axios.put(reorder(changedItem.id).url, {
-            //     oldIndex: oldIndex,
-            //     newIndex: newIndex,
-            // })
+            const changedItem = displayedPosts[oldIndex];
+            axios.put(reorder(changedItem.id).url, {
+                oldIndex: oldIndex,
+                newIndex: newIndex,
+            })
         }
     }
 
@@ -88,12 +88,12 @@ export default function Index({
         );
     }
 
-    const deleteCategory = (deleteCategory: number) => {
-        // router.delete(
-        //     destroy(deleteCategory).url,
-        // )
+    const deleteCategory = (deletePost: number) => {
+        router.delete(
+            destroy(deletePost).url,
+        )
         setPosts((prevPosts) => {
-            return prevPosts.filter(item => item.id !== deleteCategory);
+            return prevPosts.filter(item => item.id !== deletePost);
         })
     }
 
@@ -113,7 +113,7 @@ export default function Index({
                             <TableRow>
                             <TableHead>順番</TableHead>
                             <TableHead>ID</TableHead>
-                            <TableHead>コンテンツ</TableHead>
+                            <TableHead>タイトル</TableHead>
                             <TableHead>動作</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -128,14 +128,14 @@ export default function Index({
                                 >
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.id}</TableCell>
-                                    <TableCell>{row.name}</TableCell>
+                                    <TableCell>{row.title}</TableCell>
                                     <TableCell
                                     dada-dnd-cancel="true"
                                     >
                                         <LinkButton href={edit(row.id).url} className="bg-black">編集
                                         </LinkButton>
                                         <DeleteContent
-                                        model="コンテンツ"
+                                        model="記事"
                                         model_id={row.id}onDeleteClick={deleteCategory}
                                         />
                                     </TableCell>

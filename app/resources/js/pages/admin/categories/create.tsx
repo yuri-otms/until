@@ -15,7 +15,7 @@ import { index, store } from '@/routes/categories';
 
 const breadcrubms: BreadcrumbItem[] = [
     {
-        title: 'カテゴリー設定設定',
+        title: 'カテゴリー設定',
         href: index().url,
     },
     {
@@ -76,7 +76,9 @@ export default function Create({
                                     <Label htmlFor="content">コンテンツ</Label>
                                     <RadioGroup defaultValue={defaultContent} name="content_id">
                                         {contents.map((row) => (
-                                            <div className="flex items-center gap-3">
+                                            <div
+                                            key={row.id}
+                                            className="flex items-center gap-3">
                                                 <RadioGroupItem value={row.id.toString()} id={row.id.toString()} />
                                                 <Label htmlFor={row.id.toString()}>{row.name}</Label>
                                              </div>

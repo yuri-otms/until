@@ -21,4 +21,20 @@ class Category extends Model
     {
         return $this->belongsTo(Content::class);
     }
+
+    public static function getCategoriesByContent($contentId)
+    {
+        return Category::where('content_id', $contentId)
+                        ->orderBy('sort_order')
+                        ->get();
+    }
+
+    public static function getContentByCategory($categoryId)
+    {
+        $category = Category::find($categoryId);
+        if (!$category) {
+            return;
+        }
+        return $category->content_id;
+    }
 }

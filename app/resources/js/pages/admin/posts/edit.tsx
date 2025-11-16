@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Theme } from "@/types";
+import { type BreadcrumbItem, type Content, type Category, type Post } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
@@ -11,33 +11,34 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { store } from '@/routes/contents';
-import { index } from '@/routes/contents'
+import { index, update } from '@/routes/posts'
 
-const breadcrubms: BreadcrumbItem[] = [
-    {
-        title: 'コンテンツ設定',
-        href: index().url,
-    },
-    {
-        title: '新規作成',
-        href: '',
-    }
-];
-
-export default function Create({
-    themes
-} : {
-    themes: Theme[]
+export default function Edit({
+    content,
+    categories,
+    post,
+}: {
+    content: Content;
+    categories: Category[];
+    post: Post;
 }) {
-    const defaultTheme: string = themes[0].id.toString();
-
+    const pageName = content.name + '記事投稿';
+    const breadcrubms: BreadcrumbItem[] = [
+        {
+            title: pageName,
+            href: index().url,
+        },
+        {
+            title: '編集',
+            href: '',
+        }
+    ];
     return (
         <AppLayout breadcrumbs={breadcrubms}>
-            <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定">
+                <Head title="記事編集" />
+                <ContentsLayout title={pageName}>
                 <Form
-                    {...store.form()}
+                    {...update.form(post.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
                     disableWhileProcessing
                     className="flex flex-col gap-6"
@@ -46,16 +47,18 @@ export default function Create({
                         <>
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">コンテンツ名</Label>
+                                    <Label htmlFor="name">記事タイトル</Label>
+
                                     <Input
-                                        id="name"
-                                        type="text"
-                                        autoFocus
-                                        tabIndex={1}
-                                        autoComplete="name"
-                                        name="name"
-                                        placeholder=""
-                                        />
+                                    id="title"
+                                    defaultValue={post.title}
+                                    type="text"
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="title"
+                                    name="title"
+                                    placeholder=""
+                                    />
                                     <InputError
                                         message={errors.name}
                                         className="mt-2"
@@ -63,6 +66,7 @@ export default function Create({
                                     <Label htmlFor="slug">slug</Label>
                                     <Input
                                         id="slug"
+                                        defaultValue={post.slug}
                                         type="text"
                                         autoFocus
                                         tabIndex={1}
@@ -74,9 +78,9 @@ export default function Create({
                                         message={errors.slug}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="theme">テーマ</Label>
-                                    <RadioGroup defaultValue={defaultTheme} name="theme_id">
-                                        {themes.map((row) => (
+                                    <Label htmlFor="name">カテゴリー</Label>
+                                    <RadioGroup defaultValue={post.category_id.toString()} name="category_id">
+                                        {categories.map((row) => (
                                             <div
                                             key={row.id}
                                             className="flex items-center gap-3">
@@ -86,7 +90,7 @@ export default function Create({
                                         ))}
                                     </RadioGroup>
                                     <InputError
-                                        message={errors.theme_id}
+                                        message={errors.category_id}
                                         className="mt-2"
                                     />
                                     <Button
@@ -96,7 +100,7 @@ export default function Create({
                                         data-test="register-user-button"
                                     >
                                         {processing && <Spinner />}
-                                        新規作成
+                                        更新
                                     </Button>
                                 </div>
                             </div>

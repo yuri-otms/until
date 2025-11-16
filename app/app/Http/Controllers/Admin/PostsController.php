@@ -3,26 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PostStoreRequest;
+use App\Http\Requests\Admin\PostUpdateRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Content;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 
 class PostsController extends Controller
 {
     public function index(Request $request): Response
     {
-        $contentId = $request->input('content_id', 1);
-        $content = Content::find($contentId);
-
-        $categories = Category::where('content_id', $contentId)
-                        ->orderBy('sort_order')
-                        ->get();
-        $initialCategoryId = $categories->first()->id ?? null;
-        $categoryId = $request->input('category_id', $initialCategoryId);
-        $category = Category::find($categoryId);
+        $content = $this->getContent($request);
+        $categories = Category::getCategoriesByContent($content->id);
+        $category = $this->getCategory($categories, $request);
 
         if ($category) {
             $posts = Post::where('category_id', $category->id)
@@ -37,4 +34,67 @@ class PostsController extends Controller
             'content' => $content,
         ]);
     }
+
+    public function create(Request $request): Response
+    {
+        $content = $this->getContent($request);
+        $categories = Category::getCategoriesByContent($content->id);
+
+        return Inertia::render('admin/posts/create', [
+            'categories' => $categories,
+            'content' => $content,
+        ]);
+    }
+
+    public function store(PostStoreRequest $request): RedirectResponse
+    {
+        $post = $request->all();
+        $contentId = Category::getContentbyCategory($post['category_id']);
+        $post['content_id'] = $contentId;
+        $post['body_markdown'] = 'markdown'; // TODO 対応
+        $post['description'] = 'description'; // TODO 対応
+        Post::create($post);
+        return to_route('posts.index');
+    }
+
+    public function edit(Post $post): Response
+    {
+        $content = Content::find($post->content_id);
+        $categories = Category::getCategoriesByContent($content->id);
+        return Inertia::render('admin/posts/edit', [
+            'content' => $content,
+            'categories' => $categories,
+            'post' => $post,
+        ]);
+    }
+
+    public function update(PostUpdateRequest $request, Post $post): RedirectResponse
+    {
+        $post->update($request->validated());
+        return to_route('posts.index');
+    }
+
+    public function destroy(Post $post): void
+    {
+        $post->delete();
+    }
+
+    public function reorder(Post $post, Request $request): void
+    {
+        $post->reorder($request->input('oldIndex'), $request->input('newIndex'), 'react');
+    }
+
+    protected function getContent(Request $request)
+    {
+        $contentId = $request->input('content_id', 1);
+        return Content::find($contentId);
+    }
+
+    protected function getCategory($categories, Request $request)
+    {
+        $initialCategoryId = $categories->first()->id ?? null;
+        $categoryId = $request->input('category_id', $initialCategoryId);
+        return Category::find($categoryId);
+    }
+
 }

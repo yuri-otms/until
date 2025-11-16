@@ -69,9 +69,13 @@ export interface Category {
 
 export interface Post {
     id: number;
-    name: string;
+    title: string;
     slug: string;
     sort_order: number;
+    category_id: number;
+    content_id: number;
+    description: string;
+    body_markdown: string;
 }
 
 export interface ContentGroup {

@@ -76,7 +76,9 @@ export default function Edit({
                                     <Label htmlFor="name">テーマ</Label>
                                     <RadioGroup defaultValue={content.theme_id.toString()} name="theme_id">
                                         {themes.map((row) => (
-                                            <div className="flex items-center gap-3">
+                                            <div
+                                            key={row.id}
+                                            className="flex items-center gap-3">
                                                 <RadioGroupItem value={row.id.toString()} id={row.id.toString()} />
                                                 <Label htmlFor={row.id.toString()}>{row.name}</Label>
                                              </div>

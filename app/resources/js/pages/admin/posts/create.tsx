@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Theme } from "@/types";
+import { type BreadcrumbItem, type Content, type Category } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import ContentsLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
@@ -11,31 +11,33 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { store } from '@/routes/contents';
-import { index } from '@/routes/contents'
+import { index, store } from '@/routes/posts';
 
-const breadcrubms: BreadcrumbItem[] = [
-    {
-        title: 'コンテンツ設定',
-        href: index().url,
-    },
-    {
-        title: '新規作成',
-        href: '',
-    }
-];
 
 export default function Create({
-    themes
+    content,
+    categories,
 } : {
-    themes: Theme[]
+    content: Content;
+    categories: Category[];
 }) {
-    const defaultTheme: string = themes[0].id.toString();
+    const pageName = content.name + '記事投稿';
+    const breadcrubms: BreadcrumbItem[] = [
+        {
+            title: pageName,
+            href: index().url,
+        },
+        {
+            title: '新規作成',
+            href: '',
+        }
+    ];
+    const defaultCategory: string = categories[0].id.toString();
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
-            <Head title="コンテンツ新規作成" />
-            <ContentsLayout title="コンテンツ設定">
+            <Head title="記事新規作成" />
+            <ContentsLayout title={pageName}>
                 <Form
                     {...store.form()}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -46,18 +48,18 @@ export default function Create({
                         <>
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">コンテンツ名</Label>
+                                    <Label htmlFor="title">記事タイトル</Label>
                                     <Input
-                                        id="name"
+                                        id="title"
                                         type="text"
                                         autoFocus
                                         tabIndex={1}
-                                        autoComplete="name"
-                                        name="name"
+                                        autoComplete="title"
+                                        name="title"
                                         placeholder=""
                                         />
                                     <InputError
-                                        message={errors.name}
+                                        message={errors.title}
                                         className="mt-2"
                                     />
                                     <Label htmlFor="slug">slug</Label>
@@ -74,9 +76,9 @@ export default function Create({
                                         message={errors.slug}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="theme">テーマ</Label>
-                                    <RadioGroup defaultValue={defaultTheme} name="theme_id">
-                                        {themes.map((row) => (
+                                    <Label htmlFor="category">カテゴリー</Label>
+                                    <RadioGroup defaultValue={defaultCategory} name="category_id">
+                                        {categories.map((row) => (
                                             <div
                                             key={row.id}
                                             className="flex items-center gap-3">
@@ -86,7 +88,7 @@ export default function Create({
                                         ))}
                                     </RadioGroup>
                                     <InputError
-                                        message={errors.theme_id}
+                                        message={errors.category_id}
                                         className="mt-2"
                                     />
                                     <Button
