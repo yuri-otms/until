@@ -8,7 +8,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Admin\ContentsController;
 use App\Http\Controllers\Admin\ThemesController;
 use App\Http\Controllers\Admin\CategoriesController;
-
+use App\Http\Controllers\Admin\PostsController;
 
 Route::prefix('admin')->group(function () {
 
@@ -45,10 +45,10 @@ Route::prefix('admin')->group(function () {
         Route::put('/contents/reorder/{content}/', [ContentsController::class, 'reorder'])->name('contents.reorder');
         Route::put('/categoriess/reorder/{category}/', [CategoriesController::class, 'reorder'])->name('categories.reorder');
         Route::resources([
-            'contents' => ContentsController::class,
             'themes' => ThemesController::class,
+            'contents' => ContentsController::class,
             'categories' => CategoriesController::class,
+            'posts' => PostsController::class,
         ]);
     });
-
 });

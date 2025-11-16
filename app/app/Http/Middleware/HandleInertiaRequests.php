@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Content;
+use Illuminate\Support\Facades\Cache;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -46,6 +48,25 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'adminSidebarContents' => $this->getAdminSidebarContents(),
         ];
+    }
+
+    protected function getAdminSidebarContents()
+    {
+        $contents = Content::getContentsOrderByTheme();
+        $adminSidebarContents = [];
+        if ($contents) {
+            foreach ($contents as $content) {
+                $adminSidebarContents[] = [
+                    'title' => $content->name,
+                    'href' => '/admin/posts/?content=' . $content->slug,
+                    'icon' => '',
+                ];
+            }
+        }
+        return Cache::remember('admin_sidebar_contents', 3600, function () use ($adminSidebarContents) {
+            return $adminSidebarContents;
+        });
     }
 }

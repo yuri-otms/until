@@ -43,11 +43,11 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface Category {
+export interface Theme {
     id: number;
     name: string;
     slug: string;
-    content_id: string;
+    description: string;
     sort_order: number;
 }
 
@@ -59,11 +59,18 @@ export interface Content {
     sort_order: number;
 }
 
-export interface Theme {
+export interface Category {
     id: number;
     name: string;
     slug: string;
-    description: string;
+    content_id: string;
+    sort_order: number;
+}
+
+export interface Post {
+    id: number;
+    name: string;
+    slug: string;
     sort_order: number;
 }
 

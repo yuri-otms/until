@@ -51,7 +51,7 @@ class ContentsController extends Controller
         return to_route('contents.index');
     }
 
-    public function  edit(Content $content): Response
+    public function edit(Content $content): Response
     {
         return Inertia::render('admin/contents/edit', [
             'content' => $content,
