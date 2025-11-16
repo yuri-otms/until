@@ -81,6 +81,7 @@ export interface Post {
 export interface ContentGroup {
     id: number;
     name: string;
+    description: string;
     contents: Content[];
 }
 

@@ -1,7 +1,7 @@
 import { type BreadcrumbItem, type Content, type Theme } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';import {
+import AdminLayout from '@/layouts/contents/layout';import {
   Table,
   TableBody,
   TableCell,
@@ -97,7 +97,7 @@ export default function Index({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ設定" />
-            <ContentsLayout title="コンテンツ設定" create={create().url}>
+            <AdminLayout title="コンテンツ設定" create={create().url}>
                 <div>
                     <ThemeSelect themes={themes} activeTheme={activeTheme} onThemeChange={handleThemeChange} />
                     <div className="overflow-hidden rounded-md border">
@@ -145,7 +145,7 @@ export default function Index({
                         </DndContext>
                     </div>
                 </div>
-            </ContentsLayout>
+            </AdminLayout>
 
         </AppLayout>
     );

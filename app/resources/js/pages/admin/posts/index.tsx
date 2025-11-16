@@ -2,7 +2,7 @@ import { useState } from "react";
 import { type BreadcrumbItem, type Post, type Category, type Content } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';import {
+import AdminLayout from '@/layouts/contents/layout';import {
   Table,
   TableBody,
   TableCell,
@@ -100,7 +100,7 @@ export default function Index({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title={content.name + '記事投稿'} />
-            <ContentsLayout title={content.name + '記事投稿'} create={create().url}>
+            <AdminLayout title={content.name + '記事投稿'} create={create().url}>
                 <div>
                     <ThemeSelect themes={categories} activeTheme={activeCategory} onThemeChange={handleCategoryChange} />
                     <div className="overflow-hidden rounded-md border">
@@ -149,7 +149,7 @@ export default function Index({
                     </div>
                 </div>
 
-            </ContentsLayout>
+            </AdminLayout>
 
         </AppLayout>
     );

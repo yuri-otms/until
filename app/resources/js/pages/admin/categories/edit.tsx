@@ -1,6 +1,6 @@
 import { type BreadcrumbItem, type Content, type Category } from "@/types";
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';
+import AdminLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import {
@@ -33,7 +33,7 @@ export default function Edit({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
                 <Head title="カテゴリー新規作成" />
-                <ContentsLayout title="カテゴリー設定">
+                <AdminLayout title="カテゴリー設定">
                 <Form
                     {...update.form(category.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -105,7 +105,7 @@ export default function Edit({
                     )}
                 </Form>
 
-            </ContentsLayout>
+            </AdminLayout>
         </AppLayout>
     );
 }

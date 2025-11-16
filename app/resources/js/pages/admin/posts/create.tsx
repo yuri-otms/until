@@ -1,6 +1,6 @@
 import { type BreadcrumbItem, type Content, type Category } from "@/types";
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';
+import AdminLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import {
@@ -37,7 +37,7 @@ export default function Create({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="記事新規作成" />
-            <ContentsLayout title={pageName}>
+            <AdminLayout title={pageName}>
                 <Form
                     {...store.form()}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -106,7 +106,7 @@ export default function Create({
                     )}
                 </Form>
 
-            </ContentsLayout>
+            </AdminLayout>
         </AppLayout>
     );
 }

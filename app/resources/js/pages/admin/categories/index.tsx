@@ -2,7 +2,7 @@ import { useState } from "react";
 import { type BreadcrumbItem, type Content, type Category } from "@/types";
 import { dashboard } from '@/routes';
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';import {
+import AdminLayout from '@/layouts/contents/layout';import {
   Table,
   TableBody,
   TableCell,
@@ -96,7 +96,7 @@ export default function Index({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="カテゴリー設定" />
-            <ContentsLayout title="カテゴリー設定" create={create().url}>
+            <AdminLayout title="カテゴリー設定" create={create().url}>
                 <div>
                     <ThemeSelect themes={contents} activeTheme={activeContent} onThemeChange={handleContentChange} />
                     <div className="overflow-hidden rounded-md border">
@@ -145,7 +145,7 @@ export default function Index({
                     </div>
                 </div>
 
-            </ContentsLayout>
+            </AdminLayout>
 
         </AppLayout>
     );

@@ -1,6 +1,6 @@
 import { type BreadcrumbItem, type Theme } from "@/types";
 import AppLayout from '@/layouts/app-layout';
-import ContentsLayout from '@/layouts/contents/layout';
+import AdminLayout from '@/layouts/contents/layout';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { Label } from '@/components/ui/label';
@@ -28,7 +28,7 @@ export default function Edit({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="テーマ新規作成" />
-            <ContentsLayout title="テーマ設定">
+            <AdminLayout title="テーマ設定">
                 <Form
                     {...update.form(theme.id)}
                     resetOnSuccess={['password', 'password_confirmation']}
@@ -100,7 +100,7 @@ export default function Edit({
                     )}
                 </Form>
 
-            </ContentsLayout>
+            </AdminLayout>
         </AppLayout>
     );
 }

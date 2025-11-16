@@ -20,7 +20,7 @@ class HomeController extends Controller
                 ->get();
 
 
-        return Inertia::render('home/index', [
+        return Inertia::render('contents/home/index', [
             'contentGroups' => $themes
         ]);
     }
