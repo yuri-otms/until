@@ -1,6 +1,5 @@
 import ContentLayout from '@/layouts/content-layout'
 import { Link } from '@inertiajs/react';
-import { type Content, type PostGroup } from '@/types';
 
 export default function Index({
     content,
