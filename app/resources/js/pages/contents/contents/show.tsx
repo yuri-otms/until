@@ -1,14 +1,6 @@
 import ContentLayout from '@/layouts/content-layout'
-import {
-    HomeCard,
-    HomeCardHeader,
-    HomeCardTitle,
-    HomeCardDescription,
-    HomeCardContent
-} from '@/components/ui/home-card';
-import { ContentButton } from '@/components/ui/content-button';
-import { Head, Link } from '@inertiajs/react';
-import { type ContentGroup, type Content, type PostGroup } from '@/types';
+import { Link } from '@inertiajs/react';
+import { type Content, type PostGroup } from '@/types';
 
 export default function Index({
     content,
@@ -31,7 +23,7 @@ export default function Index({
                     <ul className="mx-4">
                     {category.posts.map((post)=>
                         <li key={post.id}>
-                            <Link href="">
+                            <Link href={"/contents/" + content.slug + '/' + post.id}>
                                 {post.title}
                             </Link>
                         </li>
