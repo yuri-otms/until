@@ -10,14 +10,14 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { dashboard } from '@/routes/admin';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
-import { index as contentIndex } from '@/routes/contents'
-import { index as themeIndex } from '@/routes/themes'
-import { index as categoryIndex } from '@/routes/categories'
+import { index as contentIndex } from '@/routes/admin/contents'
+import { index as themeIndex } from '@/routes/admin/themes'
+import { index as categoryIndex } from '@/routes/admin/categories'
 import { home } from '@/routes/'
 
 const footerNavItems: NavItem[] = [

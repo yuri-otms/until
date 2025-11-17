@@ -8,7 +8,7 @@ import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea"
 import InputError from '@/components/input-error';
-import { index, store } from '@/routes/themes'
+import { index, store } from '@/routes/admin/themes'
 
 const breadcrubms: BreadcrumbItem[] = [
     {

@@ -9,9 +9,9 @@ use App\Http\Controllers\Contents\PostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/content/{content:slug}', [ContentController::class, 'show'])->name('content.show');
+Route::get('/contents/{content:slug}', [ContentController::class, 'show'])->name('contents.show');
 
-Route::get('/content/{content:slug}/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/contents/{content:slug}/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/welcome', function () {
     return Inertia::render('welcome', [

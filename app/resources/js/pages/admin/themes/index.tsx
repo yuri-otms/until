@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { type BreadcrumbItem, type Theme } from "@/types";
-import { dashboard } from '@/routes';
+import { dashboard } from '@/routes/admin';
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/contents/layout';import {
   Table,
@@ -22,7 +22,7 @@ import {
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
-import { edit, create, destroy, reorder } from '@/routes/themes';
+import { edit, create, destroy, reorder } from '@/routes/admin/themes';
 import axios from 'axios';
 
 import DeleteContent from '@/components/delete-content';

@@ -10,7 +10,9 @@ use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')
+        ->name('admin.')
+        ->group(function () {
 
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', function () {

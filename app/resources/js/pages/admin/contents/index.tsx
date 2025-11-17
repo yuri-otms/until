@@ -1,5 +1,5 @@
 import { type BreadcrumbItem, type Content, type Theme } from "@/types";
-import { dashboard } from '@/routes';
+import { dashboard } from '@/routes/admin';
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/contents/layout';import {
   Table,
@@ -23,7 +23,7 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import { index, edit, create, destroy, reorder } from '@/routes/contents';
+import { index, edit, create, destroy, reorder } from '@/routes/admin/contents';
 import DeleteContent from '@/components/delete-content';
 import axios from 'axios';
 

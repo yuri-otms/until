@@ -11,8 +11,8 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
-import { store } from '@/routes/contents';
-import { index } from '@/routes/contents'
+import { store } from '@/routes/admin/contents';
+import { index } from '@/routes/admin/contents'
 
 const breadcrubms: BreadcrumbItem[] = [
     {
