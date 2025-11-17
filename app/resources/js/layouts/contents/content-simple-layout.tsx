@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from 'react';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { ContentHeader } from '@/components/content-header';
 import { ContentFooter } from '@/components/content-footer';
 
@@ -14,11 +14,10 @@ export default function ContentSimpleLayout({
 }: PropsWithChildren<ContentLayoutProps>) {
     return (
         <>
-            <Head title="">
-            </Head>
+            <Head title="" />
             <div className="flex min-h-screen flex-col  items-center bg-[#ffffff] text-[#494544] dark:bg-[#040404]">
                 <ContentHeader />
-                <div className="flex-grow w-full items-center lg:max-w-4xl pt-22 px-5 sm:px-14">
+                <div className="flex-grow w-full items-center lg:max-w-6xl mt-15 pt-10 px-5 sm:px-14">
                     <main className="w-full">
                         {children}
                     </main>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { type BreadcrumbItem, type Content, type Category } from "@/types";
 import { dashboard } from '@/routes/admin';
 import AppLayout from '@/layouts/app-layout';
-import AdminLayout from '@/layouts/contents/layout';import {
+import AdminLayout from '@/layouts/admin/layout';import {
   Table,
   TableBody,
   TableCell,

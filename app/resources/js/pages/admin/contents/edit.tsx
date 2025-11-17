@@ -1,6 +1,6 @@
 import { type BreadcrumbItem, type Content, type Theme } from "@/types";
 import AppLayout from '@/layouts/app-layout';
-import AdminLayout from '@/layouts/contents/layout';
+import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import {

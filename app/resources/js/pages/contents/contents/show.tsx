@@ -1,5 +1,6 @@
 import ContentLayout from '@/layouts/content-layout'
 import { Link } from '@inertiajs/react';
+import { type Content, type PostGroup } from '@/types'
 
 export default function Index({
     content,
@@ -11,7 +12,7 @@ export default function Index({
 
     return (
         <ContentLayout>
-            <h1 className="font-semibold text-lg my-2">{content.name}</h1>
+            <h1 className="font-semibold text-3xl my-4">{content.name}</h1>
             <p className="my-2">説明文説明文</p>
 
             <div>

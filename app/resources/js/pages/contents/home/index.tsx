@@ -17,7 +17,7 @@ export default function Index({
 
     return (
         <ContentLayout>
-            <p>80歳になる2065年まで40年続けるサイトです。</p>
+            <p className="mt-1 mb-5">80歳になる2065年まで40年続けるサイトです。</p>
             {contentGroups.map((themeRow) =>
                 <HomeCard key={themeRow.id}>
                     <HomeCardHeader>
