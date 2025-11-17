@@ -17,6 +17,7 @@ class PostController extends Controller
 {
     public function index(Request $request): Response
     {
+        // dd($request->all());
         $content = $this->getContent($request);
         $categories = Category::getCategoriesByContent($content->id);
         $category = $this->getCategory($categories, $request);
@@ -25,6 +26,8 @@ class PostController extends Controller
             $posts = Post::where('category_id', $category->id)
                         ->orderBy('sort_order')
                         ->get();
+        } else {
+            return dd('カテゴリーが登録されていません');
         }
 
         return Inertia::render('admin/posts/index', [
@@ -49,10 +52,11 @@ class PostController extends Controller
     public function store(PostStoreRequest $request): RedirectResponse
     {
         $post = $request->all();
-        $contentId = Category::getContentbyCategory($post['category_id']);
-        $post['content_id'] = $contentId;
+        $content = Category::getContentbyCategory($post['category_id']);
+        // dd($content);
+        $post['content_id'] = $content->id;
         Post::create($post);
-        return to_route('admin.posts.index', []);
+        return to_route('admin.posts.index', ['content'=> $content->slug]);
     }
 
     public function edit(Post $post): Response
@@ -69,7 +73,7 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, Post $post): RedirectResponse
     {
         $post->update($request->validated());
-        return to_route('admin.posts.index');
+        return to_route('admin.posts.index', ['content'=> $post->content->slug]);
     }
 
     public function destroy(Post $post): void

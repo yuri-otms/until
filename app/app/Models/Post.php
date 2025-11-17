@@ -16,8 +16,7 @@ class Post extends Model
         'sort_order',
         'content_id',
         'category_id',
-        'body_markdown',
-        'description'
+        'body',
     ];
 
     public function content()

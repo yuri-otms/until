@@ -66,21 +66,6 @@ export default function Edit({
                                         message={errors.name}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="slug">slug</Label>
-                                    <Input
-                                        id="slug"
-                                        defaultValue={post.slug}
-                                        type="text"
-                                        autoFocus
-                                        tabIndex={1}
-                                        autoComplete="slug"
-                                        name="slug"
-                                        placeholder=""
-                                        />
-                                    <InputError
-                                        message={errors.slug}
-                                        className="mt-2"
-                                    />
                                     <Label htmlFor="name">カテゴリー</Label>
                                     <RadioGroup defaultValue={post.category_id.toString()} name="category_id">
                                         {categories.map((row) => (
@@ -98,13 +83,13 @@ export default function Edit({
                                     />
                                     <Label htmlFor="name">本文</Label>
                                     <Textarea
-                                    id="body_markdown"
-                                    name="body_markdown"
+                                    id="body"
+                                    name="body"
                                     className="min-h-40"
-                                    defaultValue={post.body_markdown}
+                                    defaultValue={post.body}
                                      />
                                     <InputError
-                                        message={errors.body_markdown}
+                                        message={errors.body}
                                         className="mt-2"
                                     />
                                     <Button

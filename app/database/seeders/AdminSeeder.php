@@ -64,7 +64,7 @@ MD;
         Post::firstOrCreate(
             [
                 'id' => 1,
-                'title' => '記事',
+                'title' => 'デフォルトmarkdown記事',
                 'content_id' => 1,
                 'category_id' => 1,
                 'body' => $markdown,

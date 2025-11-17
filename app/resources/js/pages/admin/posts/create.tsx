@@ -26,7 +26,7 @@ export default function Create({
     const breadcrubms: BreadcrumbItem[] = [
         {
             title: pageName,
-            href: index().url,
+            href: index({query: {content: content.slug}}).url,
         },
         {
             title: '新規作成',
@@ -41,7 +41,6 @@ export default function Create({
             <AdminLayout title={pageName}>
                 <Form
                     {...store.form()}
-                    resetOnSuccess={['password', 'password_confirmation']}
                     disableWhileProcessing
                     className="flex flex-col gap-6"
                 >
@@ -63,20 +62,6 @@ export default function Create({
                                         message={errors.title}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="slug">slug</Label>
-                                    <Input
-                                        id="slug"
-                                        type="text"
-                                        autoFocus
-                                        tabIndex={1}
-                                        autoComplete="slug"
-                                        name="slug"
-                                        placeholder=""
-                                        />
-                                    <InputError
-                                        message={errors.slug}
-                                        className="mt-2"
-                                    />
                                     <Label htmlFor="category">カテゴリー</Label>
                                     <RadioGroup defaultValue={defaultCategory} name="category_id">
                                         {categories.map((row) => (
@@ -92,11 +77,16 @@ export default function Create({
                                         message={errors.category_id}
                                         className="mt-2"
                                     />
+                                    <Label htmlFor="body">本文</Label>
                                     <Textarea
                                     defaultValue=""
-                                    name="body_markdown"
+                                    name="body"
                                     className="min-h-40"
                                      />
+                                    <InputError
+                                        message={errors.body}
+                                        className="mt-2"
+                                    />
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

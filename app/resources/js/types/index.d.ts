@@ -70,7 +70,6 @@ export interface Category {
 export interface Post {
     id: number;
     title: string;
-    slug: string;
     sort_order: number;
     category_id: number;
     content_id: number;

@@ -40,6 +40,7 @@ class Category extends Model
         if (!$category) {
             return;
         }
-        return $category->content_id;
+        $content = Content::find($category->content_id);
+        return $content;
     }
 }
