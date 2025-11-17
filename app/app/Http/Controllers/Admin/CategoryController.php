@@ -46,7 +46,7 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
         Category::create($request->all());
-        return to_route('categories.index');
+        return to_route('admin.categories.index');
     }
 
     public function edit(Category $category): Response
@@ -60,7 +60,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
-        return to_route('categories.index');
+        return to_route('admin.categories.index');
     }
 
     public function destroy(Category $category): void

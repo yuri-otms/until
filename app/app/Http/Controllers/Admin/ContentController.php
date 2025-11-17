@@ -48,7 +48,7 @@ class ContentController extends Controller
     public function store(ContentStoreRequest $request): RedirectResponse
     {
         Content::create($request->all());
-        return to_route('contents.index');
+        return to_route('admin.contents.index');
     }
 
     public function edit(Content $content): Response
@@ -63,7 +63,7 @@ class ContentController extends Controller
     public function update(ContentUpdateRequest $request, Content $content): RedirectResponse
     {
         $content->update($request->validated());
-        return to_route('contents.index');
+        return to_route('admin.contents.index');
     }
 
     public function destroy(Content $content): void

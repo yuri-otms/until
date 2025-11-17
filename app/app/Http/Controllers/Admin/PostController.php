@@ -54,7 +54,7 @@ class PostController extends Controller
         $post['body_markdown'] = 'markdown'; // TODO 対応
         $post['description'] = 'description'; // TODO 対応
         Post::create($post);
-        return to_route('posts.index');
+        return to_route('admin.posts.index');
     }
 
     public function edit(Post $post): Response
@@ -71,7 +71,7 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, Post $post): RedirectResponse
     {
         $post->update($request->validated());
-        return to_route('posts.index');
+        return to_route('admin.posts.index');
     }
 
     public function destroy(Post $post): void

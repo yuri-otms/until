@@ -30,7 +30,7 @@ class ThemeController extends Controller
     public function store(ThemeStoreRequest $request): RedirectResponse
     {
         Theme::create($request->all());
-        return to_route('themes.index');
+        return to_route('admin.themes.index');
     }
 
     public function  edit(Theme $theme): Response
@@ -43,7 +43,7 @@ class ThemeController extends Controller
     public function update(ThemeUpdateRequest $request, Theme $theme): RedirectResponse
     {
         $theme->update($request->validated());
-        return to_route('themes.index');
+        return to_route('admin.themes.index');
     }
 
     public function destroy(Theme $theme): void
