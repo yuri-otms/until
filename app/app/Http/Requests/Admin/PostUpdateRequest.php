@@ -31,6 +31,9 @@ class PostUpdateRequest extends FormRequest
                 'required',
                 'numeric'
             ],
+            'body_markdown' => [
+                'string',
+            ]
         ];
     }
 

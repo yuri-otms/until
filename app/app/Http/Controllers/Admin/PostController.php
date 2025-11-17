@@ -51,7 +51,7 @@ class PostController extends Controller
         $post = $request->all();
         $contentId = Category::getContentbyCategory($post['category_id']);
         $post['content_id'] = $contentId;
-        $post['body_markdown'] = 'markdown'; // TODO 対応
+        // $post['body_markdown'] = 'markdown'; // TODO 対応
         $post['description'] = 'description'; // TODO 対応
         Post::create($post);
         return to_route('admin.posts.index');

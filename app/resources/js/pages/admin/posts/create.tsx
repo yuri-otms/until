@@ -10,6 +10,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from "@/components/ui/textarea";
 import InputError from '@/components/input-error';
 import { index, store } from '@/routes/admin/posts';
 
@@ -91,6 +92,11 @@ export default function Create({
                                         message={errors.category_id}
                                         className="mt-2"
                                     />
+                                    <Textarea
+                                    defaultValue=""
+                                    name="body_markdown"
+                                    className="min-h-40"
+                                     />
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

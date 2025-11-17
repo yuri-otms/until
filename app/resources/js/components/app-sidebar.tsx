@@ -37,11 +37,6 @@ const footerNavItems: NavItem[] = [
         icon: Settings,
     },
     {
-        title: 'テーマ設定',
-        href: themeIndex(),
-        icon: Settings,
-    },
-    {
         title: 'Home',
         href: home(),
         icon: House,

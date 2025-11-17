@@ -10,6 +10,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/posts'
 
@@ -33,6 +34,8 @@ export default function Edit({
             href: '',
         }
     ];
+
+
     return (
         <AppLayout breadcrumbs={breadcrubms}>
                 <Head title="記事編集" />
@@ -91,6 +94,17 @@ export default function Edit({
                                     </RadioGroup>
                                     <InputError
                                         message={errors.category_id}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="name">本文</Label>
+                                    <Textarea
+                                    id="body_markdown"
+                                    name="body_markdown"
+                                    className="min-h-40"
+                                    defaultValue={post.body_markdown}
+                                     />
+                                    <InputError
+                                        message={errors.body_markdown}
                                         className="mt-2"
                                     />
                                     <Button
