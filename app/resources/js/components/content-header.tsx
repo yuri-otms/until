@@ -5,7 +5,7 @@ import { home } from '@/routes';
 
 export function ContentHeader() {
     return (
-        <header className="fixed mb-6 w-full text-lg pt-4 text-[#494544] bg-[#ffffff]">
+        <header className="fixed w-full text-lg pt-4 text-[#494544] bg-[#ffffff]">
             <div className="flex justify-between mx-auto items-center px-4 sm:px-12 gap-4 font-semibold">
                 <span className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-sm"><img src={LogoImage} alt="until 80" loading="eager" /></div>

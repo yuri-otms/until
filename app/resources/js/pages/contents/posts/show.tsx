@@ -1,18 +1,37 @@
 import ContentLayout from '@/layouts/content-layout'
-import { type Post } from '@/types';
+import { type BreadcrumbItem, type Post, type Content } from '@/types';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { home } from '@/routes'
 
 export default function Index({
-    post
+    post,
+    content
 }: {
-    post: Post
+    post: Post;
+    content: Content;
 }) {
 
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: 'Top',
+            href: home().url,
+        },
+        {
+            title: content.name,
+            href: '/contents/' + content.slug,
+        },
+        {
+            title: '',
+            href: '',
+        }
+    ];
+
+
     return (
-        <ContentLayout>
-            <h1 className="font-semibold text-lg my-2">{post.title}</h1>
+        <ContentLayout breadcrumbs={breadcrumbs}>
+            <h1 className="font-semibold text-3xl my-2">{post.title}</h1>
 
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}

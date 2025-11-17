@@ -2,22 +2,27 @@ import { type PropsWithChildren } from 'react';
 import { Head } from '@inertiajs/react';
 import { ContentHeader } from '@/components/content-header';
 import { ContentFooter } from '@/components/content-footer';
+import { ContentBodyHeader } from '@/components/content-body-header';
+import { type BreadcrumbItem } from '@/types';
 
 interface ContentLayoutProps {
     name?: string;
     title?: string;
     description?: string;
+    breadcrumbs?: BreadcrumbItem[];
 }
 
 export default function ContentSimpleLayout({
     children,
+    breadcrumbs,
 }: PropsWithChildren<ContentLayoutProps>) {
     return (
         <>
             <Head title="" />
             <div className="flex min-h-screen flex-col  items-center bg-[#ffffff] text-[#494544] dark:bg-[#040404]">
                 <ContentHeader />
-                <div className="flex-grow w-full items-center lg:max-w-6xl mt-15 pt-10 px-5 sm:px-14">
+                <div className="flex-grow w-full items-center lg:max-w-6xl mt-7 pt-10 px-5 sm:px-14">
+                    { breadcrumbs ? <ContentBodyHeader breadcrumbs={breadcrumbs} /> : ''}
                     <main className="w-full">
                         {children}
                     </main>
