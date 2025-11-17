@@ -51,10 +51,8 @@ class PostController extends Controller
         $post = $request->all();
         $contentId = Category::getContentbyCategory($post['category_id']);
         $post['content_id'] = $contentId;
-        // $post['body_markdown'] = 'markdown'; // TODO 対応
-        $post['description'] = 'description'; // TODO 対応
         Post::create($post);
-        return to_route('admin.posts.index');
+        return to_route('admin.posts.index', []);
     }
 
     public function edit(Post $post): Response
@@ -86,8 +84,8 @@ class PostController extends Controller
 
     protected function getContent(Request $request)
     {
-        $contentId = $request->input('content_id', 1);
-        return Content::find($contentId);
+        $contentSlug = $request->input('content', 1);
+        return Content::where('slug', $contentSlug)->first();
     }
 
     protected function getCategory($categories, Request $request)

@@ -74,8 +74,7 @@ export interface Post {
     sort_order: number;
     category_id: number;
     content_id: number;
-    description: string;
-    body_markdown: string;
+    body: string;
 }
 
 export interface ContentGroup {
