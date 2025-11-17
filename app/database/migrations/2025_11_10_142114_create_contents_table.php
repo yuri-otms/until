@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('sort_order')->default(0);
             $table->foreignId('theme_id')->default(0);
+            $table->text('rescription')->nullable();
             $table->timestamps();
         });
     }

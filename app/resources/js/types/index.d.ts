@@ -85,5 +85,12 @@ export interface ContentGroup {
     contents: Content[];
 }
 
+export interface PostGroup {
+    id: number;
+    name: string;
+    description: string;
+    posts: Post[];
+}
+
 export type onThemeChange = (newTheme: string) => void;
 export type onDeleteClick = (deleteContent: number) => void;

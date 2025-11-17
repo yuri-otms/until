@@ -22,6 +22,11 @@ class Category extends Model
         return $this->belongsTo(Content::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public static function getCategoriesByContent($contentId)
     {
         return Category::where('content_id', $contentId)
