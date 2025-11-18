@@ -66,7 +66,6 @@ export default function Create({
                                     <Input
                                         id="slug"
                                         type="text"
-                                        autoFocus
                                         tabIndex={1}
                                         autoComplete="slug"
                                         name="slug"

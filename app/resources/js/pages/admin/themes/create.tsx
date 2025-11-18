@@ -55,7 +55,6 @@ export default function Create() {
                                     id="slug"
                                     type="text"
                                     required
-                                    autoFocus
                                     tabIndex={1}
                                     autoComplete="slug"
                                     name="slug"
@@ -69,7 +68,6 @@ export default function Create() {
                                                                                                     <Textarea
                                     id="description"
                                     required
-                                    autoFocus
                                     tabIndex={1}
                                     autoComplete="description"
                                     name="description"

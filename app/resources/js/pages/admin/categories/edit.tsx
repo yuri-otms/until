@@ -66,7 +66,6 @@ export default function Edit({
                                         id="slug"
                                         defaultValue={category.slug}
                                         type="text"
-                                        autoFocus
                                         tabIndex={1}
                                         autoComplete="slug"
                                         name="slug"

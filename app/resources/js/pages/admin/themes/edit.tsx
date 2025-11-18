@@ -61,7 +61,6 @@ export default function Edit({
                                     defaultValue={theme.slug}
                                     type="text"
                                     required
-                                    autoFocus
                                     tabIndex={1}
                                     autoComplete="slug"
                                     name="slug"
@@ -72,10 +71,9 @@ export default function Edit({
                                         className="mt-2"
                                     />
                                     <Label htmlFor="slug">説明</Label>
-                                                                                                                                                                                <Textarea
+                                    <Textarea
                                     id="description"
                                     defaultValue={theme.description}
-                                    autoFocus
                                     tabIndex={1}
                                     autoComplete="description"
                                     name="description"
