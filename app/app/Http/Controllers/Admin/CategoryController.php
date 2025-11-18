@@ -17,10 +17,7 @@ class CategoryController extends Controller
     public function index(Request $request): Response
     {
         $contents = Content::getContentsOrderByTheme();
-
-        $initialContentId = $contents->first()->id ?? null;
-        $contentId = $request->input('content_id', $initialContentId);
-        $content = Content::find($contentId);
+        $content = $this->getContent($contents, $request);
 
         $categories = [];
         if ($content) {
@@ -36,31 +33,42 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        $contents = Content::getContentsOrderByTheme();
+        $content = $this->getContent($contents, $request);
         return Inertia::render('admin/categories/create', [
-            'contents' => Content::getContentsOrderByTheme(),
+            'contents' => $contents,
+            'content' => $content,
         ]);
     }
 
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        Category::create($request->all());
-        return to_route('admin.categories.index');
+        $category = $request->all();
+        $contentId = $category['content_id'];
+        Category::create($category);
+        return to_route('admin.categories.index', [
+            'content_id' => $contentId,
+        ]);
     }
 
     public function edit(Category $category): Response
     {
+        $contents = Content::getContentsOrderByTheme();
+
         return Inertia::render('admin/categories/edit', [
             'category' => $category,
-            'contents' => Content::getContentsOrderByTheme(),
+            'contents' => $contents,
         ]);
     }
 
     public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
-        return to_route('admin.categories.index');
+        return to_route('admin.categories.index', [
+            'content_id' => $category->content->id,
+        ]);
     }
 
     public function destroy(Category $category): void
@@ -71,6 +79,13 @@ class CategoryController extends Controller
     public function reorder(Category $category, Request $request): void
     {
         $category->reorder($request->input('oldIndex'), $request->input('newIndex'), 'react');
+    }
+
+    protected function getContent($contents, Request $request)
+    {
+        $initialContentId = $contents->first()->id ?? null;
+        $contentId = $request->input('content_id', $initialContentId);
+        return Content::find($contentId);
     }
 
 }

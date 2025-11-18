@@ -13,22 +13,23 @@ import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/contents'
 
-const breadcrubms: BreadcrumbItem[] = [
-    {
-        title: 'コンテンツ設定',
-        href: index().url,
-    },
-    {
-        title: '編集',
-        href: '',
-    }
-];
 export default function Edit({
-    content,themes
+    content,
+    themes
 }: {
     content: Content;
     themes: Theme[];
 }) {
+    const breadcrubms: BreadcrumbItem[] = [
+        {
+            title: 'コンテンツ設定',
+            href: index({query: {theme_id: content.theme_id}}).url,
+        },
+        {
+            title: '編集',
+            href: '',
+        }
+    ];
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />

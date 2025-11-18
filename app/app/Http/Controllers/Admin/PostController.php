@@ -17,7 +17,6 @@ class PostController extends Controller
 {
     public function index(Request $request): Response
     {
-        // dd($request->all());
         $content = $this->getContent($request);
         $categories = Category::getCategoriesByContent($content->id);
         $category = $this->getCategory($categories, $request);
@@ -42,8 +41,10 @@ class PostController extends Controller
     {
         $content = $this->getContent($request);
         $categories = Category::getCategoriesByContent($content->id);
+        $category = $this->getCategory($categories, $request);
 
         return Inertia::render('admin/posts/create', [
+            'category' => $category,
             'categories' => $categories,
             'content' => $content,
         ]);
@@ -52,11 +53,14 @@ class PostController extends Controller
     public function store(PostStoreRequest $request): RedirectResponse
     {
         $post = $request->all();
-        $content = Category::getContentbyCategory($post['category_id']);
-        // dd($content);
+        $categoryId = $post['category_id'];
+        $content = Category::getContentbyCategory($categoryId);
         $post['content_id'] = $content->id;
         Post::create($post);
-        return to_route('admin.posts.index', ['content'=> $content->slug]);
+        return to_route('admin.posts.index',[
+            'content'=> $content->slug,
+            'category_id' => $categoryId,
+        ]);
     }
 
     public function edit(Post $post): Response
@@ -73,7 +77,10 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, Post $post): RedirectResponse
     {
         $post->update($request->validated());
-        return to_route('admin.posts.index', ['content'=> $post->content->slug]);
+        return to_route('admin.posts.index', [
+            'content'=> $post->content->slug,
+            'category_id' => $post->category->id,
+        ]);
     }
 
     public function destroy(Post $post): void

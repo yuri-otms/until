@@ -19,10 +19,8 @@ class ContentController extends Controller
     {
         $themes = Theme::orderBy('sort_order')
                         ->get();
+        $theme = $this->getTheme($themes, $request);
 
-        $initialThemeId = $themes->first()->id ?? null;
-        $themeId = $request->input('theme_id', $initialThemeId);
-        $theme = Theme::find($themeId);
 
         $contents = [];
         if ($theme) {
@@ -37,33 +35,44 @@ class ContentController extends Controller
         ]);
     }
 
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        $themes = Theme::orderBy('sort_order')
+                        ->get();
+        $theme = $this->getTheme($themes, $request);
         return Inertia::render('admin/contents/create', [
-            'themes' => Theme::orderBy('sort_order')
-                        ->get(),
+            'themes' => $themes,
+            'theme' => $theme
         ]);
     }
 
     public function store(ContentStoreRequest $request): RedirectResponse
     {
-        Content::create($request->all());
-        return to_route('admin.contents.index');
+        $content = $request->all();
+        $themeId = $content['theme_id'];
+        $theme = Theme::find($themeId);
+        Content::create($content);
+        return to_route('admin.contents.index', [
+            'theme_id' => $theme->id,
+        ]);
     }
 
     public function edit(Content $content): Response
     {
+        $themes = Theme::orderBy('sort_order')
+                        ->get();
         return Inertia::render('admin/contents/edit', [
             'content' => $content,
-            'themes' => Theme::orderBy('sort_order')
-                        ->get(),
+            'themes' => $themes,
         ]);
     }
 
     public function update(ContentUpdateRequest $request, Content $content): RedirectResponse
     {
         $content->update($request->validated());
-        return to_route('admin.contents.index');
+        return to_route('admin.contents.index', [
+            'theme_id' => $content->theme_id,
+        ]);
     }
 
     public function destroy(Content $content): void
@@ -74,5 +83,12 @@ class ContentController extends Controller
     public function reorder(Content $content, Request $request): void
     {
         $content->reorder($request->input('oldIndex'), $request->input('newIndex'), 'react');
+    }
+
+    protected function getTheme($themes, Request $request)
+    {
+        $initialThemeId = $themes->first()->id ?? null;
+        $themeId = $request->input('theme_id', $initialThemeId);
+        return Theme::find($themeId);
     }
 }

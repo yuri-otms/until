@@ -25,7 +25,11 @@ export function ThemeSelect({
                 value={activeTheme}
                 >
                     {themes.map((row) =>
-                        <NativeSelectOption key={row.id} value={row.id}>{row.name}</NativeSelectOption>
+                        <NativeSelectOption
+                        key={row.id}
+                        value={row.id}
+                        >{row.name}
+                        </NativeSelectOption>
                     )};d
                 </NativeSelect>
         </div>

@@ -31,7 +31,7 @@ import axios from 'axios';
 const breadcrubms: BreadcrumbItem[] = [
     {
         title: 'コンテンツ設定',
-        href: dashboard().url,
+        href: '',
     },
 ];
 
@@ -97,7 +97,7 @@ export default function Index({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ設定" />
-            <AdminLayout title="コンテンツ設定" create={create().url}>
+            <AdminLayout title="コンテンツ設定" create={create({query: {theme_id: theme.id}}).url}>
                 <div>
                     <ThemeSelect themes={themes} activeTheme={activeTheme} onThemeChange={handleThemeChange} />
                     <div className="overflow-hidden rounded-md border">

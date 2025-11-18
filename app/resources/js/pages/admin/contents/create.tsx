@@ -14,23 +14,25 @@ import InputError from '@/components/input-error';
 import { store } from '@/routes/admin/contents';
 import { index } from '@/routes/admin/contents'
 
-const breadcrubms: BreadcrumbItem[] = [
-    {
-        title: 'コンテンツ設定',
-        href: index().url,
-    },
-    {
-        title: '新規作成',
-        href: '',
-    }
-];
 
 export default function Create({
-    themes
+    themes,
+    theme
 } : {
-    themes: Theme[]
+    themes: Theme[];
+    theme: Theme;
 }) {
-    const defaultTheme: string = themes[0].id.toString();
+    const breadcrubms: BreadcrumbItem[] = [
+        {
+            title: 'コンテンツ設定',
+            href: index({query: { theme_id: theme.id}}).url,
+        },
+        {
+            title: '新規作成',
+            href: '',
+        }
+    ];
+    const defaultTheme: string = theme.id.toString();
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>

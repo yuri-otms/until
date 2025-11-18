@@ -96,7 +96,9 @@ export default function Index({
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="カテゴリー設定" />
-            <AdminLayout title="カテゴリー設定" create={create().url}>
+            <AdminLayout title="カテゴリー設定" create={create({query: {
+                content_id: content.id
+            }}).url}>
                 <div>
                     <ThemeSelect themes={contents} activeTheme={activeContent} onThemeChange={handleContentChange} />
                     <div className="overflow-hidden rounded-md border">

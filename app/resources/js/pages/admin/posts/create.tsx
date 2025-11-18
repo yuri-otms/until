@@ -17,23 +17,28 @@ import { index, store } from '@/routes/admin/posts';
 
 export default function Create({
     content,
+    category,
     categories,
 } : {
     content: Content;
+    category: Category;
     categories: Category[];
 }) {
     const pageName = content.name + '記事投稿';
     const breadcrubms: BreadcrumbItem[] = [
         {
             title: pageName,
-            href: index({query: {content: content.slug}}).url,
+            href: index({query: {
+                content: content.slug,
+                category_id: category.id
+            }}).url,
         },
         {
             title: '新規作成',
             href: '',
         }
     ];
-    const defaultCategory: string = categories[0].id.toString();
+    const defaultCategory: string = category.id.toString();
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -63,7 +68,8 @@ export default function Create({
                                         className="mt-2"
                                     />
                                     <Label htmlFor="category">カテゴリー</Label>
-                                    <RadioGroup defaultValue={defaultCategory} name="category_id">
+                                    <RadioGroup
+                                    defaultValue={defaultCategory} name="category_id">
                                         {categories.map((row) => (
                                             <div
                                             key={row.id}

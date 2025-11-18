@@ -13,23 +13,24 @@ import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/categories'
 
-const breadcrubms: BreadcrumbItem[] = [
-    {
-        title: 'カテゴリー設定',
-        href: index().url,
-    },
-    {
-        title: '編集',
-        href: '',
-    }
-];
 export default function Edit({
     category,
-    contents
+    contents,
 }: {
     category: Category;
     contents: Content[];
 }) {
+    const breadcrubms: BreadcrumbItem[] = [
+        {
+            title: 'カテゴリー設定',
+            href: index({query: {content_id: category.content_id}}).url,
+        },
+        {
+            title: '編集',
+            href: '',
+        }
+    ];
+
     return (
         <AppLayout breadcrumbs={breadcrubms}>
                 <Head title="カテゴリー新規作成" />

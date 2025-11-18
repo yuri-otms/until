@@ -27,7 +27,10 @@ export default function Edit({
     const breadcrubms: BreadcrumbItem[] = [
         {
             title: pageName,
-            href: index().url,
+            href: index({
+                query:{content: content.slug,
+                category_id: post.category_id
+            }}).url,
         },
         {
             title: '編集',
