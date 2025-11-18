@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import { type BreadcrumbItem, type Content, type PostGroup } from '@/types'
 import { home } from '@/routes'
 
-export default function Index({
+export default function Show({
     content,
     categories
 }: {
