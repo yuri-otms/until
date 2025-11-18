@@ -12,11 +12,11 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'slug',
         'sort_order',
         'content_id',
         'category_id',
         'body',
+        'status',
     ];
 
     public function content()

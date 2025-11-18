@@ -14,7 +14,8 @@ class ContentController extends Controller
     public function show(Content $content): Response
     {
         $categories = Category::with(['posts' => function ($q) {
-            $q->orderBy('sort_order');
+            $q->where('status', 'published')
+                ->orderBy('sort_order');
         }])
                         ->where('content_id', $content->id)
                         ->whereHas('posts')

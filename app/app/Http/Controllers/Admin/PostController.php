@@ -12,6 +12,7 @@ use App\Models\Content;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
+use App\Enums\PostStatus;
 
 class PostController extends Controller
 {
@@ -47,6 +48,7 @@ class PostController extends Controller
             'category' => $category,
             'categories' => $categories,
             'content' => $content,
+            'postStatusOptions' => PostStatus::keyLabelList(),
         ]);
     }
 
@@ -71,6 +73,7 @@ class PostController extends Controller
             'content' => $content,
             'categories' => $categories,
             'post' => $post,
+            'postStatusOptions' => PostStatus::keyLabelList(),
         ]);
     }
 

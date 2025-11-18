@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\PostStatus;
 
 return new class extends Migration
 {
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->foreignId('content_id')->default(0);
             $table->foreignId('category_id')->default(0);
             $table->longText('body');
+            $table->enum('status', PostStatus::values())->default(PostStatus::DRAFT->value);
             $table->timestamps();
         });
     }

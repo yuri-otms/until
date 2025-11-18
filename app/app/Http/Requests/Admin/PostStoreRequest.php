@@ -28,6 +28,9 @@ class PostStoreRequest extends FormRequest
             ],
             'body' => [
                 'required',
+            ],
+            'status' => [
+                'required',
             ]
         ];
     }

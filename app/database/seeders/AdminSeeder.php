@@ -68,6 +68,7 @@ MD;
                 'content_id' => 1,
                 'category_id' => 1,
                 'body' => $markdown,
+                'status' => 'published'
             ]
         );
 

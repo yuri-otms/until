@@ -1,4 +1,10 @@
-import { type BreadcrumbItem, type Content, type Category, type Post } from "@/types";
+import {
+    type BreadcrumbItem,
+    type Content,
+    type Category,
+    type Post,
+    type PostStatus
+} from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
@@ -18,10 +24,12 @@ export default function Edit({
     content,
     categories,
     post,
+    postStatusOptions,
 }: {
     content: Content;
     categories: Category[];
     post: Post;
+    postStatusOptions: PostStatus[];
 }) {
     const pageName = content.name + '記事投稿';
     const breadcrubms: BreadcrumbItem[] = [
@@ -37,7 +45,6 @@ export default function Edit({
             href: '',
         }
     ];
-
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -95,6 +102,23 @@ export default function Edit({
                                         message={errors.body}
                                         className="mt-2"
                                     />
+
+                                    <Label htmlFor="status">掲載状態</Label>
+                                    <RadioGroup defaultValue={post.status} name="status">
+                                        {postStatusOptions.map((row) => (
+                                            <div
+                                            key={row.key}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.key} id={row.key} />
+                                                <Label htmlFor={row.key}>{row.label}</Label>
+                                             </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.status}
+                                        className="mt-2"
+                                    />
+
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

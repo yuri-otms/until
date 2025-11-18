@@ -28,6 +28,9 @@ class PostUpdateRequest extends FormRequest
             ],
             'body' => [
                 'required',
+            ],
+            'status' => [
+                'required',
             ]
         ];
     }

@@ -74,6 +74,12 @@ export interface Post {
     category_id: number;
     content_id: number;
     body: string;
+    status: string;
+}
+
+export interface PostStatus {
+    key: string;
+    label: string;
 }
 
 export interface ContentGroup {
