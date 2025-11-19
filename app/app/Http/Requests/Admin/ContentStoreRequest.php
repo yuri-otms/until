@@ -21,7 +21,6 @@ class ContentStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(Content::class)
             ],
             'display_name' => [
                 'max:255',

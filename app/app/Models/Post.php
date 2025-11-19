@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Trait\HasSortOrder;
 
 class Post extends Model
 {
+    use HasFactory;
     use HasSortOrder;
     protected static ?string $sortScope = 'category_id';
 

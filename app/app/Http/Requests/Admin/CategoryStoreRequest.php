@@ -21,7 +21,6 @@ class CategoryStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(Category::class)
             ],
             'slug' => [
                 'required',
