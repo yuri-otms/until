@@ -54,9 +54,11 @@ export interface Theme {
 export interface Content {
     id: number;
     name: string;
+    display_name: string;
     slug: string;
     theme_id: string;
     sort_order: number;
+    description: string;
 }
 
 export interface Category {

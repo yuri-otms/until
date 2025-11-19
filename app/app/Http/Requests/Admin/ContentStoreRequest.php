@@ -23,6 +23,9 @@ class ContentStoreRequest extends FormRequest
                 'max:255',
                 Rule::unique(Content::class)
             ],
+            'display_name' => [
+                'max:255',
+            ],
             'slug' => [
                 'required',
                 'string',
@@ -32,6 +35,8 @@ class ContentStoreRequest extends FormRequest
             'theme_id' => [
                 'required',
                 'numeric'
+            ],
+            'description' => [
             ],
         ];
     }

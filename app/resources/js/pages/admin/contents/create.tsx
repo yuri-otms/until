@@ -10,6 +10,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from "@/components/ui/textarea";
 import InputError from '@/components/input-error';
 import { store } from '@/routes/admin/contents';
 import { index } from '@/routes/admin/contents'
@@ -62,6 +63,16 @@ export default function Create({
                                         message={errors.name}
                                         className="mt-2"
                                     />
+                                    <Label htmlFor="display_name">コンテンツ名(表示)</Label>
+                                    <Textarea
+                                        id="display_name"
+                                        name="display_name"
+                                        />
+
+                                    <InputError
+                                        message={errors.display_name}
+                                        className="mt-2"
+                                    />
                                     <Label htmlFor="slug">slug</Label>
                                     <Input
                                         id="slug"
@@ -90,6 +101,18 @@ export default function Create({
                                         message={errors.theme_id}
                                         className="mt-2"
                                     />
+
+                                    <Label htmlFor="description">説明文</Label>
+                                    <Textarea
+                                        id="description"
+                                        name="description"
+                                        />
+
+                                    <InputError
+                                        message={errors.description}
+                                        className="mt-2"
+                                    />
+
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

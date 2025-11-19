@@ -22,6 +22,9 @@ class ContentUpdateRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'display_name' => [
+                'max:255',
+            ],
             'slug' => [
                 'required',
                 'string',
@@ -30,7 +33,9 @@ class ContentUpdateRequest extends FormRequest
             'theme_id' => [
                 'required',
                 'numeric'
-            ] ,
+            ],
+            'description' => [
+            ],
         ];
     }
 

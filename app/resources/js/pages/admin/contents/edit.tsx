@@ -10,6 +10,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
+import { Textarea } from "@/components/ui/textarea";
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/contents'
 
@@ -45,18 +46,28 @@ export default function Edit({
                             <div className="grid gap-6">
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">コンテンツ名</Label>
-                                                                                                <Input
+                                     <Input
                                     id="name"
                                     defaultValue={content.name}
                                     type="text"
                                     autoFocus
-                                    tabIndex={1}
                                     autoComplete="name"
                                     name="name"
                                     placeholder=""
                                     />
                                     <InputError
-                                        message={errors.name}
+                                        message={errors.title}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="display_name">コンテンツ名(表示)</Label>
+                                     <Textarea
+                                    id="display_name"
+                                    defaultValue={content.display_name}
+                                    name="display_name"
+                                    placeholder=""
+                                    />
+                                    <InputError
+                                        message={errors.display_name}
                                         className="mt-2"
                                     />
                                     <Label htmlFor="slug">slug</Label>
@@ -73,7 +84,7 @@ export default function Edit({
                                         message={errors.slug}
                                         className="mt-2"
                                     />
-                                    <Label htmlFor="name">テーマ</Label>
+                                    <Label htmlFor="theme_id">テーマ</Label>
                                     <RadioGroup defaultValue={content.theme_id.toString()} name="theme_id">
                                         {themes.map((row) => (
                                             <div
@@ -88,6 +99,22 @@ export default function Edit({
                                         message={errors.theme_id}
                                         className="mt-2"
                                     />
+
+                                    <Label htmlFor="description">説明文</Label>
+                                     <Textarea
+                                    id="description"
+                                    defaultValue={content.description}
+                                    tabIndex={1}
+                                    name="description"
+                                    placeholder=""
+                                    />
+                                    <InputError
+                                        message={errors.description}
+                                        className="mt-2"
+                                    />
+
+
+
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

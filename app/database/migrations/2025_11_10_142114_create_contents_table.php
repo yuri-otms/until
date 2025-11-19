@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('display_name')->nullable();
             $table->string('slug');
             $table->integer('sort_order')->default(0);
             $table->foreignId('theme_id')->default(0);
-            $table->text('rescription')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -26,6 +26,8 @@ class AdminSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'コンテンツ1',
+                'display_name' => 'コンテンツ
+1',
                 'slug' => 'content1',
                 'theme_id' => 1,
             ]
