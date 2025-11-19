@@ -25,6 +25,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { Head, router } from '@inertiajs/react';
 import { index, edit, create, destroy, reorder } from '@/routes/admin/posts';
 import axios from 'axios';
+import { Search } from 'lucide-react';
 
 import DeleteContent from '@/components/delete-content';
 
@@ -119,6 +120,7 @@ export default function Index({
                             <TableHead>順番</TableHead>
                             <TableHead>ID</TableHead>
                             <TableHead>タイトル</TableHead>
+                            <TableHead>確認</TableHead>
                             <TableHead>動作</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -134,10 +136,15 @@ export default function Index({
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.title}</TableCell>
+                                    <TableCell>
+                                        <a href={"/contents/" + content.slug + '/' + row.id} target="_blank">
+                                            <Search />
+                                        </a>
+                                    </TableCell>
                                     <TableCell
                                     dada-dnd-cancel="true"
                                     >
-                                        <LinkButton href={edit(row.id).url} className="bg-black">編集
+                                        <LinkButton target="_blank" href={edit(row.id).url} className="bg-black">編集
                                         </LinkButton>
                                         <DeleteContent
                                         model="記事"
