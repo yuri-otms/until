@@ -27,9 +27,9 @@ class TwoFactorAuthenticationTest extends TestCase
 
         $this->actingAs($user)
             ->withSession(['auth.password_confirmed_at' => time()])
-            ->get(route('two-factor.show'))
+            ->get(route('admin.two-factor.show'))
             ->assertInertia(fn (Assert $page) => $page
-                ->component('settings/two-factor')
+                ->component('admin/settings/two-factor')
                 ->where('twoFactorEnabled', false)
             );
     }
@@ -48,7 +48,7 @@ class TwoFactorAuthenticationTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->get(route('two-factor.show'));
+            ->get(route('admin.two-factor.show'));
 
         $response->assertRedirect(route('password.confirm'));
     }
@@ -67,10 +67,10 @@ class TwoFactorAuthenticationTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get(route('two-factor.show'))
+            ->get(route('admin.two-factor.show'))
             ->assertOk()
             ->assertInertia(fn (Assert $page) => $page
-                ->component('settings/two-factor')
+                ->component('admin/settings/two-factor')
             );
     }
 
@@ -86,7 +86,7 @@ class TwoFactorAuthenticationTest extends TestCase
 
         $this->actingAs($user)
             ->withSession(['auth.password_confirmed_at' => time()])
-            ->get(route('two-factor.show'))
+            ->get(route('admin.two-factor.show'))
             ->assertForbidden();
     }
 }
