@@ -11,15 +11,20 @@ export function ContentHeader() {
                     <div className="w-10 h-10 rounded-sm"><img src={LogoImage} alt="until 80" loading="eager" /></div>
                     <Link href={ home() }>80歳まで続けるサイト</Link>
                 </span>
-                <nav className="justify-end">
-                    <Link
-                        href="/welcome"
-                        className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal
-                        hover:text-[#CCCCCC]
-                        "
-                    >
-                        Welcome
-                    </Link>
+                <nav className="justify-end text-sm font-medium gap-5">
+                    <div className="hidden md:block">
+                        <Link href="/about-this-site"
+                        className="p-2">このサイトについて
+                        </Link>
+                        <Link
+                        className="p-2" href="/about-this-site">プロフィール
+                        </Link>
+                        <Link
+                        className="p-2" href="/contact">お問い合わせ</Link>
+                    </div>
+                    <div className="block md:hidden">
+                        ハンバーガー
+                    </div>
                 </nav>
             </div>
         </header>
