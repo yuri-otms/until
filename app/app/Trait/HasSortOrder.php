@@ -33,6 +33,33 @@ trait HasSortOrder
                 ->decrement('sort_order');
         });
 
+        static::updating(function (Model $model) {
+            if (!static::$sortScope) {
+                return;
+            }
+
+            $scopeField = static::$sortScope;
+            $oldScopeValue = $model->getOriginal($scopeField);
+            $newScopeValue = $model->{$scopeField};
+
+            if ($oldScopeValue == $newScopeValue) {
+                return;
+            }
+            $model->sort_order = 1;
+
+            // 旧sortScope所属のsort_order変更
+            $oldSortOrder = $model->getOriginal('sort_order');
+            DB::table($model->getTable())
+                ->where($scopeField, $oldScopeValue)
+                ->where('sort_order', '>', $oldSortOrder)
+                ->decrement('sort_order');
+
+            // 新sortScope所属のsort_order変更
+            DB::table($model->getTable())
+                ->where($scopeField, $newScopeValue)
+                ->increment('sort_order');
+        });
+
     }
 
     public function reorder($from, $to, $type = '')
