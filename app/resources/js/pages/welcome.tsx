@@ -1,4 +1,4 @@
-import { login, register } from '@/routes';
+import { login } from '@/routes';
 import { dashboard } from '@/routes/admin';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
