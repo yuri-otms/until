@@ -17,7 +17,7 @@ export default function Index({
 
     return (
         <ContentLayout>
-            <div className="mt-10 mb-5">
+            <div className="mt-6 mb-5">
                 <p className="mb-4">80歳になる2065年まで40年続けるサイトです。</p>
             </div>
             {contentGroups.map((themeRow) =>

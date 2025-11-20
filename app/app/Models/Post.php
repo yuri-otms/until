@@ -21,6 +21,11 @@ class Post extends Model
         'status',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+        'updated_at' => 'datetime:Y-m-d H:i',
+    ];
+
     public function content()
     {
         return $this->belongsTo(Content::class);

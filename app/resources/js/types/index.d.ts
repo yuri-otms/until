@@ -82,6 +82,8 @@ export interface Post {
     content_id: number;
     body: string;
     status: string;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface PostStatus {

@@ -25,7 +25,7 @@ export default function Show({
     return (
         <ContentLayout breadcrumbs={breadcrumbs} title={content.name}>
 
-            <p className="my-6">説明文説明文</p>
+            <p className="my-6 whitespace-pre-line">{content.description}</p>
 
             <div>
                 {categories.map((category) =>
