@@ -8,6 +8,15 @@ use App\Http\Controllers\Contents\ContentController;
 use App\Http\Controllers\Contents\PostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about-this-site', function () {
+    return Inertia::render('contents/home/about-this-site');
+})->name('about-this-site');
+Route::get('/profile', function () {
+    return Inertia::render('contents/home/profile');
+})->name('profile');
+Route::get('/contact', function () {
+    return Inertia::render('contents/home/contact');
+})->name('contact');
 
 Route::get('/contents/{content:slug}', [ContentController::class, 'show'])->name('contents.show');
 

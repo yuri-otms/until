@@ -18,7 +18,9 @@ class ContentController extends Controller
                 ->orderBy('sort_order');
         }])
                         ->where('content_id', $content->id)
-                        ->whereHas('posts')
+                        ->whereHas('posts', function ($q) {
+                            $q->where('status', 'published');
+                        })
                         ->orderBy('sort_order')
                         ->get();
 

@@ -15,15 +15,17 @@ interface ContentLayoutProps {
 export default function ContentSimpleLayout({
     children,
     breadcrumbs,
+    title,
 }: PropsWithChildren<ContentLayoutProps>) {
     return (
         <>
-            <Head title="" />
+            <Head title={title} />
             <div className="flex min-h-screen flex-col  items-center bg-[#ffffff] text-[#494544] dark:bg-[#040404]">
                 <ContentHeader />
                 <div className="flex-grow w-full items-center lg:max-w-6xl mt-7 pt-10 px-5 sm:px-14">
                     { breadcrumbs ? <ContentBodyHeader breadcrumbs={breadcrumbs} /> : ''}
                     <main className="w-full">
+                        { title ? <h1 className="font-semibold text-3xl my-4">{title}</h1> : ''}
                         {children}
                     </main>
                 </div>

@@ -23,8 +23,8 @@ export default function Show({
     ];
 
     return (
-        <ContentLayout breadcrumbs={breadcrumbs}>
-            <h1 className="font-semibold text-3xl my-4">{content.name}</h1>
+        <ContentLayout breadcrumbs={breadcrumbs} title={content.name}>
+
             <p className="my-6">説明文説明文</p>
 
             <div>

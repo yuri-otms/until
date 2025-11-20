@@ -110,6 +110,7 @@ export default function Index({
                         <TableHeader>
                             <TableRow>
                             <TableHead>順番</TableHead>
+                            <TableHead>並び順</TableHead>
                             <TableHead>ID</TableHead>
                             <TableHead>コンテンツ</TableHead>
                             <TableHead>動作</TableHead>
@@ -125,6 +126,7 @@ export default function Index({
                                 model_id={row.id}
                                 >
                                     <TableSortableCell model_id={row.id} />
+                                    <TableCell>{row.sort_order}</TableCell>
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell

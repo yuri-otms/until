@@ -1,9 +1,26 @@
 import { Link } from '@inertiajs/react';
+import { Menu } from "lucide-react"
 import LogoImage from '@/images/favicon.svg';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { home } from '@/routes';
+import { type MenuItem } from '@/types';
 
 
 export function ContentHeader() {
+    const links: MenuItem[] = [
+      {
+        title: 'このサイトについて',
+        href: 'about-this-site',
+      },
+      {
+        title: 'プロフィール',
+        href: 'profile',
+      },
+      {
+        title: 'お問い合わせ',
+        href: 'contact',
+      },
+    ];
     return (
         <header className="fixed w-full text-lg pt-4 text-[#494544] bg-[#ffffff]">
             <div className="flex justify-between mx-auto items-center px-4 sm:px-12 gap-4 font-semibold">
@@ -13,17 +30,25 @@ export function ContentHeader() {
                 </span>
                 <nav className="justify-end text-sm font-medium gap-5">
                     <div className="hidden md:block">
-                        <Link href="/about-this-site"
-                        className="p-2">このサイトについて
-                        </Link>
-                        <Link
-                        className="p-2" href="/about-this-site">プロフィール
-                        </Link>
-                        <Link
-                        className="p-2" href="/contact">お問い合わせ</Link>
+                        {links.map((row, index) =>
+                            <Link key={index} className="p-2" href={row.href}>{row.title}</Link>
+                        )}
                     </div>
                     <div className="block md:hidden">
-                        ハンバーガー
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <button className="border border-slate-500 p-1 border-radius rounded">
+                                    <Menu className="h-6 w-6" />
+                                </button>
+                            </SheetTrigger>
+                            <SheetContent side="right" className="p-6">
+                                <nav className="flex flex-col space-y-4">
+                                    {links.map((row, index) =>
+                                        <Link key={index} className="" href={row.href}>{row.title}</Link>
+                                    )}
+                                </nav>
+                            </SheetContent>
+                        </Sheet>
                     </div>
                 </nav>
             </div>
