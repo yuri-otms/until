@@ -34,7 +34,6 @@ services:
       - .env.dev
     volumes:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/mysql/data:/mysql
       - dbdata:/var/lib/mysql
     ports:
       - "33306:3306"

@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ContentType;
 
 return new class extends Migration
 {
@@ -19,7 +18,6 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('sort_order')->default(0);
             $table->foreignId('theme_id')->default(0);
-            $table->enum('type', ContentType::values())->default(ContentType::POST->value);
             $table->text('description')->nullable();
             $table->timestamps();
         });

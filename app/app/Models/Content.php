@@ -19,7 +19,6 @@ class Content extends Model
         'sort_order',
         'theme_id',
         'description',
-        'type',
     ];
 
     public function theme()

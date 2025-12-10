@@ -62,16 +62,9 @@ export interface Content {
     display_name: string;
     slug: string;
     theme_id: string;
-    type: string;
     sort_order: number;
     description: string;
 }
-
-export interface ContentType {
-    key: string;
-    label: string;
-}
-
 
 export interface Category {
     id: number;

@@ -35,8 +35,8 @@ class ContentStoreRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'description' => [],
-            'type' => [],
+            'description' => [
+            ],
         ];
     }
 
