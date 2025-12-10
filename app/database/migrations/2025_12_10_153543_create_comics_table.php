@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ContentType;
+use App\Enums\PostStatus;
 
 return new class extends Migration
 {
@@ -12,15 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('comics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('display_name')->nullable();
-            $table->string('slug');
+            $table->string('title');
             $table->integer('sort_order')->default(0);
-            $table->foreignId('theme_id')->default(0);
-            $table->enum('type', ContentType::values())->default(ContentType::POST->value);
-            $table->text('description')->nullable();
+            $table->foreignId('content_id')->default(0);
+            $table->foreignId('category_id')->default(0);
+            $table->longText('body');
+            $table->enum('status', PostStatus::values())->default(PostStatus::DRAFT->value);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('comics');
     }
 };
