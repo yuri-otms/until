@@ -1,5 +1,4 @@
-import { type BreadcrumbItem, type Content, type Theme } from "@/types";
-import { dashboard } from '@/routes/admin';
+import { type BreadcrumbItem, type Content, type Theme, type ContentType } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';import {
   Table,
@@ -39,10 +38,12 @@ export default function Index({
     themes,
     contents,
     theme,
+    contentTypeOptions,
 }: {
     themes: Theme[];
     contents: Content[];
     theme: Theme;
+    contentTypeOptions: ContentType[];
 }) {
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
@@ -111,6 +112,7 @@ export default function Index({
                             <TableHead>順番</TableHead>
                             <TableHead>ID</TableHead>
                             <TableHead>コンテンツ</TableHead>
+                            <TableHead>タイプ</TableHead>
                             <TableHead>動作</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -126,6 +128,7 @@ export default function Index({
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.name}</TableCell>
+                                    <TableCell>{contentTypeOptions.find(item => item.key == row.type)?.label}</TableCell>
                                     <TableCell
                                     dada-dnd-cancel="true"
                                     >

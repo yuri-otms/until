@@ -34,8 +34,8 @@ class ContentUpdateRequest extends FormRequest
                 'required',
                 'numeric'
             ],
-            'description' => [
-            ],
+            'description' => [],
+            'type' => [],
         ];
     }
 

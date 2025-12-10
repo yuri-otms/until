@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Content;
 use App\Models\Theme;
+use App\Enums\ContentType;
 
 class ContentController extends Controller
 {
@@ -32,6 +33,7 @@ class ContentController extends Controller
             'themes' => $themes,
             'contents' => $contents,
             'theme' => $theme,
+            'contentTypeOptions' => ContentType::keyLabelList(),
         ]);
     }
 
@@ -42,7 +44,8 @@ class ContentController extends Controller
         $theme = $this->getTheme($themes, $request);
         return Inertia::render('admin/contents/create', [
             'themes' => $themes,
-            'theme' => $theme
+            'theme' => $theme,
+            'contentTypeOptions' => ContentType::keyLabelList(),
         ]);
     }
 
@@ -64,6 +67,7 @@ class ContentController extends Controller
         return Inertia::render('admin/contents/edit', [
             'content' => $content,
             'themes' => $themes,
+            'contentTypeOptions' => ContentType::keyLabelList(),
         ]);
     }
 

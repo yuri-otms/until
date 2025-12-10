@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Theme } from "@/types";
+import { type BreadcrumbItem, type Theme, type ContentType } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
@@ -18,10 +18,12 @@ import { index } from '@/routes/admin/contents'
 
 export default function Create({
     themes,
-    theme
+    theme,
+    contentTypeOptions,
 } : {
     themes: Theme[];
     theme: Theme;
+    contentTypeOptions: ContentType[];
 }) {
     const breadcrubms: BreadcrumbItem[] = [
         {
@@ -99,6 +101,22 @@ export default function Create({
                                     </RadioGroup>
                                     <InputError
                                         message={errors.theme_id}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="type">投稿タイプ</Label>
+                                    <RadioGroup defaultValue={contentTypeOptions[0].key} name="type">
+                                        {contentTypeOptions.map((row) => (
+                                            <div
+                                            key={row.key}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.key} id={row.key} />
+                                                <Label htmlFor={row.key}>{row.label}</Label>
+                                                </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.status}
                                         className="mt-2"
                                     />
 
