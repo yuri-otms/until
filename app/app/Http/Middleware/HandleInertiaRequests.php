@@ -60,7 +60,7 @@ class HandleInertiaRequests extends Middleware
             foreach ($contents as $content) {
                 $adminSidebarContents[] = [
                     'title' => $content->name,
-                    'href' => '/admin/posts/?content=' . $content->slug,
+                    'href' => "/admin/{$content->type}s/?content=" . $content->slug,
                     'icon' => '',
                 ];
             }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ComicController;
 
 Route::prefix('admin')
         ->name('admin.')
@@ -47,11 +48,13 @@ Route::prefix('admin')
         Route::put('/contents/reorder/{content}/', [ContentController::class, 'reorder'])->name('contents.reorder');
         Route::put('/categoriess/reorder/{category}/', [CategoryController::class, 'reorder'])->name('categories.reorder');
         Route::put('/posts/reorder/{post}/', [PostController::class, 'reorder'])->name('posts.reorder');
+        Route::put('/comics/reorder/{comic}/', [ComicController::class, 'reorder'])->name('comics.reorder');
         Route::resources([
             'themes' => ThemeController::class,
             'contents' => ContentController::class,
             'categories' => CategoryController::class,
             'posts' => PostController::class,
+            'comics' => ComicController::class,
         ]);
     });
 });

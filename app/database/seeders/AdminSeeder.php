@@ -6,6 +6,7 @@ use App\Models\Theme;
 use App\Models\Content;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Comic;
 
 class AdminSeeder extends Seeder
 {
@@ -30,6 +31,18 @@ class AdminSeeder extends Seeder
 1',
                 'slug' => 'content1',
                 'theme_id' => 1,
+                'type' => 'post'
+            ]
+        );
+        Content::firstOrCreate(
+            [
+                'id' => 2,
+                'name' => '漫画1',
+                'display_name' => '漫画
+1',
+                'slug' => 'comic1',
+                'theme_id' => 1,
+                'type' => 'comic'
             ]
         );
         Category::firstOrCreate(
@@ -38,6 +51,14 @@ class AdminSeeder extends Seeder
                 'name' => 'カテゴリー1',
                 'slug' => 'category1',
                 'content_id' => 1,
+            ]
+        );
+        Category::firstOrCreate(
+            [
+                'id' => 2,
+                'name' => '漫画カテゴリ1',
+                'slug' => 'comic1',
+                'content_id' => 2,
             ]
         );
 
@@ -73,6 +94,63 @@ MD;
                 'status' => 'published'
             ]
         );
+
+        Post::firstOrCreate(
+            [
+                'id' => 2,
+                'title' => 'test2',
+                'content_id' => 1,
+                'category_id' => 1,
+                'body' => '',
+                'status' => 'published'
+            ]
+        );
+
+        Post::firstOrCreate(
+            [
+                'id' => 3,
+                'title' => 'test3',
+                'content_id' => 1,
+                'category_id' => 1,
+                'body' => '',
+                'status' => 'published'
+            ]
+        );
+
+        Comic::firstOrCreate(
+            [
+                'id' => 1,
+                'title' => 'デフォルト漫画記事',
+                'content_id' => 2,
+                'category_id' => 2,
+                'body' => '',
+                'status' => 'published'
+            ]
+        );
+
+        Comic::firstOrCreate(
+            [
+                'id' => 2,
+                'title' => 'デフォルト漫画記事2',
+                'content_id' => 2,
+                'category_id' => 2,
+                'body' => '',
+                'status' => 'published'
+            ]
+        );
+
+        Comic::firstOrCreate(
+            [
+                'id' => 3,
+                'title' => 'デフォルト漫画記事3',
+                'content_id' => 2,
+                'category_id' => 2,
+                'body' => '',
+                'status' => 'published'
+            ]
+        );
+
+
 
     }
 }

@@ -87,7 +87,7 @@ trait HasSortOrder
                 ->where('sort_order', '>=', $to)
                 ->increment('sort_order');
         }
-        return $this->update([
+        return $this->updateQuietly([
             'sort_order' => $to
         ]);
 

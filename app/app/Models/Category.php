@@ -30,6 +30,12 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function comics()
+    {
+        return $this->hasMany(Comic::class);
+    }
+
+
     public static function getCategoriesByContent($contentId)
     {
         return Category::where('content_id', $contentId)
