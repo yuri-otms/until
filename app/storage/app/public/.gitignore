@@ -1,2 +1,5 @@
 *
+!images/
+!images/comics/
+!images/comics/**
 !.gitignore
