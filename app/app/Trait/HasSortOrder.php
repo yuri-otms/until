@@ -4,6 +4,10 @@ namespace App\Trait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+
+/**
+ * @property static string|null $sortScope
+*/
 trait HasSortOrder
 {
     protected static function bootHasSortOrder()
