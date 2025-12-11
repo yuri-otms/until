@@ -5,13 +5,16 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Content;
 use App\Models\Post;
+use App\Models\Comic;
 use App\Policies\PostPolicy;
+use App\Policies\ComicPolicy;
 use App\Observers\ContentObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Post::class => PostPolicy::class,
+        Comic::class => ComicPolicy::class,
     ];
     /**
      * Register any application services.

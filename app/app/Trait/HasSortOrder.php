@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 
 /**
- * @property static string|null $sortScope
+ * @property-read string|null $sortScope
 */
 trait HasSortOrder
 {

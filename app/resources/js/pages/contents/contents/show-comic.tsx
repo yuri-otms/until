@@ -1,0 +1,54 @@
+import ContentLayout from '@/layouts/content-layout'
+import { Link } from '@inertiajs/react';
+import { type BreadcrumbItem, type Content, type ComicGroup } from '@/types'
+import { home } from '@/routes'
+
+export default function Show({
+    content,
+    categories
+}: {
+    content: Content;
+    categories: ComicGroup[];
+}) {
+
+    const breadcrumbs: BreadcrumbItem[] = [
+        {
+            title: 'Top',
+            href: home().url,
+        },
+        {
+            title: content.name,
+            href: '/contents/' + content.slug,
+        }
+    ];
+
+    return (
+        <ContentLayout breadcrumbs={breadcrumbs} title={content.name}>
+
+            <p className="my-6 whitespace-pre-line">{content.description}</p>
+
+            <div>
+                {categories.map((category) =>
+                <div key={category.id}>
+                    <h2 className="font-semibold text-2xl mt-8 mb-4">{category.name}</h2>
+
+                    <ul className="mx-4">
+                    {category.comics.map((post)=>
+                        <li key={post.id}>
+                            <Link
+                            href={"/contents/" + content.slug + '/' + content.type + '/' + post.id}
+                            className="underline"
+                            >
+                                {post.title}
+                            </Link>
+                        </li>
+                    )}
+                    </ul>
+                </div>
+                )}
+            </div>
+
+
+        </ContentLayout>
+    );
+}

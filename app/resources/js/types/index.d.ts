@@ -92,6 +92,18 @@ export interface Post {
     created_at: string;
     updated_at: string;
 }
+export interface Comic {
+    id: number;
+    title: string;
+    sort_order: number;
+    category_id: number;
+    content_id: number;
+    body: string;
+    status: string;
+    created_at: string;
+    updated_at: string;
+}
+
 
 export interface PostStatus {
     key: string;
@@ -110,6 +122,13 @@ export interface PostGroup {
     name: string;
     description: string;
     posts: Post[];
+}
+
+export interface ComicGroup {
+    id: number;
+    name: string;
+    description: string;
+    comics: Comic[];
 }
 
 export type onThemeChange = (newTheme: string) => void;

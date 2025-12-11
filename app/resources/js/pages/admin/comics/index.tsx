@@ -122,6 +122,7 @@ export default function Index({
                             <TableRow>
                             <TableHead>順番</TableHead>
                             <TableHead>並び順</TableHead>
+                            <TableHead>掲載</TableHead>
                             <TableHead>ID</TableHead>
                             <TableHead>タイトル</TableHead>
                             <TableHead>確認</TableHead>
@@ -139,10 +140,11 @@ export default function Index({
                                 >
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.sort_order}</TableCell>
+                                    <TableCell>{row.status}</TableCell>
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.title}</TableCell>
                                     <TableCell>
-                                        <a href={"/contents/" + content.slug + '/' + row.id} target="_blank">
+                                        <a href={"/contents/" + content.slug + '/comic/' + row.id} target="_blank">
                                             <Search />
                                         </a>
                                     </TableCell>

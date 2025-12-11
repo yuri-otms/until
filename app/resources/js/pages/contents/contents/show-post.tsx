@@ -36,7 +36,7 @@ export default function Show({
                     {category.posts.map((post)=>
                         <li key={post.id}>
                             <Link
-                            href={"/contents/" + content.slug + '/' + post.id}
+                            href={"/contents/" + content.slug + '/' + content.type + '/' + post.id}
                             className="underline"
                             >
                                 {post.title}
