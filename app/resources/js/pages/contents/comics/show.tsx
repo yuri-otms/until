@@ -7,12 +7,15 @@ import { home } from '@/routes'
 
 export default function Show({
     post,
-    content
+    content,
+    images,
 }: {
     post: Post;
     content: Content;
+    images: Array<string>;
 }) {
 
+    console.log(Array.isArray(images));
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Top',
@@ -68,6 +71,10 @@ export default function Show({
                 >
                     {post.body}
                 </ReactMarkdown>
+                {images.map((image)=>
+                    <img key={image} src={'/storage/' + image} alt=""
+                    className="block mx-auto sm:max-w-xl" />
+                )}
 
         </ContentLayout>
     );

@@ -10,6 +10,9 @@ use App\Models\Comic;
 use Inertia\Inertia;
 use Inertia\Response;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 class ComicController extends Controller
 {
     use AuthorizesRequests;
@@ -22,9 +25,20 @@ class ComicController extends Controller
             abort(404);
         }
 
+        $files = Storage::disk('public')->files('images/comics');
+
+        $number = str_pad($comic->id, 3, '0', STR_PAD_LEFT);
+        // 003 で始まるファイルだけに絞る
+
+        $images = array_filter($files, function ($file) use ($number) {
+            return Str::contains(basename($file), $number);
+        });
+        $images = array_values($images);
+
         return Inertia::render('contents/comics/show', [
             'content' => $content,
             'post' => $comic,
+            'images' => $images,
         ]);
     }
 }
