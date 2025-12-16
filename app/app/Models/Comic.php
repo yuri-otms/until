@@ -19,6 +19,8 @@ class Comic extends Model
         'category_id',
         'body',
         'status',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [

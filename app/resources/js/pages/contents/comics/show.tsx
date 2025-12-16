@@ -39,6 +39,14 @@ export default function Show({
                 <div>{post.created_at} 公開</div>
                 { post.created_at != post.updated_at ? <div>{post.updated_at} 最終改訂</div> : ''}
             </div>
+                {images.map((image)=>
+                    <img key={image} src={'/storage/' + image} alt=""
+                    className="block mx-auto sm:max-w-xl"
+                    loading="lazy"
+                    width={576}
+                    height={815}
+                     />
+                )}
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeHighlight]}
@@ -71,10 +79,6 @@ export default function Show({
                 >
                     {post.body}
                 </ReactMarkdown>
-                {images.map((image)=>
-                    <img key={image} src={'/storage/' + image} alt=""
-                    className="block mx-auto sm:max-w-xl" />
-                )}
 
         </ContentLayout>
     );

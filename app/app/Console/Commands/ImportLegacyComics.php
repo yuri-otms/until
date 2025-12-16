@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Models\Post;
+use App\Models\Comic;
 use App\Models\Category;
 use Illuminate\Support\Str;
 
@@ -37,20 +37,34 @@ class ImportLegacyComics extends Command
 
         try {
             foreach ($rows as $row) {
-                $category = Category::find($row->c3);
-                $content_id = $category->content_id;
+                $categoryId = $row->c3;
+                // 「はじめに」を「人が怖かった」に統合
+                if ($categoryId == 2 || $categoryId == '2') {
+                    $categoryId = 3;
+                }
+                $category = Category::find($categoryId);
+                $contentId = $category->content_id;
+
+                $sortOrder = ($categoryId == 3) ? $row->c3num + 1 : $row->c3;
+                if ($row->id == 3) {
+                    $sortOrder = 1;
+                }
 
                 $data = [
                     'id' => $row->id,
                     'title' => $row->title,
-                    'category_id' => $row->c3,
-                    'content_id' => $content_id,
+                    'category_id' => $categoryId,
+                    'content_id' => $contentId,
                     'created_at' => $row->date,
                     'updated_at' => $row->date,
-                    'body' => $row->text,
+                    'body' => $row->text ?? '',
                     'status' => 'published',
+                    'sort_order' => $sortOrder,
                 ];
-                Post::create($data);
+                $comic = new Comic();
+                $comic->timestamps = false;
+                $comic->fill($data);
+                $comic->saveQuietly();
             }
 
         } catch (\Throwable $e) {

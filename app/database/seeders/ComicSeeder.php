@@ -17,7 +17,7 @@ class ComicSeeder extends Seeder
         Theme::firstOrCreate(
             [
                 'id' => 1,
-                'name' => 'コミックエセ英',
+                'name' => 'コミックエッセイ',
                 'slug' => 'comic_essay',
                 'description' => '今までに描いてきたコミックエッセイです。'
             ]
@@ -27,27 +27,68 @@ class ComicSeeder extends Seeder
          */
         $contents = [
             // category2.id => データ
-            1 => ['name' => 'ひきこもりの時', 'slug' => 'hiki', 'sort_order' => 1],
-            2 => ['name' => '少し動いてみる', 'slug' => 'move', 'sort_order' => 2],
-            3 => ['name' => 'ひきこもり状態から学ぶ', 'slug' => 'learn', 'sort_order' => 3],
-            4 => ['name' => 'ひきこもり状態から働く', 'slug' => 'work', 'sort_order' => 4],
-            5 => ['name' => '身軽な生活', 'slug' => 'karu', 'sort_order' => 5],
-            6 => ['name' => '生活のこと', 'slug' => 'life', 'sort_order' => 6],
-            7 => ['name' => '外国語の勉強', 'slug' => 'languages', 'sort_order' => 7],
-            8 => ['name' => '放送大学の記録', 'slug' => 'open_university', 'sort_order' => 8],
-            9 => ['name' => 'プログラミング', 'slug' => 'programming', 'sort_order' => 9],
+            1 => [
+                'name' => 'ひきこもりの時',
+                'slug' => 'hiki',
+                'type' => 'comic',
+                'sort_order' => 1,
+            ],
+            2 => [
+                'name' => '少し動いてみる',
+                'slug' => 'move',
+                'type' => 'comic',
+                'sort_order' => 2,
+            ],
+            3 => [
+                'name' => 'ひきこもり状態から学ぶ',
+                'slug' => 'learn',
+                'type' => 'comic',
+                'sort_order' => 3,
+            ],
+            4 => [
+                'name' => 'ひきこもり状態から働く',
+                'slug' => 'work',
+                'type' => 'comic',
+                'sort_order' => 4,
+            ],
+            5 => [
+                'name' => '身軽な生活',
+                'slug' => 'karu',
+                'type' => 'comic',
+                'sort_order' => 5,
+            ],
+            6 => [
+                'name' => '生活のこと',
+                'slug' => 'life',
+                'type' => 'comic',
+                'sort_order' => 6,
+            ],
+            7 => [
+                'name' => '外国語の勉強',
+                'slug' => 'languages',
+                'type' => 'comic',
+                'sort_order' => 7,
+            ],
+            8 => [
+                'name' => '放送大学の記録',
+                'slug' => 'open_university',
+                'type' => 'comic',
+                'sort_order' => 8,
+            ],
+            9 => [
+                'name' => 'プログラミング',
+                'slug' => 'programming',
+                'type' => 'comic',
+                'sort_order' => 9,
+            ],
         ];
 
-
-        $contentModels = [];
-
-        foreach ($contents as $id => $data) {
-            $contentModels[$id] = Content::create([
-                'name' => $data['name'],
-                'slug' => $data['slug'],
-                'sort_order' => $data['sort_order'],
-                'theme_id' => 1,
-            ]);
+        foreach ($contents as $key => $data) {
+            $data['theme_id'] = 1;
+            $data['id'] = $key;
+            $content = new Content();
+            $content->fill($data);
+            $content->saveQuietly();
         }
 
         /**
@@ -55,6 +96,18 @@ class ComicSeeder extends Seeder
          */
         $categories = [
             // category3.id => データ
+            1 => [
+                'content_id' => 1,
+                'name' => '習作',
+                'slug' => 'test',
+                'sort_order' => 2,
+            ],
+            2 => [
+                'content_id' => 2,
+                'name' => '初めに',
+                'slug' => 'first',
+                'sort_order' => 1,
+            ],
             3 => [
                 'content_id' => 1,
                 'name' => '人が怖かった',
@@ -268,13 +321,11 @@ class ComicSeeder extends Seeder
         ];
 
 
-        foreach ($categories as $category) {
-            Category::create([
-                'content_id' => $contentModels[$category['content_id']]->id,
-                'name' => $category['name'],
-                'slug' => $category['slug'],
-                'sort_order' => $category['sort_order'],
-            ]);
+        foreach ($categories as $key => $data) {
+            $data['id'] = $key;
+            $category = new Category();
+            $category->fill($data);
+            $category->saveQuietly();
         }
     }
 }
