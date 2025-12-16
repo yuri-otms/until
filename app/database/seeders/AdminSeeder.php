@@ -17,48 +17,29 @@ class AdminSeeder extends Seeder
     {
         Theme::firstOrCreate(
             [
-                'id' => 1,
-                'name' => 'テーマ1',
-                'slug' => 'theme1',
-                'description' => 'テーマ1の説明文です'
+                'id' => 2,
+                'name' => '読み物',
+                'slug' => 'reading',
+                'description' => 'noteの内容などのまとめ＋α'
             ]
         );
         Content::firstOrCreate(
             [
-                'id' => 1,
-                'name' => 'コンテンツ1',
-                'display_name' => 'コンテンツ
-1',
-                'slug' => 'content1',
-                'theme_id' => 1,
+                'id' => 7,
+                'name' => '30代後半未経験エンジニア転職',
+                'display_name' => '30代後半未経験
+                エンジニア転職',
+                'slug' => 'engineer',
+                'theme_id' => 2,
                 'type' => 'post'
             ]
         );
-        Content::firstOrCreate(
-            [
-                'id' => 2,
-                'name' => '漫画1',
-                'display_name' => '漫画
-1',
-                'slug' => 'comic1',
-                'theme_id' => 1,
-                'type' => 'comic'
-            ]
-        );
         Category::firstOrCreate(
             [
-                'id' => 1,
-                'name' => 'カテゴリー1',
-                'slug' => 'category1',
-                'content_id' => 1,
-            ]
-        );
-        Category::firstOrCreate(
-            [
-                'id' => 2,
-                'name' => '漫画カテゴリ1',
-                'slug' => 'comic1',
-                'content_id' => 2,
+                'id' => 38,
+                'name' => 'エンジニアを目指すまで',
+                'slug' => 'before',
+                'content_id' => 7,
             ]
         );
 
@@ -87,70 +68,13 @@ MD;
         Post::firstOrCreate(
             [
                 'id' => 1,
-                'title' => 'デフォルトmarkdown記事',
-                'content_id' => 1,
-                'category_id' => 1,
+                'title' => '10代のころ個人サイトを作っていた',
+                'content_id' => 7,
+                'category_id' => 38,
                 'body' => $markdown,
                 'status' => 'published'
             ]
         );
-
-        Post::firstOrCreate(
-            [
-                'id' => 2,
-                'title' => 'test2',
-                'content_id' => 1,
-                'category_id' => 1,
-                'body' => '',
-                'status' => 'published'
-            ]
-        );
-
-        Post::firstOrCreate(
-            [
-                'id' => 3,
-                'title' => 'test3',
-                'content_id' => 1,
-                'category_id' => 1,
-                'body' => '',
-                'status' => 'published'
-            ]
-        );
-
-        Comic::firstOrCreate(
-            [
-                'id' => 1,
-                'title' => 'デフォルト漫画記事',
-                'content_id' => 2,
-                'category_id' => 2,
-                'body' => '',
-                'status' => 'published'
-            ]
-        );
-
-        Comic::firstOrCreate(
-            [
-                'id' => 2,
-                'title' => 'デフォルト漫画記事2',
-                'content_id' => 2,
-                'category_id' => 2,
-                'body' => '',
-                'status' => 'published'
-            ]
-        );
-
-        Comic::firstOrCreate(
-            [
-                'id' => 3,
-                'title' => 'デフォルト漫画記事3',
-                'content_id' => 2,
-                'category_id' => 2,
-                'body' => '',
-                'status' => 'published'
-            ]
-        );
-
-
 
     }
 }

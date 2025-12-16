@@ -22,8 +22,6 @@ export default function Show({
     previous: Comic;
     next: Comic;
 }) {
-
-    console.log(previous);
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Top',

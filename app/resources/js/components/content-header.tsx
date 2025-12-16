@@ -4,7 +4,7 @@ import LogoImage from '@/images/favicon.svg';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { home } from '@/routes';
 import { type MenuItem } from '@/types';
-import { about, contact } from "@/routes/";
+import { about, profile, contact } from "@/routes/";
 
 
 export function ContentHeader() {
@@ -15,7 +15,7 @@ export function ContentHeader() {
       },
       {
         title: 'プロフィール',
-        href: home().url,
+        href: profile().url,
       },
       {
         title: 'お問い合わせ',
