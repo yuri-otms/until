@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Models\Comic;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use League\HTMLToMarkdown\HtmlConverter;
 
 class ImportLegacyComics extends Command
 {
@@ -31,12 +31,20 @@ class ImportLegacyComics extends Command
     public function handle()
     {
         $query = DB::table('comics_yuru')->orderBy('id');
+        $converter = new HtmlConverter([
+            'strip_tags' => true, // 不要タグ除去
+        ]);
 
         $rows = $query->get();
         $this->info("対象件数: {$rows->count()}" );
 
         try {
             foreach ($rows as $row) {
+                if ($row->id == 1 || $row->id == 2) {
+                    continue;
+                }
+                $markdown = $converter->convert($row->text ?? '');
+
                 $categoryId = $row->c3;
                 // 「はじめに」を「人が怖かった」に統合
                 if ($categoryId == 2 || $categoryId == '2') {
@@ -45,7 +53,7 @@ class ImportLegacyComics extends Command
                 $category = Category::find($categoryId);
                 $contentId = $category->content_id;
 
-                $sortOrder = ($categoryId == 3) ? $row->c3num + 1 : $row->c3;
+                $sortOrder = ($categoryId == 3) ? $row->c3num + 1 : $row->c3num;
                 if ($row->id == 3) {
                     $sortOrder = 1;
                 }
@@ -57,7 +65,7 @@ class ImportLegacyComics extends Command
                     'content_id' => $contentId,
                     'created_at' => $row->date,
                     'updated_at' => $row->date,
-                    'body' => $row->text ?? '',
+                    'body' => $markdown,
                     'status' => 'published',
                     'sort_order' => $sortOrder,
                 ];
