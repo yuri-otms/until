@@ -4,21 +4,22 @@ import LogoImage from '@/images/favicon.svg';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { home } from '@/routes';
 import { type MenuItem } from '@/types';
+import { about, profile, contact } from "@/routes/";
 
 
 export function ContentHeader() {
     const links: MenuItem[] = [
       {
         title: 'このサイトについて',
-        href: 'about-this-site',
+        href: about().url,
       },
       {
         title: 'プロフィール',
-        href: 'profile',
+        href: profile().url,
       },
       {
         title: 'お問い合わせ',
-        href: 'contact',
+        href: contact().url,
       },
     ];
     return (

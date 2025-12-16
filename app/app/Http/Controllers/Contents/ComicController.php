@@ -39,6 +39,8 @@ class ComicController extends Controller
             'content' => $content,
             'post' => $comic,
             'images' => $images,
+            'previous' => $comic->previous(),
+            'next' => $comic->next(),
         ]);
     }
 }

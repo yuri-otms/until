@@ -1,21 +1,27 @@
 import ContentLayout from '@/layouts/content-layout'
-import { type BreadcrumbItem, type Post, type Content } from '@/types';
+import { type BreadcrumbItem, type Post, type Content, type Comic } from '@/types';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import ComicNavCard from '@/components/comic-nav-card';
+import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
 
 export default function Show({
     post,
     content,
     images,
+    previous,
+    next,
 }: {
     post: Post;
     content: Content;
     images: Array<string>;
+    previous: Comic;
+    next: Comic;
 }) {
 
-    console.log(Array.isArray(images));
+    console.log(previous);
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Top',
@@ -36,8 +42,8 @@ export default function Show({
         <ContentLayout breadcrumbs={breadcrumbs}>
             <h1 className="font-semibold text-3xl my-4">{post.title}</h1>
             <div className="text-sm py-2">
-                <div>{post.created_at} 公開</div>
-                { post.created_at != post.updated_at ? <div>{post.updated_at} 最終改訂</div> : ''}
+                <div>{formatJapaneseDate(post.created_at)} 公開</div>
+                { post.created_at != post.updated_at ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
             </div>
                 {images.map((image)=>
                     <img key={image} src={'/storage/' + image} alt=""
@@ -79,7 +85,7 @@ export default function Show({
                 >
                     {post.body}
                 </ReactMarkdown>
-
+                <ComicNavCard previous={previous} next={next} />
         </ContentLayout>
     );
 }

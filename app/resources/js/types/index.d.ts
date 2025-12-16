@@ -102,8 +102,8 @@ export interface Comic {
     status: string;
     created_at: string;
     updated_at: string;
+    url: string;
 }
-
 
 export interface PostStatus {
     key: string;
