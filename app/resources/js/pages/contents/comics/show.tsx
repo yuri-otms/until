@@ -1,5 +1,5 @@
 import ContentLayout from '@/layouts/content-layout'
-import { type BreadcrumbItem, type Post, type Content, type Comic } from '@/types';
+import { type BreadcrumbItem, type Post, type Content, type Category, type Comic } from '@/types';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -10,12 +10,14 @@ import { home } from '@/routes'
 export default function Show({
     post,
     content,
+    category,
     images,
     previous,
     next,
 }: {
     post: Post;
     content: Content;
+    category: Category;
     images: Array<string>;
     previous: Comic;
     next: Comic;
@@ -32,8 +34,12 @@ export default function Show({
             href: '/contents/' + content.slug,
         },
         {
+            title: category.name,
+            href: '/contents/' + content.slug + '#' + post.category_id ,
+        },
+        {
             title: '',
-            href: '',
+            href: '' ,
         }
     ];
 

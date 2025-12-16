@@ -30,7 +30,7 @@ export default function Show({
             <div>
                 {categories.map((category) =>
                 <div key={category.id}>
-                    <h2 className="font-semibold text-2xl mt-8 mb-4">{category.name}</h2>
+                    <h2 className="font-semibold text-2xl mt-8 mb-4 scroll-mt-[72px]" id={category.id.toString()}>{category.name}</h2>
 
                     <ul className="mx-4">
                     {category.comics.map((post)=>

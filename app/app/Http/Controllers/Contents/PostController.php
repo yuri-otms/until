@@ -24,6 +24,7 @@ class PostController extends Controller
 
         return Inertia::render('contents/posts/show', [
             'content' => $content,
+            'category' => $post->category,
             'post' => $post,
         ]);
     }

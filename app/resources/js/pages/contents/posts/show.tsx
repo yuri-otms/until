@@ -1,5 +1,5 @@
 import ContentLayout from '@/layouts/content-layout'
-import { type BreadcrumbItem, type Post, type Content } from '@/types';
+import { type BreadcrumbItem, type Post, type Content, type Category } from '@/types';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -7,10 +7,12 @@ import { home } from '@/routes'
 
 export default function Show({
     post,
-    content
+    content,
+    category,
 }: {
     post: Post;
     content: Content;
+    category: Category;
 }) {
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -23,8 +25,12 @@ export default function Show({
             href: '/contents/' + content.slug,
         },
         {
+            title: category.name,
+            href: '/contents/' + content.slug + '#' + post.category_id ,
+        },
+        {
             title: '',
-            href: '',
+            href: '' ,
         }
     ];
 

@@ -37,6 +37,7 @@ class ComicController extends Controller
 
         return Inertia::render('contents/comics/show', [
             'content' => $content,
+            'category' => $comic->category,
             'post' => $comic,
             'images' => $images,
             'previous' => $comic->previous(),
