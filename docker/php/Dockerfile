@@ -17,7 +17,7 @@ COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 # php.ini
 COPY php.ini /usr/local/etc/php/php.ini
 
-WORKDIR /var/www/html
+WORKDIR /var/www/until/app
 
 CMD ["php-fpm"]
 
