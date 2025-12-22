@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+        $this->call(ComicSeeder::class);
+        $this->call(HikiSeeder::class);
     }
 }

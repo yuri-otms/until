@@ -1,21 +1,23 @@
-FROM php:8.4-apache
+FROM php:8.3-fpm
 
 # 基本コマンド
-RUN apt-get update
-RUN apt-get install -y vim git zip unzip
-
-# MySQLドライバ
-RUN docker-php-ext-install pdo_mysql
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libpq-dev \
+    libonig-dev \
+    libzip-dev \
+    tzdata \
+    zip \
+    && docker-php-ext-install pdo pdo_mysql zip
 
 # Composerのインストール
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
-# Apacheの設定(Document Root)
-COPY ./000-default.conf /etc/apache2/sites-available
+# php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
-# Laravelのルーティング機能
-RUN a2enmod rewrite
+WORKDIR /var/www/until/app
 
-# Laravelプロジェクトの場所
-WORKDIR /var/www/
+CMD ["php-fpm"]
 

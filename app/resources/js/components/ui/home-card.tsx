@@ -7,7 +7,7 @@ function HomeCard({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "flex flex-col py-1",
+        "flex flex-col py-2",
         className
       )}
       {...props}
@@ -29,7 +29,7 @@ function HomeCardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("text-2xl pt-1 border-b border-[#0a0a0a]", className)}
+      className={cn("text-2xl font-semibold pt-2 pb-2 mb-3 border-b-2 border-[#494544]", className)}
       {...props}
     />
   )
@@ -39,7 +39,7 @@ function HomeCardDescription({ className, ...props }: React.ComponentProps<"div"
   return (
     <div
       data-slot="card-description"
-      className={cn("p-2", className)}
+      className={cn("p-2 mb-2", className)}
       {...props}
     />
   )

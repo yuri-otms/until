@@ -10,34 +10,42 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { dashboard } from '@/routes/admin';
+import { type NavItem, type SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { Settings, House } from 'lucide-react';
 import AppLogo from './app-logo';
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
+import { index as contentIndex } from '@/routes/admin/contents'
+import { index as themeIndex } from '@/routes/admin/themes'
+import { index as categoryIndex } from '@/routes/admin/categories'
+import { home } from '@/routes/'
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'カテゴリー設定',
+        href: categoryIndex(),
+        icon: Settings,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'コンテンツ設定',
+        href: contentIndex(),
+        icon: Settings,
+    },
+    {
+        title: 'テーマ設定',
+        href: themeIndex(),
+        icon: Settings,
+    },
+    {
+        title: 'Home',
+        href: home(),
+        icon: House,
     },
 ];
 
 export function AppSidebar() {
+    const adminSidebarContents = usePage<SharedData>().props.adminSidebarContents;
+    const mainNavItems: NavItem[] = adminSidebarContents;
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
