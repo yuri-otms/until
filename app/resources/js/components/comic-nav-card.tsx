@@ -1,12 +1,12 @@
 import { Link } from '@inertiajs/react'
-import {type Comic } from '@/types';
+import { type Comic, type Post } from '@/types';
 
 export default function ComicNavCard({
     previous,
     next
 }:{
-    previous:Comic;
-    next:Comic;
+    previous: Comic | Post;
+    next: Comic | Post;
 }) {
     return (
         <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-stretch">

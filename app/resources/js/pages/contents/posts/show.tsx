@@ -3,16 +3,21 @@ import { type BreadcrumbItem, type Post, type Content, type Category } from '@/t
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import ComicNavCard from '@/components/comic-nav-card';
 import { home } from '@/routes'
 
 export default function Show({
     post,
     content,
     category,
+    previous,
+    next,
 }: {
     post: Post;
     content: Content;
     category: Category;
+    previous: Post;
+    next: Post;
 }) {
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -74,6 +79,7 @@ export default function Show({
                 >
                     {post.body}
                 </ReactMarkdown>
+                <ComicNavCard previous={previous} next={next} />
 
         </ContentLayout>
     );

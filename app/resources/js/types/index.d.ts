@@ -91,6 +91,7 @@ export interface Post {
     status: string;
     created_at: string;
     updated_at: string;
+    url: string;
 }
 export interface Comic {
     id: number;

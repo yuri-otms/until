@@ -26,6 +26,8 @@ class PostController extends Controller
             'content' => $content,
             'category' => $post->category,
             'post' => $post,
+            'previous' => $post->previousWithUrl(),
+            'next' => $post->nextWithUrl()
         ]);
     }
 }
