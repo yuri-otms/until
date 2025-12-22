@@ -40,8 +40,8 @@ class ComicController extends Controller
             'category' => $comic->category,
             'post' => $comic,
             'images' => $images,
-            'previous' => $comic->previous(),
-            'next' => $comic->next(),
+            'previous' => $comic->previousWithUrl(),
+            'next' => $comic->nextWithUrl(),
         ]);
     }
 }

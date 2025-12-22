@@ -16,9 +16,9 @@ class ThemeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(2, true),
-            'slug' => $this->faker->unique()->slug(),
-            'description' => $this->faker->sentence(2, true),
+            'name' => fake()->words(2, true),
+            'slug' => fake()->unique()->slug(),
+            'description' => fake()->sentence(2, true),
         ];
     }
 }

@@ -5,12 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Trait\HasSortOrder;
+use App\Trait\HasPrevNextNavigation;
 
 class Post extends Model
 {
     use HasFactory;
     use HasSortOrder;
     protected static ?string $sortScope = 'category_id';
+
+    use HasPrevNextNavigation;
+
+    protected function routeName(): string
+    {
+        return 'posts.show';
+    }
 
     protected $fillable = [
         'title',

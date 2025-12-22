@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Trait\HasSortOrder;
+use App\Trait\HasPrevNextNavigation;
 
 class Comic extends Model
 {
@@ -13,6 +14,13 @@ class Comic extends Model
     protected static ?string $sortScope = 'category_id';
 
     protected static ?string $url = '';
+
+    use HasPrevNextNavigation;
+
+    protected function routeName(): string
+    {
+        return 'comics.show';
+    }
 
     protected $fillable = [
         'title',
@@ -39,43 +47,6 @@ class Comic extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function previous()
-    {
-        $comic = self::where('category_id', $this->category_id)
-            ->where('sort_order', '<', $this->sort_order)
-            ->orderBy('sort_order', 'desc')
-            ->first();
-
-        if ($comic) {
-            $url = $this->getLinkUrl($comic);
-            $comic->url = $url;
-        } else {
-            $comic = '';
-        }
-        return $comic;
-    }
-
-    public function next()
-    {
-        $comic = self::where('category_id', $this->category_id)
-            ->where('sort_order', '>', $this->sort_order)
-            ->orderBy('sort_order', 'asc')
-            ->first();
-
-        if ($comic) {
-            $url = $this->getLinkUrl($comic);
-            $comic->url = $url;
-        } else {
-            $comic = '';
-        }
-        return $comic;
-    }
-
-    public function getLinkUrl($comic)
-    {
-        return route('comics.show', ['content' => $comic->content->slug, 'comic' => $comic->id]);
     }
 
 }

@@ -18,8 +18,8 @@ class CategoryFactory extends Factory
     {
         return [
             'content_id' => Content::factory(),
-            'name' => $this->faker->words(2, true),
-            'slug' => $this->faker->unique()->slug(),
+            'name' => fake()->words(2, true),
+            'slug' => fake()->unique()->slug(),
         ];
     }
 }

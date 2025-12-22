@@ -21,9 +21,9 @@ class ContentFactory extends Factory
     {
         return [
             'theme_id' => Theme::factory(),
-            'name' => $this->faker->words(2, true),
-            'slug' => $this->faker->unique()->slug(),
-            'description' => $this->faker->sentence(),
+            'name' => fake()->words(2, true),
+            'slug' => fake()->unique()->slug(),
+            'description' => fake()->sentence(),
         ];
     }
 }

@@ -82,50 +82,43 @@ class ComicSeeder extends Seeder
                 'content_id' => 1,
                 'name' => '人が怖かった',
                 'slug' => 'scary',
-                'sort_order' => 2,
+                'sort_order' => 1,
             ],
             5 => [
                 'content_id' => 1,
                 'name' => '脱ひきこもり',
                 'slug' => 'escapte',
-                'sort_order' => 3,
+                'sort_order' => 2,
             ],
             7 => [
                 'content_id' => 1,
                 'name' => '脱ひきこもり挫折後',
                 'slug' => 'give_up',
-                'sort_order' => 4,
+                'sort_order' => 3,
             ],
             8 => [
                 'content_id' => 1,
                 'name' => 'ひきこもりで辛い時',
                 'slug' => 'hard_time',
-                'sort_order' => 5,
-            ],
-
-            2 => [
-                'content_id' => 2,
-                'name' => '初めに',
-                'slug' => 'first',
-                'sort_order' => 1,
+                'sort_order' => 4,
             ],
             12 => [
                 'content_id' => 2,
                 'name' => '社交不安とコミュニケーション',
                 'slug' => 'social_anxiety',
-                'sort_order' => 2,
+                'sort_order' => 1,
             ],
             14 => [
                 'content_id' => 2,
                 'name' => 'ひきこもりバランス',
                 'slug' => 'balance',
-                'sort_order' => 3,
+                'sort_order' => 2,
             ],
             4 => [
                 'content_id' => 2,
                 'name' => '無職の体力づくり計画',
                 'slug' => 'build',
-                'sort_order' => 4,
+                'sort_order' => 3,
             ],
 
             13 => [
