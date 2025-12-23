@@ -1,0 +1,63 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with: 
+          php-version: "8.3"
+          tools: composer:v2
+          coverage: none
+
+      - name: install PHP deployments
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run tests
+        run: php artisan test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+      - name: Node.js環境のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ./app/package-lock.json
+      - name: 依存関係のインストール
+        run: npm install
+        working-directory: ./app/
+      - name: Viteのプロジェクトのビルド
+        run: npm run build
+        working-directory: ./app/
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@7.1.0
+        with:
+          switches: >-
+            -avzr --delete
+            --exclude=".env"
+            --exclude=".tests/"
+            --exclude="bootstrap/cache"
+            --exclude=".git"
+            --exclude="storage/*"
+            --exclude="!storage/public/"
+            --exclude="!storage/public/images"
+          path: ${{ secrets.VPS_LINK_SOURCE}}
+          remote_path: ${{ secrets.VPS_LINK_TARGET}}
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_user: ${{ secrets.VPS_USERNAME }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY}}
