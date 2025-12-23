@@ -21,9 +21,12 @@ jobs:
 
       - name: install PHP deployments
         run: composer install --no-interaction --prefer-dist --no-progress
+        working-directory: ./app/
 
       - name: Run tests
         run: php artisan test
+        working-directory: ./app/
+
 
   deploy:
     needs: test
