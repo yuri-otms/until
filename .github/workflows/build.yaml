@@ -27,6 +27,12 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
         working-directory: ./app/
 
+      - name: Npm Build
+        run: |
+          npm install
+          npm run build
+        working-directory: ./app/
+
       - name: Generate laravel app key
         run: php artisan key:generate
         working-directory: ./app/
