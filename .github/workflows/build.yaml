@@ -19,10 +19,13 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Copy .env in Japanese locale
+        run: cp .env.example.ja .env
+        working-directory: ./app/
+
       - name: install PHP deployments
         run: composer install --no-interaction --prefer-dist --no-progress
         working-directory: ./app/
-
 
       - name: Generate laravel app key
         run: php artisan key:generate
