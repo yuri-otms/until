@@ -20,7 +20,7 @@ jobs:
           coverage: none
 
       - name: Copy .env in Japanese locale
-        run: cp .env.example.ja .env
+        run: cp .env.example .env
         working-directory: ./app/
 
       - name: install PHP deployments
