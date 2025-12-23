@@ -1,0 +1,6 @@
+*
+!hikimemo/
+!hikimemo/tips/
+!hikimemo/tips/**
+!.gitignore
+
