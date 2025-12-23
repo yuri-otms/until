@@ -21,6 +21,7 @@ jobs:
 
       - name: install PHP deployments
         run: composer install --no-interaction --prefer-dist --no-progress
+        working-directory: ./app/
 
 
       - name: Generate laravel app key
