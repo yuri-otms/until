@@ -68,9 +68,10 @@ jobs:
         uses: burnett01/rsync-deployments@7.1.0
         with:
           switches: >-
-            -avzr --delete
+            -zr --delete
             --exclude=".env"
             --exclude="bootstrap/cache"
+            --exclude="public/storage"
             --exclude=".git"
             --exclude="vendor/"
             --exclude="node_modules/"

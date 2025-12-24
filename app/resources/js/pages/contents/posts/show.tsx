@@ -42,8 +42,7 @@ export default function Show({
 
 
     return (
-        <ContentLayout breadcrumbs={breadcrumbs}>
-            <h1 className="font-semibold text-3xl my-4">{post.title}</h1>
+        <ContentLayout breadcrumbs={breadcrumbs} title={post.title}>
             <div className="text-sm py-2">
                 <div>{formatJapaneseDate(post.created_at)} 公開</div>
                 { post.created_at != post.updated_at ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
