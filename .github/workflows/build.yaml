@@ -80,6 +80,7 @@ jobs:
             --exclude="bootstrap/cache"
             --exclude=".git"
             --exclude="vendor/*"
+            --exclude="node_modules/*"
             --exclude="storage/*"
             --exclude="!storage/public/"
             --exclude="!storage/public/images"
