@@ -16,6 +16,7 @@ class Content extends Model
         'name',
         'display_name',
         'slug',
+        'url',
         'sort_order',
         'theme_id',
         'description',

@@ -61,6 +61,7 @@ export interface Content {
     name: string;
     display_name: string;
     slug: string;
+    url: string;
     theme_id: string;
     type: string;
     sort_order: number;

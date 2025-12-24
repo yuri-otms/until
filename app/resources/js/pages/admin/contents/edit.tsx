@@ -52,6 +52,7 @@ export default function Edit({
                                     id="name"
                                     defaultValue={content.name}
                                     type="text"
+                                    tabIndex={1}
                                     autoFocus
                                     autoComplete="name"
                                     name="name"
@@ -64,6 +65,7 @@ export default function Edit({
                                     <Label htmlFor="display_name">コンテンツ名(表示)</Label>
                                      <Textarea
                                     id="display_name"
+                                    tabIndex={2}
                                     defaultValue={content.display_name}
                                     name="display_name"
                                     placeholder=""
@@ -77,13 +79,27 @@ export default function Edit({
                                         id="slug"
                                         defaultValue={content.slug}
                                         type="text"
-                                        tabIndex={1}
+                                        tabIndex={3}
                                         autoComplete="slug"
                                         name="slug"
                                         placeholder=""
                                         />
                                     <InputError
                                         message={errors.slug}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="url">URL</Label>
+                                    <Input
+                                        id="url"
+                                        defaultValue={content.url}
+                                        type="text"
+                                        tabIndex={4}
+                                        autoComplete="url"
+                                        name="url"
+                                        placeholder=""
+                                        />
+                                    <InputError
+                                        message={errors.url}
                                         className="mt-2"
                                     />
                                     <Label htmlFor="theme_id">テーマ</Label>
@@ -123,7 +139,7 @@ export default function Edit({
                                      <Textarea
                                     id="description"
                                     defaultValue={content.description}
-                                    tabIndex={1}
+                                    tabIndex={5}
                                     name="description"
                                     placeholder=""
                                     />
