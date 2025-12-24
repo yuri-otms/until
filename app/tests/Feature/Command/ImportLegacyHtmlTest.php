@@ -17,8 +17,6 @@ class ImportLegacyHtmlTest extends TestCase
 
     public function test_html_files_are_imported_as_posts()
     {
-        $command = app(ImportLegacyHtml::class);
-
         $this->artisan('import:legacy-html')
                 ->assertExitCode(0);
 

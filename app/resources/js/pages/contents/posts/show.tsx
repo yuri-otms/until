@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import ComicNavCard from '@/components/comic-nav-card';
+import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
 
 export default function Show({
@@ -44,8 +45,8 @@ export default function Show({
         <ContentLayout breadcrumbs={breadcrumbs}>
             <h1 className="font-semibold text-3xl my-4">{post.title}</h1>
             <div className="text-sm py-2">
-                <div>{post.created_at} 公開</div>
-                { post.created_at != post.updated_at ? <div>{post.updated_at} 最終改訂</div> : ''}
+                <div>{formatJapaneseDate(post.created_at)} 公開</div>
+                { post.created_at != post.updated_at ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
             </div>
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
