@@ -37,15 +37,9 @@ jobs:
         run: php artisan key:generate
         working-directory: ./app/
 
-      - name: Run tests (debug)
-        run: |
-          php -v
-          php -m | head
+      - name: Run tests
+        run: php artisan test
         working-directory: ./app/
-
-      - name: Run tests (check exit code)
-        run: |
-          php artisan test -v || echo "exit=$?"
 
 
   deploy:
