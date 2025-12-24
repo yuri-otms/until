@@ -36,6 +36,7 @@ class ContentUpdateRequest extends FormRequest
             ],
             'description' => [],
             'type' => [],
+            'url' => [],
         ];
     }
 

@@ -31,7 +31,7 @@ export default function Index({
                     <HomeCardContent>
                         {themeRow.contents.map((contentRow) =>
                             <ContentButton key={contentRow.id}
-                                href={'/contents/' + contentRow.slug}>
+                                href={ contentRow.url ?? '/contents/' + contentRow.slug}>
                             {contentRow.display_name || contentRow.name}
                             </ContentButton>
                         )}

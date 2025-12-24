@@ -69,6 +69,7 @@ export default function Create({
                                     <Textarea
                                         id="display_name"
                                         name="display_name"
+                                        tabIndex={2}
                                         />
 
                                     <InputError
@@ -79,13 +80,26 @@ export default function Create({
                                     <Input
                                         id="slug"
                                         type="text"
-                                        tabIndex={1}
+                                        tabIndex={3}
                                         autoComplete="slug"
                                         name="slug"
                                         placeholder=""
                                         />
                                     <InputError
                                         message={errors.slug}
+                                        className="mt-2"
+                                    />
+                                    <Label htmlFor="url">URL</Label>
+                                    <Input
+                                        id="url"
+                                        type="text"
+                                        tabIndex={4}
+                                        autoComplete="url"
+                                        name="url"
+                                        placeholder=""
+                                        />
+                                    <InputError
+                                        message={errors.url}
                                         className="mt-2"
                                     />
                                     <Label htmlFor="theme">テーマ</Label>

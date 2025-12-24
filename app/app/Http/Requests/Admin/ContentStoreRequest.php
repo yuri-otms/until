@@ -37,6 +37,7 @@ class ContentStoreRequest extends FormRequest
             ],
             'description' => [],
             'type' => [],
+            'url' => [],
         ];
     }
 
