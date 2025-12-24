@@ -91,4 +91,3 @@ jobs:
           docker compose -f compose_prod.yaml exec -T web php artisan optimize:clear
           docker compose -f compose_prod.yaml exec -T web php artisan cache:clear
           docker compose -f compose_prod.yaml exec -T web php artisan config:clear
-        working-directory: ./app/

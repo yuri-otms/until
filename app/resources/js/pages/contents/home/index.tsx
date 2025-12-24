@@ -38,22 +38,6 @@ export default function Index({
                     </HomeCardContent>
                 </HomeCard>
             )}
-            <HomeCard>
-                <HomeCardHeader>
-                    <HomeCardTitle>プロフィール</HomeCardTitle>
-                    <HomeCardDescription>
-                        <p>未経験で37歳から2年間、地方のWeb制作会社でバックエンドエンジニア(退職済み)。<br />
-                        不登校、ひきこもり、長期無職、対人恐怖（社交不安障害）、短期離職の繰り返しから、自分の夢を叶える方法を模索しています。</p>
-                    </HomeCardDescription>
-                </HomeCardHeader>
-                <HomeCardContent>
-                    <ContentButton
-                    href="/"
-                    >
-                    不登校・ひきこもり<br />経歴
-                    </ContentButton>
-                </HomeCardContent>
-            </HomeCard>
         </ContentLayout>
     );
 }
