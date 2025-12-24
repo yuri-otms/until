@@ -54,6 +54,9 @@ jobs:
     steps:
       - name: リポジトリのチェックアウト
         uses: actions/checkout@v4
+      - name: composer install
+        run: composer install
+        working-directory: ./app/
       - name: Node.js環境のセットアップ
         uses: actions/setup-node@v4
         with:
@@ -76,6 +79,7 @@ jobs:
             --exclude=".tests/"
             --exclude="bootstrap/cache"
             --exclude=".git"
+            --exclude="vendor/*"
             --exclude="storage/*"
             --exclude="!storage/public/"
             --exclude="!storage/public/images"
