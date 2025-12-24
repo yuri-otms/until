@@ -39,9 +39,8 @@ jobs:
 
       - name: Run tests (debug)
         run: |
-          php --version
+          php -v
           php -m | head
-          php artisan test -v
         working-directory: ./app/
 
       - name: Run tests (check exit code)
