@@ -2,12 +2,14 @@
 
 namespace App\Console\Commands;
 
+
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\Crawler;
 use League\HTMLToMarkdown\HtmlConverter;
 use App\Models\Post;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class ImportLegacyHtml extends Command
 {
@@ -79,8 +81,10 @@ class ImportLegacyHtml extends Command
                             }
 
                             $html = file_get_contents($file);
-
                             $articleCrawler = new Crawler($html);
+
+                            $createdAt = $this->extractCreatedAt($articleCrawler);
+
                             $node = $articleCrawler->filter('div.article-contents.wrapper');
 
                             if ($node->count() === 0) {
@@ -101,6 +105,8 @@ class ImportLegacyHtml extends Command
                                 'sort_order' => $postSortOrder,
                                 'status' => 'published',
                                 'type' => 'post',
+                                'created_at' => $createdAt,
+                                'updated_at' => $createdAt,
                             ]);
 
                             $post->saveQuietly();
@@ -163,5 +169,40 @@ class ImportLegacyHtml extends Command
         });
 
         return $bodyCrawler->html();
+    }
+
+    private function extractCreatedAt(Crawler $crawler): ?Carbon
+    {
+        $navs = $crawler->filter('p.nav');
+        if ($navs->count() === 0) {
+            return null;
+        }
+
+        $target = null;
+        foreach ($navs as $p) {
+            $html = $p->ownerDocument->saveHTML($p);
+            if (stripos($html, '<br>') !== false) {
+                $target = $html;
+                break;
+            }
+        }
+        if ($target == null) {
+            $target = $navs->last()->outerHtml();
+        }
+        $text = trim(strip_tags($target));
+
+        if (!preg_match('/\b(20\d{2})[.\/-](\d{1,2})[.\/-](\d{1,2})\b/u', $text, $m)) {
+            return null;
+        }
+
+        $y = (int) $m[1];
+        $mo = (int) $m[2];
+        $d = (int) $m[3];
+
+        try {
+            return Carbon::create($y, $mo, $d, 0, 0, 0, 'Asia/Tokyo');
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 }
