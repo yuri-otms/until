@@ -76,14 +76,14 @@ jobs:
           switches: >-
             -avzr --delete
             --exclude=".env"
-            --exclude=".tests/"
             --exclude="bootstrap/cache"
             --exclude=".git"
-            --exclude="vendor/*"
-            --exclude="node_modules/*"
+            --exclude="vendor/"
+            --exclude="node_modules/"
+            --exclude="tests/"
             --exclude="storage/*"
             --exclude="!storage/public/"
-            --exclude="!storage/public/images"
+            --exclude="!storage/public/images/"
           path: ${{ secrets.VPS_LINK_SOURCE}}
           remote_path: ${{ secrets.VPS_LINK_TARGET}}
           remote_host: ${{ secrets.VPS_HOST }}
