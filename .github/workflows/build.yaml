@@ -39,7 +39,7 @@ jobs:
 
       - name: Run tests (debug)
         run: |
-          php -v
+          php --version
           php -m | head
           php artisan test -v
         working-directory: ./app/
