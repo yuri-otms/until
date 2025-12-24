@@ -79,11 +79,10 @@ jobs:
             --exclude=".tests/"
             --exclude="bootstrap/cache"
             --exclude=".git"
-            --exclude="vendor/*"
-            --exclude="node_modules/*"
-            --exclude="storage/*"
-            --exclude="!storage/public/"
-            --exclude="!storage/public/images"
+            --exclude="vendor"
+            --exclude="node_modules"
+            --exclude="storage"
+            --exclude="tests"
           path: ${{ secrets.VPS_LINK_SOURCE}}
           remote_path: ${{ secrets.VPS_LINK_TARGET}}
           remote_host: ${{ secrets.VPS_HOST }}
