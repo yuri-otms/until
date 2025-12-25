@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ComicController;
 
-Route::prefix('admin')
+Route::prefix(config('admin.path'))
         ->name('admin.')
         ->group(function () {
 

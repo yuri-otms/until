@@ -1,3 +1,4 @@
 .env.dev
 docker/mysql/data
 .env.prod
+app/public/robots.txt
