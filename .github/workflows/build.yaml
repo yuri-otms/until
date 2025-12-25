@@ -86,9 +86,4 @@ jobs:
           remote_user: ${{ secrets.VPS_USERNAME }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY}}
 
-    
-      - name: キャッシュ等のクリア
-        run: |
-          docker compose -f compose_prod.yaml exec -T web php artisan optimize:clear
-          docker compose -f compose_prod.yaml exec -T web php artisan cache:clear
-          docker compose -f compose_prod.yaml exec -T web php artisan config:clear
+  
