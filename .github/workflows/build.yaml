@@ -72,6 +72,7 @@ jobs:
             --exclude=".env"
             --exclude="bootstrap/cache"
             --exclude="public/storage"
+            --exclude="public/robots.txt"
             --exclude=".git"
             --exclude="vendor/"
             --exclude="node_modules/"

@@ -19,7 +19,7 @@ export default function Index() {
 
         <ContentLayout breadcrumbs={breadcrubms} title={title}>
             <div className="text-sm py-2 mb-4">
-                <div>2025年12月24日 公開</div>
+                <div>2025年12月25日 公開</div>
             </div>
             <h2 className="text-2xl font-bold mt-6 mb-4">基本情報</h2>
                 <p>yuri</p>
