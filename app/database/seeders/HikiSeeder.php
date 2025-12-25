@@ -19,7 +19,7 @@ class HikiSeeder extends Seeder
                 'id' => 2,
                 'name' => 'ひきこもりメモ',
                 'slug' => 'hiki_memo',
-                'description' => 'ひきこもりから不安を減らす、動き出すためのTipsなどです。'
+                'description' => 'ひきこもりから不安を減らす、動き出すためのTipsなどです。2017年ごろ運営していたサイトの内容です。'
             ]
         );
 

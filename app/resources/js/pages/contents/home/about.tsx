@@ -19,12 +19,16 @@ export default function Index() {
 
         <ContentLayout breadcrumbs={breadcrubms} title={title}>
             <div className="text-sm py-2 mb-4">
-                <div>2025年12月24日 公開</div>
+                <div>2025年12月25日 公開</div>
             </div>
             <p>個人サイトです。</p>
 
             <h2 className="text-2xl font-bold mt-6 mb-4">主に取り扱う内容</h2>
             <p>私は不登校・ひきこもりから抜け出すのが非常に大変だったため、その体験談やノウハウをまとめています。</p>
+            <ul className="list-disc pl-6 mb-4">
+                <li>ひきこもりメモ: 2017年ごろ運営していたサイトの内容です。</li>
+                <li>コミックエッセイ: ブログ等に載せていたコミックエッセイです。</li>
+            </ul>
 
             <p>コミックエッセイ（エッセイ漫画）が大好きなので、自分でも描けるようになりたいので、少しずつ描いていきたいです（3年描けていません…）。</p>
 
@@ -59,7 +63,7 @@ export default function Index() {
 
             <h2 className="text-2xl font-bold mt-6 mb-4">更新情報</h2>
             <ul className="list-disc pl-6 mb-4">
-                <li>2025年12月20日: サイト公開開始</li>
+                <li>2025年12月25日: サイト公開開始</li>
             </ul>
         </ContentLayout>
     );
