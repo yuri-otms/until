@@ -46,7 +46,7 @@ Route::prefix(config('admin.path'))
 
         Route::put('/themes/reorder/{theme}/', [ThemeController::class, 'reorder'])->name('themes.reorder');
         Route::put('/contents/reorder/{content}/', [ContentController::class, 'reorder'])->name('contents.reorder');
-        Route::put('/categoriess/reorder/{category}/', [CategoryController::class, 'reorder'])->name('categories.reorder');
+        Route::put('/categories/reorder/{category}/', [CategoryController::class, 'reorder'])->name('categories.reorder');
         Route::put('/posts/reorder/{post}/', [PostController::class, 'reorder'])->name('posts.reorder');
         Route::put('/comics/reorder/{comic}/', [ComicController::class, 'reorder'])->name('comics.reorder');
         Route::resources([

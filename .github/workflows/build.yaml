@@ -28,6 +28,8 @@ jobs:
         working-directory: ./app/
 
       - name: Npm Build
+        env:
+          ADMIN_URL: ${{ secrets.ADMIN_URL }} 
         run: |
           npm install
           npm run build
@@ -61,6 +63,8 @@ jobs:
         run: npm install
         working-directory: ./app/
       - name: Viteのプロジェクトのビルド
+        env:
+          ADMIN_URL: ${{ secrets.ADMIN_URL }} 
         run: npm run build
         working-directory: ./app/
 
