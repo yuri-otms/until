@@ -6,7 +6,7 @@ services:
       context: ./docker/php
       dockerfile: Dockerfile
     env_file:
-      - /var/www/until/.env.prod
+      - .env.prod
     restart: always
     ports:
       - "9000:9000"
