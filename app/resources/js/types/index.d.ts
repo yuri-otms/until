@@ -66,6 +66,7 @@ export interface Content {
     type: string;
     sort_order: number;
     description: string;
+    status: string;
 }
 
 export interface ContentType {

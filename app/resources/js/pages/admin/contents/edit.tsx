@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Content, type Theme, type ContentType } from "@/types";
+import { type BreadcrumbItem, type Content, type Theme, type ContentType, type PostStatus } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
@@ -18,10 +18,12 @@ export default function Edit({
     content,
     themes,
     contentTypeOptions,
+    postStatusOptions
 }: {
     content: Content;
     themes: Theme[];
     contentTypeOptions: ContentType[];
+    postStatusOptions: PostStatus[];
 }) {
     const breadcrubms: BreadcrumbItem[] = [
         {
@@ -121,6 +123,22 @@ export default function Edit({
                                     <Label htmlFor="type">投稿タイプ</Label>
                                     <RadioGroup defaultValue={content.type} name="type">
                                         {contentTypeOptions.map((row) => (
+                                            <div
+                                            key={row.key}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.key} id={row.key} />
+                                                <Label htmlFor={row.key}>{row.label}</Label>
+                                                </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.status}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="status">掲載状態</Label>
+                                    <RadioGroup defaultValue={content.status} name="status">
+                                        {postStatusOptions.map((row) => (
                                             <div
                                             key={row.key}
                                             className="flex items-center gap-3">

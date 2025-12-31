@@ -14,7 +14,10 @@ class HomeController extends Controller
     {
         $themes = Theme::with([
             'contents' => function ($query) {
-                $query->orderBy('sort_order');}
+                $query
+                    ->where('status', 'published')
+                    ->orderBy('sort_order');
+            }
         ])
                 ->orderBy('sort_order')
                 ->get();

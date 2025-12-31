@@ -2,3 +2,4 @@
 docker/mysql/data
 .env.prod
 app/public/robots.txt
+app/.env.testing

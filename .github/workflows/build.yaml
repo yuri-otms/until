@@ -99,6 +99,7 @@ jobs:
           script: |
             set -e
             cd /var/www/until
+            docker compose -f compose_prod.yaml exec -T web php artisan migrate --force
             docker compose -f compose_prod.yaml exec -T web php artisan optimize:clear
             docker compose -f compose_prod.yaml exec -T web php artisan route:clear
             docker compose -f compose_prod.yaml exec -T web php artisan config:clear

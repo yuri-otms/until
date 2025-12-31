@@ -38,6 +38,9 @@ class ContentStoreRequest extends FormRequest
             'description' => [],
             'type' => [],
             'url' => [],
+            'is_listed' => [],
+            'status' => [],
+            'has_categories' => [],
         ];
     }
 
