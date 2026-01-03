@@ -12,6 +12,7 @@ use Inertia\Response;
 use App\Models\Content;
 use App\Models\Theme;
 use App\Enums\ContentType;
+use App\Enums\PostStatus;
 
 class ContentController extends Controller
 {
@@ -46,6 +47,7 @@ class ContentController extends Controller
             'themes' => $themes,
             'theme' => $theme,
             'contentTypeOptions' => ContentType::keyLabelList(),
+            'postStatusOptions' => PostStatus::keyLabelList(),
         ]);
     }
 
@@ -68,6 +70,7 @@ class ContentController extends Controller
             'content' => $content,
             'themes' => $themes,
             'contentTypeOptions' => ContentType::keyLabelList(),
+            'postStatusOptions' => PostStatus::keyLabelList(),
         ]);
     }
 

@@ -21,6 +21,14 @@ class Content extends Model
         'theme_id',
         'description',
         'type',
+        'is_listed',
+        'status',
+        'has_categories'
+    ];
+
+    protected $casts = [
+        'is_listed' => 'boolean',
+        'has_categories' => 'boolean',
     ];
 
     public function theme()
