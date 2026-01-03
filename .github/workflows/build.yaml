@@ -40,6 +40,8 @@ jobs:
         working-directory: ./app/
 
       - name: Run tests
+        env:
+          ADMIN_URL: ${{ secrets.ADMIN_URL }} 
         run: php artisan test
         working-directory: ./app/
 
