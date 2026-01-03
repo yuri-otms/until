@@ -16,6 +16,7 @@ class HomeController extends Controller
             'contents' => function ($query) {
                 $query
                     ->where('status', 'published')
+                    ->where('is_listed', true)
                     ->orderBy('sort_order');
             }
         ])

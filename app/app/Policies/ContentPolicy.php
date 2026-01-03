@@ -19,7 +19,7 @@ class ContentPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Content $content): bool
+    public function view(?User $user, Content $content): bool
     {
         if ($content->status == 'published') {
             return true;
