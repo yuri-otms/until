@@ -11,6 +11,8 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/contents'
 
@@ -35,6 +37,7 @@ export default function Edit({
             href: '',
         }
     ];
+    const [isListed, setIsListed] = useState<boolean>(Boolean(content.is_listed));
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
@@ -149,6 +152,18 @@ export default function Edit({
                                     </RadioGroup>
                                     <InputError
                                         message={errors.status}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="is_listed">トップページに表示</Label>
+                                    <input type="hidden" name="is_listed" value={isListed ? "1" : "0"} />
+                                    <Switch
+                                    id="is_listed"
+                                    checked={isListed}
+                                    onCheckedChange={setIsListed}
+                                    />
+                                    <InputError
+                                        message={errors.is_listed}
                                         className="mt-2"
                                     />
 

@@ -67,6 +67,8 @@ export interface Content {
     sort_order: number;
     description: string;
     status: string;
+    is_listed: boolean;
+    has_categories: boolean;
 }
 
 export interface ContentType {

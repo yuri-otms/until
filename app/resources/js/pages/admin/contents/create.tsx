@@ -11,6 +11,8 @@ import { Label } from '@/components/ui/label';
 import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
 import InputError from '@/components/input-error';
 import { store } from '@/routes/admin/contents';
 import { index } from '@/routes/admin/contents'
@@ -38,6 +40,7 @@ export default function Create({
         }
     ];
     const defaultTheme: string = theme.id.toString();
+    const [isListed, setIsListed] = useState<boolean>(Boolean(true));
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -152,7 +155,17 @@ export default function Create({
                                         className="mt-2"
                                     />
 
-
+                                    <Label htmlFor="is_listed">トップページに表示</Label>
+                                    <input type="hidden" name="is_listed" value={isListed ? "1" : "0"} />
+                                    <Switch
+                                    id="is_listed"
+                                    checked={isListed}
+                                    onCheckedChange={setIsListed}
+                                    />
+                                    <InputError
+                                        message={errors.is_listed}
+                                        className="mt-2"
+                                    />
 
                                     <Label htmlFor="description">説明文</Label>
                                     <Textarea
