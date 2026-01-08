@@ -86,7 +86,7 @@ class PostController extends Controller
         $post->update($request->validated());
         return to_route('admin.posts.index', [
             'content'=> $post->content->slug,
-            'category_id' => $post->category->id,
+            'category_id' => $post->category_id,
         ]);
     }
 

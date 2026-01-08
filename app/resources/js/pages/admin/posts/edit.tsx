@@ -27,7 +27,7 @@ export default function Edit({
     postStatusOptions,
 }: {
     content: Content;
-    categories: Category[];
+    categories: Category[] | null;
     post: Post;
     postStatusOptions: PostStatus[];
 }) {
@@ -76,6 +76,8 @@ export default function Edit({
                                         message={errors.name}
                                         className="mt-2"
                                     />
+                                    { categories !== null ?
+                                    <div>
                                     <Label htmlFor="name">カテゴリー</Label>
                                     <RadioGroup defaultValue={post.category_id.toString()} name="category_id">
                                         {categories.map((row) => (
@@ -91,6 +93,11 @@ export default function Edit({
                                         message={errors.category_id}
                                         className="mt-2"
                                     />
+                                    </div>
+                                    :
+                                    <input type="hidden" name="category_id"
+                                    value="0" />
+                                    }
                                     <Label htmlFor="name">本文</Label>
                                     <Textarea
                                     id="body"
@@ -118,6 +125,9 @@ export default function Edit({
                                         message={errors.status}
                                         className="mt-2"
                                     />
+                                    <input type="hidden"
+                                    name="content_id"
+                                    value={content.id} />
 
                                     <Button
                                         type="submit"
