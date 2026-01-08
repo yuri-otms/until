@@ -27,8 +27,8 @@ export default function Create({
     postStatusOptions,
 } : {
     content: Content;
-    category: Category;
-    categories: Category[];
+    category: Category | null;
+    categories: Category[] | null;
     postStatusOptions: PostStatus[];
 }) {
     const pageName = content.name + '記事投稿';
@@ -37,7 +37,7 @@ export default function Create({
             title: pageName,
             href: index({query: {
                 content: content.slug,
-                category_id: category.id
+                category_id: category !== null ? category.id : 0
             }}).url,
         },
         {
@@ -45,7 +45,7 @@ export default function Create({
             href: '',
         }
     ];
-    const defaultCategory: string = category.id.toString();
+    const defaultCategory: string = category !== null ? category.id.toString() : 'none';
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -74,10 +74,12 @@ export default function Create({
                                         message={errors.title}
                                         className="mt-2"
                                     />
+                                    {categories !== null ?
+                                    <div>
                                     <Label htmlFor="category">カテゴリー</Label>
                                     <RadioGroup
                                     defaultValue={defaultCategory} name="category_id">
-                                        {categories.map((row) => (
+                                        { categories.map((row) => (
                                             <div
                                             key={row.id}
                                             className="flex items-center gap-3">
@@ -90,6 +92,10 @@ export default function Create({
                                         message={errors.category_id}
                                         className="mt-2"
                                     />
+                                    </div>
+                                    :
+                                    <input type="hidden" name="category_id" value="0" />
+                                    }
                                     <Label htmlFor="body">本文</Label>
                                     <Textarea
                                     defaultValue=""
@@ -117,6 +123,7 @@ export default function Create({
                                         className="mt-2"
                                     />
 
+                                    <input type="hidden" name="content_id" value={content.id} />
                                     <Button
                                         type="submit"
                                         className="mt-2 w-full"

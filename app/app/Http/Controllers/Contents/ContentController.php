@@ -25,22 +25,31 @@ class ContentController extends Controller
 
         $table = $content->type . 's';
 
+        if ($content->has_categories) {
+            $categories = Category::with([$table => function ($q) {
+                $q->where('status', 'published')
+                    ->orderBy('sort_order');
+            }])
+                            ->where('content_id', $content->id)
+                            ->whereHas($table, function ($q) {
+                                $q->where('status', 'published');
+                            })
+                            ->orderBy('sort_order')
+                            ->get();
+            return Inertia::render('contents/contents/show-' . $content->type, [
+                'content' => $content,
+                'categories' => $categories,
+            ]);
+        } else {
+            $posts= Post::where('content_id', $content->id)
+                            ->where('status', 'published')
+                            ->orderBy('sort_order')
+                            ->get();
+            return Inertia::render('contents/contents/show-simple-' . $content->type, [
+                'content' => $content,
+                'posts' => $posts,
+            ]);
+        }
 
-
-        $categories = Category::with([$table => function ($q) {
-            $q->where('status', 'published')
-                ->orderBy('sort_order');
-        }])
-                        ->where('content_id', $content->id)
-                        ->whereHas($table, function ($q) {
-                            $q->where('status', 'published');
-                        })
-                        ->orderBy('sort_order')
-                        ->get();
-
-        return Inertia::render('contents/contents/show-' . $content->type, [
-            'content' => $content,
-            'categories' => $categories,
-        ]);
     }
 }

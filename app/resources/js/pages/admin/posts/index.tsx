@@ -36,12 +36,11 @@ export default function Index({
     content,
     posts
 } : {
-    category: Category;
-    categories: Category[];
+    category: Category | null;
+    categories: Category[] | null;
     posts: Post[];
     content: Content;
 }) {
-
     const breadcrubms: BreadcrumbItem[] = [
         {
             title: content.name + '記事投稿',
@@ -56,7 +55,7 @@ export default function Index({
     })
     const sensors = useSensors(mouseSensor);
 
-    const [ activeCategory, setSelectedCategoryId ] = useState(category.id.toString());
+    const [ activeCategory, setSelectedCategoryId ] = useState(category?.id?.toString()) ?? "";
 
     const [ displayedPosts, setPosts ] = useState<Post[]>(posts);
 
@@ -105,10 +104,10 @@ export default function Index({
             <Head title={content.name + '記事投稿'} />
             <AdminLayout title={content.name + '記事投稿'} create={create({query:{
                 content: content.slug,
-                category_id: category.id,
+                category_id: category?.id,
                 }}).url}>
                 <div>
-                    <ThemeSelect themes={categories} activeTheme={activeCategory} onThemeChange={handleCategoryChange} />
+                    { categories ? <ThemeSelect themes={categories} activeTheme={activeCategory} onThemeChange={handleCategoryChange} /> : ''}
                     <div className="overflow-hidden rounded-md border">
                     <DndContext
                         onDragEnd={handleDragEnd}

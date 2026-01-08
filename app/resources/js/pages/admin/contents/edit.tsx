@@ -38,6 +38,7 @@ export default function Edit({
         }
     ];
     const [isListed, setIsListed] = useState<boolean>(Boolean(content.is_listed));
+    const [hasCategories, setHasCategories] = useState<boolean>(Boolean(content.has_categories));
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="コンテンツ新規作成" />
@@ -164,6 +165,18 @@ export default function Edit({
                                     />
                                     <InputError
                                         message={errors.is_listed}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="has_categories">カテゴリー使用</Label>
+                                    <input type="hidden" name="has_categories" value={hasCategories ? "1" : "0"} />
+                                    <Switch
+                                    id="has_categories"
+                                    checked={hasCategories}
+                                    onCheckedChange={setHasCategories}
+                                    />
+                                    <InputError
+                                        message={errors.has_categories}
                                         className="mt-2"
                                     />
 

@@ -10,7 +10,7 @@ export function ThemeSelect({
     onThemeChange
 } : {
     themes: Theme[] | Content[] | Category[];
-    activeTheme: string;
+    activeTheme: string | undefined;
     onThemeChange: onThemeChange;
 }) {
 

@@ -41,6 +41,7 @@ export default function Create({
     ];
     const defaultTheme: string = theme.id.toString();
     const [isListed, setIsListed] = useState<boolean>(Boolean(true));
+    const [hasCategories, setHasCategories] = useState<boolean>(Boolean(true));
 
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -164,6 +165,18 @@ export default function Create({
                                     />
                                     <InputError
                                         message={errors.is_listed}
+                                        className="mt-2"
+                                    />
+
+                                    <Label htmlFor="has_categories">カテゴリー使用</Label>
+                                    <input type="hidden" name="has_categories" value={hasCategories ? "1" : "0"} />
+                                    <Switch
+                                    id="has_categories"
+                                    checked={hasCategories}
+                                    onCheckedChange={setHasCategories}
+                                    />
+                                    <InputError
+                                        message={errors.has_categories}
                                         className="mt-2"
                                     />
 
