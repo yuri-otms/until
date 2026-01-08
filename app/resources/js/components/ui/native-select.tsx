@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 function NativeSelect({ handleChange, value, className, ...props }: React.ComponentProps<"select"> & {
     handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    value:string
+    value:string | undefined
 }) {
 
   return (

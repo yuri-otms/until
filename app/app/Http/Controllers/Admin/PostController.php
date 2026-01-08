@@ -21,9 +21,12 @@ class PostController extends Controller
         $content = $this->getContent($request);
         $categories = Category::getCategoriesByContent($content->id);
         $category = $this->getCategory($categories, $request);
-
         if ($category) {
             $posts = Post::where('category_id', $category->id)
+                        ->orderBy('sort_order')
+                        ->get();
+        } elseif (!$content->has_categories) {
+            $posts = Post::where('content_id', $content->id)
                         ->orderBy('sort_order')
                         ->get();
         } else {
@@ -56,7 +59,8 @@ class PostController extends Controller
     {
         $post = $request->all();
         $categoryId = $post['category_id'];
-        $content = Category::getContentbyCategory($categoryId);
+        $contentId = $post['content_id'];
+        $content = Content::find($contentId);
         $post['content_id'] = $content->id;
         Post::create($post);
         return to_route('admin.posts.index',[
@@ -104,9 +108,17 @@ class PostController extends Controller
 
     protected function getCategory($categories, Request $request)
     {
-        $initialCategoryId = $categories->first()->id ?? null;
-        $categoryId = $request->input('category_id', $initialCategoryId);
-        return Category::find($categoryId);
+        $content = Content::where('slug', $request->input('content'))
+                    ->get()
+                    ->first();
+        if ($content->has_categories) {
+            $initialCategoryId = $categories->first()->id ?? null;
+            $categoryId = $request->input('category_id', $initialCategoryId);
+            $category = Category::find($categoryId);
+        } else {
+            $category = null;
+        }
+        return $category;
     }
 
 }

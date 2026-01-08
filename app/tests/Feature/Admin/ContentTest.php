@@ -114,6 +114,7 @@ class ContentTest extends TestCase
         $content = Content::factory()->create(['is_listed' => false, 'status' => 'published']);
         $this
             ->get(route('contents.show', ['content' => $content->slug], false))
-            ->assertStatus(202);
+            ->assertStatus(200);
     }
+
 }

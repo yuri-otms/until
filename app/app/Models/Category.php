@@ -38,9 +38,15 @@ class Category extends Model
 
     public static function getCategoriesByContent($contentId)
     {
-        return Category::where('content_id', $contentId)
+        $content = Content::find($contentId);
+        if ($content->has_categories) {
+            $categories = Category::where('content_id', $contentId)
                         ->orderBy('sort_order')
                         ->get();
+        } else {
+            $categories = null;
+        }
+        return $categories;
     }
 
     public static function getContentByCategory($categoryId)
