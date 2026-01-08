@@ -2,4 +2,6 @@
 !images/
 !images/comics/
 !images/comics/**
+!images/posts/
+!images/posts/**
 !.gitignore

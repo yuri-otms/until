@@ -76,7 +76,7 @@ export default function Show({
                             <pre className="bg-black text-white px-4 py-3" {...props} />
                         ),
                         img: (props) => (
-                            <img className="block mx-auto sm:max-w-xl" {...props} />
+                            <img className="sm:max-w-xl border border-slate-200 p-2 m-2 rounded" {...props} />
                         ),
                     }}
                 >
