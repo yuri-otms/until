@@ -59,8 +59,9 @@ class ContentTest extends TestCase
 
     public function test_draft_content_is_not_listed_on_homepage(): void
     {
-        $publishedContent = Content::factory()->create(['status' => 'published']);
-        $draftContent = Content::factory()->create(['status' => 'draft']);
+        $theme = Theme::factory()->create(['status' => 'published']);
+        $publishedContent = Content::factory()->create(['status' => 'published', 'theme_id' => $theme->id]);
+        $draftContent = Content::factory()->create(['status' => 'draft', 'theme_id' => $theme->id]);
 
         $this
             ->get(route('home', absolute: false))
