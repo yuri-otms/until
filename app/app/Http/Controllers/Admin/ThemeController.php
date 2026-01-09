@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Theme;
+use App\Enums\PostStatus;
 
 class ThemeController extends Controller
 {
@@ -24,7 +25,9 @@ class ThemeController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('admin/themes/create', []);
+        return Inertia::render('admin/themes/create', [
+            'postStatusOptions' => PostStatus::keyLabelList(),
+        ]);
     }
 
     public function store(ThemeStoreRequest $request): RedirectResponse
@@ -37,6 +40,7 @@ class ThemeController extends Controller
     {
         return Inertia::render('admin/themes/edit', [
             'theme' => $theme,
+            'postStatusOptions' => PostStatus::keyLabelList(),
         ]);
     }
 

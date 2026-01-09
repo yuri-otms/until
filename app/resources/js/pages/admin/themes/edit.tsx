@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type Theme } from "@/types";
+import { type BreadcrumbItem, type Theme, type PostStatus } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error';
 import { index, update } from '@/routes/admin/themes'
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/radio-group";
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -21,9 +25,11 @@ const breadcrubms: BreadcrumbItem[] = [
     }
 ];
 export default function Edit({
-    theme
+    theme,
+    postStatusOptions
 }: {
-    theme: Theme
+    theme: Theme;
+    postStatusOptions: PostStatus[];
 }) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
@@ -70,6 +76,23 @@ export default function Edit({
                                         message={errors.slug}
                                         className="mt-2"
                                     />
+
+                                    <Label htmlFor="status">掲載状態</Label>
+                                    <RadioGroup defaultValue={theme.status} name="status">
+                                        {postStatusOptions.map((row) => (
+                                            <div
+                                            key={row.key}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.key} id={row.key} />
+                                                <Label htmlFor={row.key}>{row.label}</Label>
+                                                </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.status}
+                                        className="mt-2"
+                                    />
+
                                     <Label htmlFor="slug">説明</Label>
                                     <Textarea
                                     id="description"

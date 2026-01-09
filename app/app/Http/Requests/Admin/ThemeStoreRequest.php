@@ -28,6 +28,7 @@ class ThemeStoreRequest extends FormRequest
                 'max:255',
                 Rule::unique(Theme::class)
             ],
+            'status' => [],
             'description' => [
                 'max:255'
             ]
