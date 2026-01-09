@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        @if (request()->is(config('admin.path')))
+        @if (request()->routeIs('admin.*'))
             <meta name="robots" content="noindex,nofollow" />
         @endif
 
@@ -47,7 +47,7 @@
         @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         @inertiaHead
 
-        @if (!request()->is(config('admin.path')))
+        @if (!request()->routeIs('admin.*'))
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPX0ZD20GR"></script>
         <script>
