@@ -27,6 +27,7 @@ class ThemeUpdateRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'status' => [],
             'description' => [
                 'max:255'
             ]

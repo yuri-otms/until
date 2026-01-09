@@ -92,6 +92,7 @@ export default function Index({
                         <TableRow>
                         <TableHead>順番</TableHead>
                         <TableHead>ID</TableHead>
+                        <TableHead>掲載</TableHead>
                         <TableHead>テーマ</TableHead>
                         <TableHead>動作</TableHead>
                         </TableRow>
@@ -105,6 +106,7 @@ export default function Index({
                             >
                                 <TableSortableCell model_id={row.id} />
                                 <TableCell>{row.id}</TableCell>
+                                <TableCell>{row.status}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell
                                     onClick={(e) => e.stopPropagation()}

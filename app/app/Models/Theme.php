@@ -16,7 +16,8 @@ class Theme extends Model
         'name',
         'slug',
         'sort_order',
-        'description'
+        'status',
+        'description',
     ];
 
     public function contents()

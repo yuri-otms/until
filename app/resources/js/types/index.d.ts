@@ -52,6 +52,7 @@ export interface Theme {
     id: number;
     name: string;
     slug: string;
+    status: string;
     description: string;
     sort_order: number;
 }

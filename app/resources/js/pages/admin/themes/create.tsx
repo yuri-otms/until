@@ -1,4 +1,4 @@
-import { BreadcrumbItem } from "@/types";
+import { BreadcrumbItem,  type PostStatus } from "@/types";
 import AppLayout from '@/layouts/app-layout';
 import AdminLayout from '@/layouts/admin/layout';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,11 @@ import { Form, Head } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea"
 import InputError from '@/components/input-error';
-import { index, store } from '@/routes/admin/themes'
+import { index, store } from '@/routes/admin/themes';
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/radio-group";
 
 const breadcrubms: BreadcrumbItem[] = [
     {
@@ -20,7 +24,11 @@ const breadcrubms: BreadcrumbItem[] = [
         href: '',
     }
 ];
-export default function Create() {
+export default function Create({
+    postStatusOptions
+} : {
+    postStatusOptions: PostStatus[];
+}) {
     return (
         <AppLayout breadcrumbs={breadcrubms}>
             <Head title="テーマ新規作成" />
@@ -64,6 +72,24 @@ export default function Create() {
                                         message={errors.slug}
                                         className="mt-2"
                                     />
+
+                                    <Label htmlFor="status">掲載状態</Label>
+                                    <RadioGroup defaultValue={postStatusOptions[0].key} name="status">
+                                        {postStatusOptions.map((row) => (
+                                            <div
+                                            key={row.key}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.key} id={row.key} />
+                                                <Label htmlFor={row.key}>{row.label}</Label>
+                                                </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.status}
+                                        className="mt-2"
+                                    />
+
+
                                     <Label htmlFor="slug">説明</Label>
                                                                                                     <Textarea
                                     id="description"

@@ -20,6 +20,7 @@ class HomeController extends Controller
                     ->orderBy('sort_order');
             }
         ])
+                ->where('status', 'published')
                 ->orderBy('sort_order')
                 ->get();
 
