@@ -57,7 +57,6 @@ export default function Index() {
                 <li><a className="text-blue-600 underline" href="https://x.com/lstliauou" target="_blank">X (旧Twitter)</a></li>
                 <li><a className="text-blue-600 underline" href="https://qiita.com/yuri_t" target="_blank">Qiita</a></li>
                 <li><a className="text-blue-600 underline" href="https://note.com/yuri_bbr/" target="_blank">yuri｜note</a>(エンジニア関係)</li>
-                <li><a className="text-blue-600 underline" href="https://note.com/omuraisu_kk" target="_blank">オムライス｜note</a>(婚活関係)</li>
                 <li><a className="text-blue-600 underline" href="https://link.skskfun.com/" target="_blank">その他リンクまとめ</a></li>
             </ul>
 
