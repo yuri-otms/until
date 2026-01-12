@@ -18,6 +18,9 @@ Route::get('/profile', function () {
 Route::get('/contact', function () {
     return Inertia::render('contents/home/contact');
 })->name('contact');
+Route::get('/privacy', function () {
+    return Inertia::render('contents/home/privacy');
+})->name('privacy');
 
 Route::get('/contents/{content:slug}', [ContentController::class, 'show'])->name('contents.show');
 
