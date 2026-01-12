@@ -1,7 +1,7 @@
 import ContentLayout from '@/layouts/content-layout'
-import { Link } from '@inertiajs/react';
 import { type BreadcrumbItem, type Content, type Post } from '@/types'
 import { home } from '@/routes'
+import { PostRow } from '@/components/post-row';
 
 export default function Show({
     content,
@@ -27,17 +27,16 @@ export default function Show({
 
             <p className="my-6 whitespace-pre-line">{content.description}</p>
 
-            <ul>
-                {posts.map((post) =>
-                    <li>
-                        <Link
-                            href={"/contents/" + content.slug + '/' + content.type + '/' + post.id}
-                            className="underline">
-                        {post.created_at}: {post.title}
-                        </Link>
-                    </li>
-                )}
-            </ul>
-        </ContentLayout>
+            {posts.map((post) => (
+                <PostRow key={post.id} post={post} content={content} />
+            ))}
+
+            {/* 将来ページネーションするならここを置き換える
+            <div className="py-10 text-center text-sm text-muted-foreground">
+            ここにページネーション（10件ごと）を追加予定
+            </div>
+            */}
+
+    </ContentLayout>
     );
 }

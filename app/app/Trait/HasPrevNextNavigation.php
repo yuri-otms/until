@@ -39,6 +39,7 @@ trait HasPrevNextNavigation
     protected function previousInSameCategory(): ?Model
     {
         return static::where('category_id', $this->category_id)
+            ->where('status', 'published')
             ->where('sort_order', '<', $this->sort_order)
             ->orderByDesc('sort_order')
             ->first();
@@ -47,6 +48,7 @@ trait HasPrevNextNavigation
     protected function nextInSameCategory(): ?Model
     {
         return static::where('category_id', $this->category_id)
+            ->where('status', 'published')
             ->where('sort_order', '>', $this->sort_order)
             ->orderBy('sort_order')
             ->first();
