@@ -24,7 +24,7 @@ export default function ContentSimpleLayout({
                 <ContentHeader />
                 <div className="flex-grow flex flex-col w-full lg:max-w-6xl mt-7 pt-10 px-5 sm:px-14">
                     { breadcrumbs ? <ContentBodyHeader breadcrumbs={breadcrumbs} /> : ''}
-                    <main className="w-full flex-grow mb-5">
+                    <main className="w-full flex-grow mb-5 break-all">
                         { title ? <h1 className="font-semibold text-3xl my-2">{title}</h1> : ''}
                         {children}
                     </main>
