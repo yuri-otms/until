@@ -22,12 +22,6 @@ export default function Index() {
                 <div>2025年12月25日 公開</div>
             </div>
 
-            <h2 className="text-2xl font-bold mt-6 mb-4"></h2>
-            <ul className="list-disc pl-6 mb-4">
-                <li></li>
-            </ul>
-
-
             <h2 className="text-2xl font-bold mt-6 mb-4">運営者情報</h2>
 
             <p>yuri</p>
