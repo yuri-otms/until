@@ -84,8 +84,8 @@ jobs:
             --exclude="node_modules/"
             --exclude="tests/"
             --exclude="storage/**"
-            --include="storage/public/"
-            --include="storage/public/**"
+            --include="storage/app/public/"
+            --include="storage/app/public/**"
             --exclude="storage/***"
           path: ${{ secrets.VPS_LINK_SOURCE}}
           remote_path: ${{ secrets.VPS_LINK_TARGET}}
