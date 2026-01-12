@@ -1,5 +1,4 @@
 import { Link } from "@inertiajs/react";
-import { Badge } from "@/components/ui/badge";
 import { formatJapaneseDate } from '@/utils/data';
 import { type Post, type Content } from '@/types';
 
@@ -16,9 +15,6 @@ export function PostRow({ post, content }: { post: Post; content: Content}) {
                 <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 text-sm">
                     <time className="font-medium">{formatJapaneseDate(post.created_at)}</time>
-                    {post.updated_at && post.updated_at !== post.created_at ? (
-                        <Badge variant="secondary">更新</Badge>
-                    ) : null}
                     </div>
 
                     {post.title}
