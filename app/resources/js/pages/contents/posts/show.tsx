@@ -67,7 +67,7 @@ export default function Show({
                             <ul className="list-disc pl-6 mb-4" {...props} />
                         ),
                         a: (props) => (
-                            <a className="text-blue-600 underline" {...props} />
+                            <a className="text-blue-600 underline break-all" {...props} />
                         ),
                         blockquote: (props) => (
                             <blockquote className="border-l-5 pl-5" {...props} />
