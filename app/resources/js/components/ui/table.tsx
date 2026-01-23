@@ -139,7 +139,7 @@ function TableSortableCell({
         )}
         {...props}
         >
-        <Move className="hover:cursor-grab" data-dnd-hander="true" />
+        <Move className="hover:cursor-grab touch-none select-none" data-dnd-hander="true" />
         </td>
     )
 }
