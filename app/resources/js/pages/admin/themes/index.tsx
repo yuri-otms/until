@@ -15,6 +15,7 @@ import AdminLayout from '@/layouts/admin/layout';import {
 import {
     DndContext,
     MouseSensor,
+    TouchSensor,
     useSensor,
     useSensors,
     type DragOverEvent,
@@ -40,12 +41,13 @@ export default function Index({
     themes: Theme[]
 }) {
     const mouseSensor = useSensor(MouseSensor, {
-        activationConstraint: {
-            distance: 5,
-        }
-    })
+        activationConstraint: { distance: 5 },
+    });
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: { delay: 200, tolerance: 8 },
+    });
 
-    const sensors = useSensors(mouseSensor);
+    const sensors = useSensors(mouseSensor, touchSensor);
 
     const [ displayedThemes, setThemes ] = useState<Theme[]>(themes);
 

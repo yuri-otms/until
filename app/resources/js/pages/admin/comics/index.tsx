@@ -16,6 +16,7 @@ import { ThemeSelect } from "@/components/theme-select";
 import {
     DndContext,
     MouseSensor,
+    TouchSensor,
     useSensor,
     useSensors,
     type DragOverEvent,
@@ -50,11 +51,13 @@ export default function Index({
     ];
 
     const mouseSensor = useSensor(MouseSensor, {
-        activationConstraint: {
-            distance: 5,
-        }
-    })
-    const sensors = useSensors(mouseSensor);
+        activationConstraint: { distance: 5 },
+    });
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: { delay: 200, tolerance: 8 },
+    });
+
+    const sensors = useSensors(mouseSensor, touchSensor);
 
     const [ activeCategory, setSelectedCategoryId ] = useState(category.id.toString());
 
@@ -73,9 +76,6 @@ export default function Index({
             })
 
             const changedItem = displayedPosts[oldIndex];
-            console.log('changed.Item: ' + changedItem.id);
-            console.log('oldIndex: ' + oldIndex);
-            console.log('newIndex: ' + newIndex);
             axios.put(reorder(changedItem.id).url, {
                 oldIndex: oldIndex,
                 newIndex: newIndex,
