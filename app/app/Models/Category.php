@@ -11,7 +11,12 @@ class Category extends Model
 {
     use HasFactory;
     use HasSortOrder;
-    protected static ?string $sortScope = 'content_id';
+
+    public function sortScope(): string
+    {
+        return 'content_id';
+    }
+
 
     protected $fillable = [
         'name',

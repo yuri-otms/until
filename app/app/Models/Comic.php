@@ -11,7 +11,15 @@ class Comic extends Model
 {
     use HasFactory;
     use HasSortOrder;
-    protected static ?string $sortScope = 'category_id';
+
+    public function sortScope(): string
+    {
+        if ($this->content->has_categories) {
+            return 'category_id';
+        } else {
+            return 'content_id';
+        }
+    }
 
     protected static ?string $url = '';
 

@@ -10,7 +10,11 @@ class Content extends Model
 {
     use HasFactory;
     use HasSortOrder;
-    protected static ?string $sortScope = 'theme_id';
+
+    public function sortScope(): string
+    {
+        return 'theme_id';
+    }
 
     protected $fillable = [
         'name',
