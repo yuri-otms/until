@@ -10,7 +10,12 @@ class Theme extends Model
 {
     use HasFactory;
     use HasSortOrder;
-    protected static ?string $sortScope = '';
+    // protected static ?string $sortScope = '';
+
+    public function sortScope(): string
+    {
+        return '';
+    }
 
     protected $fillable = [
         'name',

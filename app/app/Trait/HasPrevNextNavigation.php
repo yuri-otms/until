@@ -8,14 +8,22 @@ trait HasPrevNextNavigation
 {
     public function previous(): ?Model
     {
-        return
-            $this->previousInSameCategory() ?? $this->previousAcrossCategories();
+        if ($this->content->has_categories) {
+            return
+                $this->previousInSameCategory() ?? $this->previousAcrossCategories();
+        } else {
+            return $this->previousInSameContent();
+        }
     }
 
     public function next(): ?Model
     {
-        return
-            $this->nextInSameCategory() ?? $this->nextAcrossCategories();
+        if ($this->content->has_categories) {
+            return
+                $this->nextInSameCategory() ?? $this->nextAcrossCategories();
+        } else {
+            return $this->nextInSameContent();
+        }
     }
 
     public function previousWithUrl()
@@ -94,5 +102,23 @@ trait HasPrevNextNavigation
             ->orderBy('sort_order')
             ->first();
     }
+    protected function previousInSameContent(): ?Model
+    {
+        return static::where('content_id', $this->content_id)
+            ->where('status', 'published')
+            ->where('sort_order', '<', $this->sort_order)
+            ->orderBy('sort_order', 'desc')
+            ->first();
+    }
+
+    protected function nextInSameContent(): ?Model
+    {
+        return static::where('content_id', $this->content_id)
+            ->where('status', 'published')
+            ->where('sort_order', '>', $this->sort_order)
+            ->orderBy('sort_order')
+            ->first();
+    }
+
     abstract protected function routeName(): string;
 }

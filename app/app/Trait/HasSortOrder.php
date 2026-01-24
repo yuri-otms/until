@@ -16,11 +16,7 @@ trait HasSortOrder
             $model->sort_order = 1;
             // 既存のデータのsort_order変更
             $query = DB::table($model->getTable());
-
-            if (static::$sortScope && $model->{static::$sortScope}) {
-                $query->where(static::$sortScope, $model->{static::$sortScope});
-            }
-
+            $model->applySortScope($query, $model);
             $query->increment('sort_order');
         });
 
@@ -28,21 +24,18 @@ trait HasSortOrder
             $deletedOrder = $model->sort_order;
 
             $query = DB::table($model->getTable());
-
-            if (static::$sortScope && $model->{static::$sortScope}) {
-                $query->where(static::$sortScope, $model->{static::$sortScope});
-            }
+            $model->applySortScope($query, $model);
 
             $query->where('sort_order', '>', $deletedOrder)
                 ->decrement('sort_order');
         });
 
         static::updating(function (Model $model) {
-            if (!static::$sortScope) {
+            if (!$model->sortScope()) {
                 return;
             }
 
-            $scopeField = static::$sortScope;
+            $scopeField = $model->sortScope();
             $oldScopeValue = $model->getOriginal($scopeField);
             $newScopeValue = $model->{$scopeField};
 
@@ -78,6 +71,7 @@ trait HasSortOrder
         }
         $query = DB::table($this->getTable())
                 ->where('id', '!=', $this->id);
+        $this->applySortScope($query, $this);
         if ($from < $to) {
             // 順番を下げる
             $query
@@ -97,5 +91,12 @@ trait HasSortOrder
 
     }
 
-
+    protected function applySortScope($query, $model): void
+    {
+        $scope = $model->sortScope();
+        $value = $model->{$model->sortScope()};
+        if ($scope && $value) {
+            $query->where($scope, $value);
+        }
+    }
 }

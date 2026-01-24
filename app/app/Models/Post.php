@@ -15,6 +15,15 @@ class Post extends Model
 
     use HasPrevNextNavigation;
 
+    public function sortScope(): string
+    {
+        if ($this->category_id) {
+            return 'category_id';
+        } else {
+            return 'content_id';
+        }
+    }
+
     protected function routeName(): string
     {
         return 'posts.show';

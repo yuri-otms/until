@@ -4,6 +4,7 @@ namespace Tests\Unit\Traits;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Content;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -68,4 +69,32 @@ class HasSortOrderTest extends TestCase
         );
 
     }
+
+    public function test_reorder_when_the_content_has_categories()
+    {
+        $content1 = Content::factory()->create(['has_categories' => true]);
+        $content2 = Content::factory()->create(['has_categories' => true]);
+        $category1_1 = Category::factory()->create(['content_id' => $content1->id]);
+        $category1_2 = Category::factory()->create(['content_id' => $content1->id]);
+        $category2_1 = Category::factory()->create(['content_id' => $content2->id]);
+
+        Post::factory()->count(3)->create(['content_id' => $content1->id, 'category_id' => $category1_1->id]);
+        Post::factory()->count(3)->create(['content_id' => $content1->id, 'category_id' => $category1_2->id]);
+        Post::factory()->count(3)->create(['content_id' => $content2->id, 'category_id' => $category2_1->id]);
+
+        $post3 = Post::where('category_id', $category1_2->id)
+                    ->where('sort_order', 3)
+                    ->first();
+
+        $post3->reorder(3, 1);
+        $this->assertEquals([
+                3, 2, 1, 1, 3, 2, 3, 2, 1
+            ],
+            Post::orderBy('id')->pluck('sort_order')
+            ->toArray()
+        );
+    }
+
+    // public function test_sort_order_is_set_when_content_has_no_categories()
+
 }
