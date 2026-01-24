@@ -101,8 +101,10 @@ class HasPrevNextNavigationTest extends TestCase
         ]);
         $post1_1 = Post::find(1);
         $post2_1 = Post::find(2);
+        $post2_2 = Post::find(3);
 
-        $this->assertFalse($post1_1->next()->is($post2_1));
+        $this->assertNull($post1_1->next());
+        $this->assertTrue($post2_2->next()->is($post2_1));
     }
 
         public function test_previous_when_category_is_not_set()
@@ -114,21 +116,19 @@ class HasPrevNextNavigationTest extends TestCase
             'has_categories' => false
         ]);
 
-        Post::factory()->create([
+        Post::factory()->count(3)->create([
             'content_id' => $content1->id,
-            'category_id' => 0
+            'category_id' => null
         ]);
-        Post::factory()->create([
+        Post::factory()->count(3)->create([
             'content_id' => $content2->id,
-            'category_id' => 0
+            'category_id' => null
         ]);
-        Post::factory()->create([
-            'content_id' => $content2->id,
-            'category_id' => 0
-        ]);
-        $post1_1 = Post::find(1);
-        $post2_2 = Post::find(3);
+        $post2_1 = Post::find(4);
+        $post2_2 = Post::find(5);
+        $post2_3 = Post::find(6);
 
-        $this->assertFalse($post2_2->previous()->is($post1_1));
+        $this->assertNull($post2_3->previous());
+        $this->assertTrue($post2_1->previous()->is($post2_2));
     }
 }
