@@ -10,9 +10,12 @@ use League\HTMLToMarkdown\HtmlConverter;
 use App\Models\Post;
 use App\Models\Category;
 use Carbon\Carbon;
+use App\Trait\PreventsDuplicateImport;
 
 class ImportLegacyHtml extends Command
 {
+    use PreventsDuplicateImport;
+
     protected $signature = 'import:legacy-html';
     protected $description = 'Import old static HTML to posts';
 
@@ -25,6 +28,13 @@ class ImportLegacyHtml extends Command
 
     public function handle()
     {
+        $this->abortIfAlreadyImported(
+            fn () => Post::where('title', '家の中で少し動く')
+                ->where('content_id', 7)
+                ->exists(),
+            'すでに Legacy Html のインポートは実行されています'
+        );
+
 
         try {
             foreach ($this->targets as $contentId => $dirs) {
