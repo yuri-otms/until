@@ -1,0 +1,46 @@
+name: Test (PR)
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with: 
+          php-version: "8.3"
+          tools: composer:v2
+          coverage: none
+
+      - name: Copy .env in Japanese locale
+        run: cp .env.example .env
+        working-directory: ./app/
+
+      - name: install PHP deployments
+        run: composer install --no-interaction --prefer-dist --no-progress
+        working-directory: ./app/
+
+      - name: Npm Build
+        env:
+          ADMIN_URL: ${{ secrets.ADMIN_URL }} 
+        run: |
+          npm install
+          npm run build
+        working-directory: ./app/
+
+      - name: Generate laravel app key
+        run: php artisan key:generate
+        working-directory: ./app/
+
+      - name: Run tests
+        env:
+          ADMIN_URL: ${{ secrets.ADMIN_URL }} 
+        run: php artisan test
+        working-directory: ./app/
