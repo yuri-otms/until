@@ -4,12 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use League\HTMLToMarkdown\HtmlConverter;
 use App\Models\Comic;
 use App\Models\Category;
-use League\HTMLToMarkdown\HtmlConverter;
+use App\Trait\PreventsDuplicateImport;
 
 class ImportLegacyComics extends Command
 {
+    use PreventsDuplicateImport;
     /**
      * The name and signature of the console command.
      *
@@ -30,6 +32,14 @@ class ImportLegacyComics extends Command
      */
     public function handle()
     {
+        $this->abortIfAlreadyImported(
+            fn () => Comic::where('title', 'これまでの経緯')
+                ->where('content_id', 1)
+                ->exists(),
+            'すでに Legacy Comic のインポートは実行されています'
+        );
+
+
         $query = DB::table('comics_yuru')->orderBy('id');
         $converter = new HtmlConverter([
             'strip_tags' => true, // 不要タグ除去

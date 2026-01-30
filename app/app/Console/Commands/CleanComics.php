@@ -27,6 +27,10 @@ class CleanComics extends Command
      */
     public function handle()
     {
+
+        $this->warn("Clean Comicは既に実行しました");
+        return Command::FAILURE;
+
         $files = Storage::disk('public')->files('images/comics');
 
         foreach ($files as $file) {
