@@ -7,9 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use Database\Seeders\HikiSeeder;
 
 class CleanComicsTest extends TestCase
 {
+    use RefreshDatabase;
+    protected string $seeder = HikiSeeder::class;
     /**
      * A basic feature test example.
      */
