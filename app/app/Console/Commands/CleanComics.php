@@ -5,9 +5,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Comic;
+use App\Trait\PreventsDuplicateImport;
 
 class CleanComics extends Command
 {
+    use PreventsDuplicateImport;
     /**
      * The name and signature of the console command.
      *
@@ -28,8 +31,12 @@ class CleanComics extends Command
     public function handle()
     {
 
-        $this->warn("Clean Comicは既に実行しました");
-        return Command::FAILURE;
+        $this->abortIfAlreadyImported(
+            fn () => Comic::where('title', 'これまでの経緯')
+                ->where('content_id', 1)
+                ->exists(),
+            'Clean Comicは既に実行しました'
+        );
 
         $files = Storage::disk('public')->files('images/comics');
 
