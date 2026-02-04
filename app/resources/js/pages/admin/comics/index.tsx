@@ -1,34 +1,22 @@
 import { useState } from "react";
-import { type BreadcrumbItem, type Post, type Category, type Content } from "@/types";
+import { type BreadcrumbItem, type Post, type Category, type Content, type Paginated } from "@/types";
 import { dashboard } from '@/routes/admin';
 import AppLayout from '@/layouts/app-layout';
-import AdminLayout from '@/layouts/admin/layout';import {
-  Table,
-  TableBody,
-  TableCell,
-  TableSortableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableSortableRow,
-} from "@/components/ui/table"
+import AdminLayout from '@/layouts/admin/layout';
 import { ThemeSelect } from "@/components/theme-select";
 import {
-    DndContext,
     MouseSensor,
     TouchSensor,
     useSensor,
     useSensors,
     type DragOverEvent,
 } from "@dnd-kit/core";
-import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import { LinkButton } from "@/components/ui/link-button";
+import { arrayMove } from "@dnd-kit/sortable";
 import { Head, router } from '@inertiajs/react';
 import { index, edit, create, destroy, reorder } from "@/routes/admin/comics";
 import axios from 'axios';
-import { Search } from 'lucide-react';
-
-import DeleteContent from '@/components/delete-content';
+import { PostsTable } from '@/components/posts-table';
+import { PostsPagination } from '@/components/posts-pagination';
 
 
 export default function Index({
@@ -39,7 +27,7 @@ export default function Index({
 } : {
     category: Category;
     categories: Category[];
-    posts: Post[];
+    posts: Paginated<Post>;
     content: Content;
 }) {
 
@@ -61,7 +49,9 @@ export default function Index({
 
     const [ activeCategory, setSelectedCategoryId ] = useState(category.id.toString());
 
-    const [ displayedPosts, setPosts ] = useState<Post[]>(posts);
+    // ページが変わったときに自動的にposts.dataから初期化
+    const [ displayedPosts, setPosts ] = useState<Post[]>(posts.data);
+
 
     const handleDragEnd = (event:DragOverEvent) => {
         const { active, over } = event;
@@ -112,60 +102,18 @@ export default function Index({
                 }}).url}>
                 <div>
                     <ThemeSelect themes={categories} activeTheme={activeCategory} onThemeChange={handleCategoryChange} />
-                    <div className="overflow-hidden rounded-md border">
-                    <DndContext
-                        onDragEnd={handleDragEnd}
+
+                    <PostsTable
+                        displayedPosts={displayedPosts}
+                        content={content}
+                        contentType="comic"
                         sensors={sensors}
-                    >
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                            <TableHead>順番</TableHead>
-                            <TableHead>並び順</TableHead>
-                            <TableHead>掲載</TableHead>
-                            <TableHead>ID</TableHead>
-                            <TableHead>タイトル</TableHead>
-                            <TableHead>確認</TableHead>
-                            <TableHead>動作</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            <SortableContext
-                            items={displayedPosts}
-                            >
-                            {displayedPosts.map((row) => (
-                                <TableSortableRow
-                                key={row.id}
-                                model_id={row.id}
-                                >
-                                    <TableSortableCell model_id={row.id} />
-                                    <TableCell>{row.sort_order}</TableCell>
-                                    <TableCell>{row.status}</TableCell>
-                                    <TableCell>{row.id}</TableCell>
-                                    <TableCell>{row.title}</TableCell>
-                                    <TableCell>
-                                        <a href={"/contents/" + content.slug + '/comic/' + row.id} target="_blank">
-                                            <Search />
-                                        </a>
-                                    </TableCell>
-                                    <TableCell
-                                    dada-dnd-cancel="true"
-                                    >
-                                        <LinkButton target="_blank" href={edit(row.id).url} className="bg-black">編集
-                                        </LinkButton>
-                                        <DeleteContent
-                                        model="記事"
-                                        model_id={row.id}onDeleteClick={deleteCategory}
-                                        />
-                                    </TableCell>
-                                </TableSortableRow>
-                            ))
-                            }
-                        </SortableContext>
-                        </TableBody>
-                        </Table>
-                        </DndContext>
-                    </div>
+                        handleDragEnd={handleDragEnd}
+                        editUrl={(id) => edit(id).url}
+                        onDelete={deleteCategory}
+                    />
+
+                    <PostsPagination paginated={posts} />
                 </div>
 
             </AdminLayout>

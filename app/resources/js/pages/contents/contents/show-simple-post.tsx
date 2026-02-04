@@ -40,7 +40,7 @@ export default function Show({
                         const isNavButton = link.label.includes('Previous') || link.label.includes('Next');
                         const isPrevious = link.label.includes('Previous');
                         const isNext = link.label.includes('Next');
-                        
+
                         if (link.url === null) {
                             return (
                                 <span
@@ -53,7 +53,7 @@ export default function Show({
                                 </span>
                             );
                         }
-                        
+
                         return (
                             <Link
                                 key={index}

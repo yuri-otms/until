@@ -25,7 +25,8 @@ class ComicController extends Controller
         if ($category) {
             $comics = Comic::where('category_id', $category->id)
                         ->orderBy('sort_order')
-                        ->get();
+                        ->paginate(10)
+                        ->appends($request->query());
         } else {
             return dd('カテゴリーが登録されていません');
         }
