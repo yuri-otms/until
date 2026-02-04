@@ -44,7 +44,7 @@ class ContentController extends Controller
             $posts= Post::where('content_id', $content->id)
                             ->where('status', 'published')
                             ->orderBy('sort_order')
-                            ->get();
+                            ->paginate(7);
             return Inertia::render('contents/contents/show-simple-' . $content->type, [
                 'content' => $content,
                 'posts' => $posts,
