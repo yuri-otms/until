@@ -66,6 +66,9 @@ export default function Show({
                         ul: (props) => (
                             <ul className="list-disc pl-6 mb-4" {...props} />
                         ),
+                        ol: (props) => (
+                            <ol className="list-decimal pl-6 mb-4" {...props} />
+                        ),
                         a: (props) => (
                             <a className="text-blue-600 underline break-all" {...props} />
                         ),
