@@ -24,11 +24,13 @@ class PostController extends Controller
         if ($category) {
             $posts = Post::where('category_id', $category->id)
                         ->orderBy('sort_order')
-                        ->get();
+                        ->paginate(10)
+                        ->appends($request->query());
         } elseif (!$content->has_categories) {
             $posts = Post::where('content_id', $content->id)
                         ->orderBy('sort_order')
-                        ->get();
+                        ->paginate(10)
+                        ->appends($request->query());
         } else {
             return dd('カテゴリーが登録されていません');
         }
