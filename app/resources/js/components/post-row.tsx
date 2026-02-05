@@ -14,7 +14,7 @@ export function PostRow({ post, content }: { post: Post; content: Content}) {
                 <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 text-sm">
-                    <time className="font-medium">{formatJapaneseDate(post.created_at)}</time>
+                    <time className="font-medium">{formatJapaneseDate(post.published_at)}</time>
                     </div>
 
                     {post.title}

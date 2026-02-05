@@ -45,8 +45,8 @@ export default function Show({
     return (
         <ContentLayout breadcrumbs={breadcrumbs} title={post.title}>
             <div className="text-sm py-2">
-                <div>{formatJapaneseDate(post.created_at)} 公開</div>
-                { post.created_at != post.updated_at ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
+                <div>{formatJapaneseDate(post.published_at)} 公開</div>
+                { new Date(post.published_at).toDateString() !== new Date(post.updated_at).toDateString() ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
             </div>
                 {images.map((image)=>
                     <img key={image} src={'/storage/' + image} alt=""
