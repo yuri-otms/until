@@ -28,11 +28,13 @@ class ContentController extends Controller
         if ($content->has_categories) {
             $categories = Category::with([$table => function ($q) {
                 $q->where('status', 'published')
+                    ->where('published_at', '<=', now())
                     ->orderBy('sort_order');
             }])
                             ->where('content_id', $content->id)
                             ->whereHas($table, function ($q) {
-                                $q->where('status', 'published');
+                                $q->where('status', 'published')
+                                    ->where('published_at', '<=', now());
                             })
                             ->orderBy('sort_order')
                             ->get();
@@ -43,6 +45,7 @@ class ContentController extends Controller
         } else {
             $posts= Post::where('content_id', $content->id)
                             ->where('status', 'published')
+                            ->where('published_at', '<=', now())
                             ->orderBy('sort_order')
                             ->paginate(7);
             return Inertia::render('contents/contents/show-simple-' . $content->type, [

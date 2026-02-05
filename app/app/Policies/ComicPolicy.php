@@ -22,6 +22,10 @@ class ComicPolicy
     public function view(?User $user, Comic $comic): bool
     {
         if ($comic->status == 'published') {
+            // 公開日が未来の場合はログインユーザーのみ閲覧可能
+            if ($comic->published_at && $comic->published_at > now()) {
+                return $user !== null;
+            }
             return true;
         }
 

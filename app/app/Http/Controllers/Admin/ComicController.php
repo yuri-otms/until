@@ -59,6 +59,12 @@ class ComicController extends Controller
         $categoryId = $comic['category_id'];
         $content = Category::getContentbyCategory($categoryId);
         $comic['content_id'] = $content->id;
+        
+        // published_atが空の場合は現在時刻を設定
+        if (empty($comic['published_at'])) {
+            $comic['published_at'] = now();
+        }
+        
         Comic::create($comic);
         return to_route('admin.comics.index',[
             'content'=> $content->slug,
@@ -80,7 +86,14 @@ class ComicController extends Controller
 
     public function update(ComicUpdateRequest $request, Comic $comic): RedirectResponse
     {
-        $comic->update($request->validated());
+        $data = $request->validated();
+        
+        // published_atが空の場合は現在時刻を設定
+        if (empty($data['published_at']) || $data['published_at'] === '') {
+            $data['published_at'] = now();
+        }
+        
+        $comic->update($data);
         return to_route('admin.comics.index', [
             'content'=> $comic->content->slug,
             'category_id' => $comic->category->id,

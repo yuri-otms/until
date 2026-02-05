@@ -110,6 +110,19 @@ export default function Edit({
                                         className="mt-2"
                                     />
 
+                                    <Label htmlFor="published_at">公開日</Label>
+                                    <Input
+                                        id="published_at"
+                                        type="datetime-local"
+                                        name="published_at"
+                                        defaultValue={post.published_at ? new Date(post.published_at).toISOString().slice(0, 16) : ''}
+                                        placeholder=""
+                                    />
+                                    <InputError
+                                        message={errors.published_at}
+                                        className="mt-2"
+                                    />
+
                                     <Label htmlFor="status">掲載状態</Label>
                                     <RadioGroup defaultValue={post.status} name="status">
                                         {postStatusOptions.map((row) => (

@@ -101,6 +101,18 @@ export default function Create({
                                         className="mt-2"
                                     />
 
+                                    <Label htmlFor="published_at">公開日</Label>
+                                    <Input
+                                        id="published_at"
+                                        type="datetime-local"
+                                        name="published_at"
+                                        placeholder=""
+                                    />
+                                    <InputError
+                                        message={errors.published_at}
+                                        className="mt-2"
+                                    />
+
                                     <Label htmlFor="status">掲載状態</Label>
                                     <RadioGroup defaultValue={postStatusOptions[0].key} name="status">
                                         {postStatusOptions.map((row) => (

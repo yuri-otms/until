@@ -37,12 +37,14 @@ class Comic extends Model
         'category_id',
         'body',
         'status',
+        'published_at',
         'created_at',
         'updated_at',
         'id',
     ];
 
     protected $casts = [
+        'published_at' => 'datetime:Y-m-d H:i',
         'created_at' => 'datetime:Y-m-d H:i',
         'updated_at' => 'datetime:Y-m-d H:i',
     ];

@@ -94,6 +94,7 @@ export interface Post {
     content_id: number;
     body: string;
     status: string;
+    published_at: string | null;
     created_at: string;
     updated_at: string;
     url: string;
@@ -106,6 +107,7 @@ export interface Comic {
     content_id: number;
     body: string;
     status: string;
+    published_at: string | null;
     created_at: string;
     updated_at: string;
     url: string;
