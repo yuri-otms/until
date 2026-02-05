@@ -31,6 +31,10 @@ class PostUpdateRequest extends FormRequest
             ],
             'status' => [
                 'required',
+            ],
+            'published_at' => [
+                'nullable',
+                'date'
             ]
         ];
     }

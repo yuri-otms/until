@@ -31,6 +31,10 @@ class ComicStoreRequest extends FormRequest
             ],
             'status' => [
                 'required',
+            ],
+            'published_at' => [
+                'nullable',
+                'date'
             ]
         ];
     }

@@ -36,11 +36,13 @@ class Post extends Model
         'category_id',
         'body',
         'status',
+        'published_at',
         'created_at',
         'updated_at',
     ];
 
     protected $casts = [
+        'published_at' => 'datetime:Y-m-d H:i',
         'created_at' => 'datetime:Y-m-d H:i',
         'updated_at' => 'datetime:Y-m-d H:i',
     ];
