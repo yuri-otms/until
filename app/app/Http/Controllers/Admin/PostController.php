@@ -64,6 +64,12 @@ class PostController extends Controller
         $contentId = $post['content_id'];
         $content = Content::find($contentId);
         $post['content_id'] = $content->id;
+        
+        // published_atが空の場合は現在時刻を設定
+        if (empty($post['published_at'])) {
+            $post['published_at'] = now();
+        }
+        
         Post::create($post);
         return to_route('admin.posts.index',[
             'content'=> $content->slug,
@@ -85,7 +91,14 @@ class PostController extends Controller
 
     public function update(PostUpdateRequest $request, Post $post): RedirectResponse
     {
-        $post->update($request->validated());
+        $data = $request->validated();
+        
+        // published_atが空の場合は現在時刻を設定
+        if (empty($data['published_at']) || $data['published_at'] === '') {
+            $data['published_at'] = now();
+        }
+        
+        $post->update($data);
         return to_route('admin.posts.index', [
             'content'=> $post->content->slug,
             'category_id' => $post->category_id,
