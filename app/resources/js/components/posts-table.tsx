@@ -20,7 +20,7 @@ import { Search } from 'lucide-react';
 import DeleteContent from '@/components/delete-content';
 import { type Content } from "@/types";
 
-interface PostsTableProps<T extends { id: number; sort_order: number; status: string; title: string }> {
+interface PostsTableProps<T extends { id: number; sort_order: number; status: string; title: string; published_at: string | null }> {
     displayedPosts: T[];
     content: Content;
     contentType: 'post' | 'comic';
@@ -30,7 +30,42 @@ interface PostsTableProps<T extends { id: number; sort_order: number; status: st
     onDelete: (id: number) => void;
 }
 
-export function PostsTable<T extends { id: number; sort_order: number; status: string; title: string }>({
+const getPublicationStatus = (status: string, published_at: string | null): string => {
+    if (status === 'draft') {
+        return '下書き';
+    }
+    
+    if (status === 'published' && published_at) {
+        const now = new Date();
+        const publishedDate = new Date(published_at);
+        
+        if (publishedDate > now) {
+            return '公開前';
+        }
+        return '公開中';
+    }
+    
+    return status;
+};
+
+const getStatusClassName = (status: string, published_at: string | null): string => {
+    if (status === 'draft') {
+        return 'bg-gray-200 dark:bg-gray-700';
+    }
+    
+    if (status === 'published' && published_at) {
+        const now = new Date();
+        const publishedDate = new Date(published_at);
+        
+        if (publishedDate > now) {
+            return 'bg-gray-200 dark:bg-gray-700';
+        }
+    }
+    
+    return '';
+};
+
+export function PostsTable<T extends { id: number; sort_order: number; status: string; title: string; published_at: string | null }>({
     displayedPosts,
     content,
     contentType,
@@ -63,10 +98,13 @@ export function PostsTable<T extends { id: number; sort_order: number; status: s
                                 <TableSortableRow
                                     key={row.id}
                                     model_id={row.id}
+                                    className={getStatusClassName(row.status, row.published_at)}
                                 >
                                     <TableSortableCell model_id={row.id} />
                                     <TableCell>{row.sort_order}</TableCell>
-                                    <TableCell>{row.status}</TableCell>
+                                    <TableCell>
+                                        {getPublicationStatus(row.status, row.published_at)}
+                                    </TableCell>
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.title}</TableCell>
                                     <TableCell>

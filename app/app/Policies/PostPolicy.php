@@ -22,6 +22,10 @@ class PostPolicy
     public function view(?User $user, Post $post): bool
     {
         if ($post->status == 'published') {
+            // 公開日が未来の場合はログインユーザーのみ閲覧可能
+            if ($post->published_at && $post->published_at > now()) {
+                return $user !== null;
+            }
             return true;
         }
 

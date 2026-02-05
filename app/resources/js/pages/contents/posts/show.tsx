@@ -48,7 +48,7 @@ export default function Show({
         <ContentLayout breadcrumbs={breadcrumbs} title={post.title}>
             <div className="text-sm py-2">
                 <div>{formatJapaneseDate(post.published_at)} 公開</div>
-                { new Date(post.published_at).toDateString() !== new Date(post.updated_at).toDateString() ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
+                { new Date(post.published_at) < new Date(post.updated_at) ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
             </div>
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
