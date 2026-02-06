@@ -35,6 +35,13 @@ class ComicController extends Controller
         });
         $images = array_values($images);
 
+        // メタ情報を準備
+        $appName = config('app.name');
+        $metaTitle = $comic->title . ' - ' . $appName;
+        // Markdownを除去してプレーンテキストの最初の60文字を取得
+        $plainBody = strip_tags(preg_replace('/[#*`\[\]()]/', '', $comic->body));
+        $metaDescription = mb_substr($plainBody, 0, 60);
+
         return Inertia::render('contents/comics/show', [
             'content' => $content,
             'category' => $comic->category,
@@ -42,6 +49,9 @@ class ComicController extends Controller
             'images' => $images,
             'previous' => $comic->previousWithUrl(),
             'next' => $comic->nextWithUrl(),
+            'metaTitle' => $metaTitle,
+            'metaDescription' => $metaDescription,
+            'metaType' => 'article',
         ]);
     }
 }

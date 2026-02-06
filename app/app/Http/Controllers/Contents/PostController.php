@@ -22,12 +22,22 @@ class PostController extends Controller
             abort(404);
         }
 
+        // メタ情報を準備
+        $appName = config('app.name');
+        $metaTitle = $post->title . ' - ' . $appName;
+        // Markdownを除去してプレーンテキストの最初の60文字を取得
+        $plainBody = strip_tags(preg_replace('/[#*`\[\]()]/', '', $post->body));
+        $metaDescription = mb_substr($plainBody, 0, 60);
+
         return Inertia::render('contents/posts/show', [
             'content' => $content,
             'category' => $post->category,
             'post' => $post,
             'previous' => $post->previousWithUrl(),
-            'next' => $post->nextWithUrl()
+            'next' => $post->nextWithUrl(),
+            'metaTitle' => $metaTitle,
+            'metaDescription' => $metaDescription,
+            'metaType' => 'article',
         ]);
     }
 }

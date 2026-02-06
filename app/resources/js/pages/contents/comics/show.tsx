@@ -6,6 +6,7 @@ import rehypeHighlight from "rehype-highlight";
 import ComicNavCard from '@/components/comic-nav-card';
 import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
+import { Head } from '@inertiajs/react';
 
 export default function Show({
     post,
@@ -14,6 +15,7 @@ export default function Show({
     images,
     previous,
     next,
+    metaTitle,
 }: {
     post: Post;
     content: Content;
@@ -21,6 +23,7 @@ export default function Show({
     images: Array<string>;
     previous: Comic;
     next: Comic;
+    metaTitle: string;
 }) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -43,7 +46,11 @@ export default function Show({
 
 
     return (
-        <ContentLayout breadcrumbs={breadcrumbs} title={post.title}>
+        <>
+            <Head>
+                <title>{metaTitle}</title>
+            </Head>
+            <ContentLayout breadcrumbs={breadcrumbs} title={post.title}>
             <div className="text-sm py-2">
                 <div>{formatJapaneseDate(post.published_at)} 公開</div>
                 { new Date(post.published_at) < new Date(post.updated_at) ? <div>{formatJapaneseDate(post.updated_at)} 最終改訂</div> : ''}
@@ -89,6 +96,7 @@ export default function Show({
                     {post.body}
                 </ReactMarkdown>
                 <ComicNavCard previous={previous} next={next} />
-        </ContentLayout>
+            </ContentLayout>
+        </>
     );
 }
