@@ -17,7 +17,6 @@ export default function Index({
     contentGroups : ContentGroup[];
     recentPosts?: Post[];
    }) {
-
     return (
         <ContentLayout>
             <div className="mt-6 mb-5">

@@ -94,10 +94,11 @@ export interface Post {
     content_id: number;
     body: string;
     status: string;
-    published_at: string | null;
+    published_at: string;
     created_at: string;
     updated_at: string;
     url: string;
+    content_name: string;
 }
 export interface Comic {
     id: number;
