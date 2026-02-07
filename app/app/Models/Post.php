@@ -2,18 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Trait\HasSortOrder;
-use App\Trait\HasPrevNextNavigation;
-
-class Post extends Model
+class Post extends BaseArticle
 {
-    use HasFactory;
-    use HasSortOrder;
     protected static ?string $sortScope = 'category_id';
-
-    use HasPrevNextNavigation;
 
     public function sortScope(): string
     {
@@ -29,33 +20,8 @@ class Post extends Model
         return 'posts.show';
     }
 
-    protected $fillable = [
-        'title',
-        'sort_order',
-        'content_id',
-        'category_id',
-        'body',
-        'status',
-        'published_at',
-        'created_at',
-        'updated_at',
-    ];
-
-    protected $casts = [
-        'published_at' => 'datetime:Y-m-d H:i',
-        'created_at' => 'datetime:Y-m-d H:i',
-        'updated_at' => 'datetime:Y-m-d H:i',
-    ];
-
-    public function content()
+    public function viewPath(): string
     {
-        return $this->belongsTo(Content::class);
+        return 'contents/posts/show';
     }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-
 }

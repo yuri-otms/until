@@ -2,33 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Trait\HasSortOrder;
-use App\Trait\HasPrevNextNavigation;
-
-class Comic extends Model
+class Comic extends BaseArticle
 {
-    use HasFactory;
-    use HasSortOrder;
-
-    public function sortScope(): string
-    {
-        if ($this->content->has_categories) {
-            return 'category_id';
-        } else {
-            return 'content_id';
-        }
-    }
-
     protected static ?string $url = '';
-
-    use HasPrevNextNavigation;
-
-    protected function routeName(): string
-    {
-        return 'comics.show';
-    }
 
     protected $fillable = [
         'title',
@@ -43,20 +19,27 @@ class Comic extends Model
         'id',
     ];
 
-    protected $casts = [
-        'published_at' => 'datetime:Y-m-d H:i',
-        'created_at' => 'datetime:Y-m-d H:i',
-        'updated_at' => 'datetime:Y-m-d H:i',
-    ];
-
-    public function content()
+    public function sortScope(): string
     {
-        return $this->belongsTo(Content::class);
+        if ($this->content->has_categories) {
+            return 'category_id';
+        } else {
+            return 'content_id';
+        }
     }
 
-    public function category()
+    protected function routeName(): string
     {
-        return $this->belongsTo(Category::class);
+        return 'comics.show';
     }
 
+    public function hasImages(): bool
+    {
+        return true;
+    }
+
+    public function viewPath(): string
+    {
+        return 'contents/comics/show';
+    }
 }
