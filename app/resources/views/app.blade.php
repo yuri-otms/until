@@ -3,8 +3,8 @@
   $defaultTitle = $appName;
   $defaultDesc = '80歳まで40年間続けるサイトです。未経験からエンジニア正社員になるまで、不登校・ひきこもりから立ち直るまで。';
   $defaultUrl = url()->current();
-  $defaultImage = asset('images/common/ogimage.png');
-  
+  $defaultImage = asset('storage/images/common/ogimage.png');
+
   // ページ固有のメタ情報を取得（なければデフォルト値）
   $metaTitle = $page['props']['metaTitle'] ?? $defaultTitle;
   $metaDescription = $page['props']['metaDescription'] ?? $defaultDesc;
