@@ -93,6 +93,9 @@ export default function ArticleShow({
                         h2: (props) => (
                             <h3 className="text-xl font-semibold mt-6 mb-3" {...props} />
                         ),
+                        h3: (props) => (
+                            <h4 className="text-lg font-semibold mt-5 mb-2" {...props} />
+                        ),
                         p: (props) => (
                             <p className="text-base leading-7 mb-4" {...props} />
                         ),
@@ -109,7 +112,7 @@ export default function ArticleShow({
                             <blockquote className="border-l-5 pl-5" {...props} />
                         ),
                         pre: (props) => (
-                            <pre className="bg-black text-white px-4 py-3" {...props} />
+                            <pre className="bg-black text-white px-4 py-3 overflow-x-auto max-w-full rounded" {...props} />
                         ),
                         img: (props) => (
                             <img className={imageClassName} {...props} />
