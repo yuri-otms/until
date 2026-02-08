@@ -9,7 +9,7 @@ import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
 import { Head } from '@inertiajs/react';
 import type { ReactNode } from 'react';
-import { Twitter, Facebook, MessageCircle, Link2, Check } from 'lucide-react';
+import { Link2, Check } from 'lucide-react';
 import { useState } from 'react';
 import {
     Tooltip,
@@ -200,7 +200,11 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="Xで共有"
                                 >
-                                    <Twitter className="w-6 h-6 text-gray-700" />
+                                    <img 
+                                        src="/storage/images/common/x_logo.png" 
+                                        alt="X" 
+                                        className="w-6 h-6"
+                                    />
                                 </button>
                             </TooltipTrigger>
                             <TooltipContent className="border border-white">
@@ -215,7 +219,11 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="LINEで共有"
                                 >
-                                    <MessageCircle className="w-6 h-6 text-gray-700" />
+                                    <img 
+                                        src="/storage/images/common/line_logo.png" 
+                                        alt="LINE" 
+                                        className="w-6 h-6"
+                                    />
                                 </button>
                             </TooltipTrigger>
                             <TooltipContent className="border border-white">
@@ -230,7 +238,11 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="Facebookで共有"
                                 >
-                                    <Facebook className="w-6 h-6 text-gray-700" />
+                                    <img 
+                                        src="/storage/images/common/facebook_logo.png" 
+                                        alt="Facebook" 
+                                        className="w-6 h-6"
+                                    />
                                 </button>
                             </TooltipTrigger>
                             <TooltipContent className="border border-white">
