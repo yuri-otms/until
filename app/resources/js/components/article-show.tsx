@@ -51,7 +51,7 @@ export default function ArticleShow({
     ];
 
     // 画像スタイルの設定
-    const imageClassName = imageStyle === 'comic' 
+    const imageClassName = imageStyle === 'comic'
         ? "block mx-auto sm:max-w-xl"
         : "sm:max-w-md border border-slate-200 p-2 m-2 rounded";
 
@@ -72,9 +72,9 @@ export default function ArticleShow({
 
                 {/* 画像がある場合は表示（主にコミック用） */}
                 {images && images.map((image) => (
-                    <img 
-                        key={image} 
-                        src={'/storage/' + image} 
+                    <img
+                        key={image}
+                        src={'/storage/' + image}
                         alt=""
                         className={imageClassName}
                         loading="lazy"

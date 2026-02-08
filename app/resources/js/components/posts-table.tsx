@@ -34,17 +34,17 @@ const getPublicationStatus = (status: string, published_at: string | null): stri
     if (status === 'draft') {
         return '下書き';
     }
-    
+
     if (status === 'published' && published_at) {
         const now = new Date();
         const publishedDate = new Date(published_at);
-        
+
         if (publishedDate > now) {
             return '公開前';
         }
         return '公開中';
     }
-    
+
     return status;
 };
 
@@ -52,16 +52,16 @@ const getStatusClassName = (status: string, published_at: string | null): string
     if (status === 'draft') {
         return 'bg-gray-200 dark:bg-gray-700';
     }
-    
+
     if (status === 'published' && published_at) {
         const now = new Date();
         const publishedDate = new Date(published_at);
-        
+
         if (publishedDate > now) {
             return 'bg-gray-200 dark:bg-gray-700';
         }
     }
-    
+
     return '';
 };
 

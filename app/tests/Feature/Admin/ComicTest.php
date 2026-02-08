@@ -21,7 +21,7 @@ class ComicTest extends TestCase
         $content = Content::factory()->create(['has_categories' => true]);
         $category = Category::factory()->create(['content_id' => $content->id]);
         $publishedAt = Carbon::parse('2026-03-01 10:30:00');
-        
+
         $payload = [
             'title' => '公開日指定コミック',
             'body' => '本文',
@@ -44,11 +44,11 @@ class ComicTest extends TestCase
     public function test_admin_comic_can_be_stored_without_published_at(): void
     {
         Carbon::setTestNow('2026-02-05 15:30:00');
-        
+
         $user = User::factory()->create();
         $content = Content::factory()->create(['has_categories' => true]);
         $category = Category::factory()->create(['content_id' => $content->id]);
-        
+
         $payload = [
             'title' => '公開日未指定コミック',
             'body' => '本文',
@@ -66,7 +66,7 @@ class ComicTest extends TestCase
             'title' => '公開日未指定コミック',
             'published_at' => '2026-02-05 15:30:00',
         ]);
-        
+
         Carbon::setTestNow();
     }
 
@@ -80,9 +80,9 @@ class ComicTest extends TestCase
             'category_id' => $category->id,
             'published_at' => '2026-02-01 10:00:00'
         ]);
-        
+
         $newPublishedAt = Carbon::parse('2026-03-15 14:30:00');
-        
+
         $payload = [
             'title' => $comic->title,
             'body' => $comic->body,
@@ -105,7 +105,7 @@ class ComicTest extends TestCase
     public function test_admin_comic_can_be_updated_without_published_at(): void
     {
         Carbon::setTestNow('2026-02-05 16:45:00');
-        
+
         $user = User::factory()->create();
         $content = Content::factory()->create(['has_categories' => true]);
         $category = Category::factory()->create(['content_id' => $content->id]);
@@ -114,7 +114,7 @@ class ComicTest extends TestCase
             'category_id' => $category->id,
             'published_at' => '2026-02-01 10:00:00'
         ]);
-        
+
         $payload = [
             'title' => $comic->title,
             'body' => $comic->body,
@@ -132,7 +132,7 @@ class ComicTest extends TestCase
             'id' => $comic->id,
             'published_at' => '2026-02-05 16:45:00',
         ]);
-        
+
         Carbon::setTestNow();
     }
 }
