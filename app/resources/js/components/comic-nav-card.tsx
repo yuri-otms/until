@@ -9,7 +9,7 @@ export default function ComicNavCard({
     next: Comic | Post;
 }) {
     return (
-        <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-stretch">
+        <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-stretch">
             {previous && (
                 <Link
                     href={previous.url}
