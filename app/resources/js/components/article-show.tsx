@@ -2,11 +2,19 @@ import ContentLayout from '@/layouts/content-layout'
 import { type BreadcrumbItem, type Post, type Content, type Category, type Comic } from '@/types';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ComicNavCard from '@/components/comic-nav-card';
 import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
 import { Head } from '@inertiajs/react';
+import type { ReactNode } from 'react';
+
+interface CodeProps {
+    inline?: boolean;
+    className?: string;
+    children?: ReactNode;
+}
 
 interface ArticleShowProps {
     post: Post | Comic;
@@ -51,7 +59,7 @@ export default function ArticleShow({
     ];
 
     // 画像スタイルの設定
-    const imageClassName = imageStyle === 'comic' 
+    const imageClassName = imageStyle === 'comic'
         ? "block mx-auto sm:max-w-xl"
         : "sm:max-w-md border border-slate-200 p-2 m-2 rounded";
 
@@ -72,9 +80,9 @@ export default function ArticleShow({
 
                 {/* 画像がある場合は表示（主にコミック用） */}
                 {images && images.map((image) => (
-                    <img 
-                        key={image} 
-                        src={'/storage/' + image} 
+                    <img
+                        key={image}
+                        src={'/storage/' + image}
                         alt=""
                         className={imageClassName}
                         loading="lazy"
@@ -85,13 +93,15 @@ export default function ArticleShow({
 
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
                     components={{
                         h1: (props) => (
                             <h2 className="text-2xl font-bold mt-6 mb-4" {...props} />
                         ),
                         h2: (props) => (
                             <h3 className="text-xl font-semibold mt-6 mb-3" {...props} />
+                        ),
+                        h3: (props) => (
+                            <h4 className="text-lg font-semibold mt-5 mb-2" {...props} />
                         ),
                         p: (props) => (
                             <p className="text-base leading-7 mb-4" {...props} />
@@ -108,9 +118,29 @@ export default function ArticleShow({
                         blockquote: (props) => (
                             <blockquote className="border-l-5 pl-5" {...props} />
                         ),
-                        pre: (props) => (
-                            <pre className="bg-black text-white px-4 py-3" {...props} />
-                        ),
+                        code: (props: CodeProps) => {
+                            const { inline, className, children, ...rest } = props;
+                            const match = /language-(\w+)/.exec(className || '');
+                            return !inline && match ? (
+                                <SyntaxHighlighter
+                                    style={vscDarkPlus}
+                                    language={match[1]}
+                                    PreTag="div"
+                                    customStyle={{
+                                        borderRadius: '0.375rem',
+                                        marginBottom: '1rem',
+                                        maxWidth: '100%',
+                                    }}
+                                    {...rest}
+                                >
+                                    {String(children).replace(/\n$/, '')}
+                                </SyntaxHighlighter>
+                            ) : (
+                                <code className="bg-gray-100 px-1 rounded text-sm" {...rest}>
+                                    {children}
+                                </code>
+                            );
+                        },
                         img: (props) => (
                             <img className={imageClassName} {...props} />
                         ),

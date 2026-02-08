@@ -60,11 +60,11 @@ abstract class BaseArticleController extends Controller
     {
         $files = Storage::disk('public')->files('images/comics');
         $number = str_pad($article->id, 3, '0', STR_PAD_LEFT);
-        
+
         $images = array_filter($files, function ($file) use ($number) {
             return Str::contains(basename($file), $number);
         });
-        
+
         return array_values($images);
     }
 }

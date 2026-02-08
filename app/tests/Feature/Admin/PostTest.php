@@ -64,7 +64,7 @@ class PostTest extends TestCase
         $user = User::factory()->create();
         $content = Content::factory()->create(['has_categories' => false]);
         $publishedAt = Carbon::parse('2026-03-01 10:30:00');
-        
+
         $payload = [
             'title' => '公開日指定記事',
             'body' => '本文',
@@ -88,10 +88,10 @@ class PostTest extends TestCase
     public function test_admin_post_can_be_stored_without_published_at(): void
     {
         Carbon::setTestNow('2026-02-05 15:30:00');
-        
+
         $user = User::factory()->create();
         $content = Content::factory()->create(['has_categories' => false]);
-        
+
         $payload = [
             'title' => '公開日未指定記事',
             'body' => '本文',
@@ -110,7 +110,7 @@ class PostTest extends TestCase
             'title' => '公開日未指定記事',
             'published_at' => '2026-02-05 15:30:00',
         ]);
-        
+
         Carbon::setTestNow();
     }
 
@@ -123,9 +123,9 @@ class PostTest extends TestCase
             'category_id' => 0,
             'published_at' => '2026-02-01 10:00:00'
         ]);
-        
+
         $newPublishedAt = Carbon::parse('2026-03-15 14:30:00');
-        
+
         $payload = [
             'title' => $post->title,
             'body' => $post->body,
@@ -149,7 +149,7 @@ class PostTest extends TestCase
     public function test_admin_post_can_be_updated_without_published_at(): void
     {
         Carbon::setTestNow('2026-02-05 16:45:00');
-        
+
         $user = User::factory()->create();
         $content = Content::factory()->create(['has_categories' => false]);
         $post = Post::factory()->create([
@@ -157,7 +157,7 @@ class PostTest extends TestCase
             'category_id' => 0,
             'published_at' => '2026-02-01 10:00:00'
         ]);
-        
+
         $payload = [
             'title' => $post->title,
             'body' => $post->body,
@@ -176,7 +176,7 @@ class PostTest extends TestCase
             'id' => $post->id,
             'published_at' => '2026-02-05 16:45:00',
         ]);
-        
+
         Carbon::setTestNow();
     }
 }
