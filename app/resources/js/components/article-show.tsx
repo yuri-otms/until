@@ -9,6 +9,14 @@ import { formatJapaneseDate } from '@/utils/data';
 import { home } from '@/routes'
 import { Head } from '@inertiajs/react';
 import type { ReactNode } from 'react';
+import { Twitter, Facebook, MessageCircle, Link2, Check } from 'lucide-react';
+import { useState } from 'react';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface CodeProps {
     inline?: boolean;
@@ -37,6 +45,8 @@ export default function ArticleShow({
     metaTitle,
     imageStyle = 'post',
 }: ArticleShowProps) {
+    const [copied, setCopied] = useState(false);
+
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Top',
@@ -62,6 +72,37 @@ export default function ArticleShow({
     const imageClassName = imageStyle === 'comic'
         ? "block mx-auto sm:max-w-xl"
         : "sm:max-w-md border border-slate-200 p-2 m-2 rounded";
+
+    // 現在のページのURL
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const shareTitle = post.title;
+    const shareText = `${shareTitle} | ${content.name}`;
+
+    // 共有ハンドラー
+    const handleShareX = () => {
+        const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+    };
+
+    const handleShareLine = () => {
+        const url = `https://line.me/R/msg/text/?${encodeURIComponent(`${shareText} ${currentUrl}`)}`;
+        window.open(url, '_blank');
+    };
+
+    const handleShareFacebook = () => {
+        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+        window.open(url, '_blank', 'width=600,height=400');
+    };
+
+    const handleCopyUrl = async () => {
+        try {
+            await navigator.clipboard.writeText(currentUrl);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
 
     return (
         <>
@@ -148,6 +189,76 @@ export default function ArticleShow({
                 >
                     {post.body}
                 </ReactMarkdown>
+
+                {/* 共有ボタン */}
+                <TooltipProvider>
+                    <div className="flex justify-center items-center gap-3 py-3 mt-4 mb-2 bg-[#F5F5F5] rounded-lg">
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    onClick={handleShareX}
+                                    className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
+                                    aria-label="Xで共有"
+                                >
+                                    <Twitter className="w-6 h-6 text-gray-700" />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="border border-white">
+                                <p>X</p>
+                            </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    onClick={handleShareLine}
+                                    className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
+                                    aria-label="LINEで共有"
+                                >
+                                    <MessageCircle className="w-6 h-6 text-gray-700" />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="border border-white">
+                                <p>LINE</p>
+                            </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    onClick={handleShareFacebook}
+                                    className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
+                                    aria-label="Facebookで共有"
+                                >
+                                    <Facebook className="w-6 h-6 text-gray-700" />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="border border-white">
+                                <p>Facebook</p>
+                            </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    onClick={handleCopyUrl}
+                                    className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
+                                    aria-label="URLをコピー"
+                                >
+                                    {copied ? (
+                                        <Check className="w-6 h-6 text-green-600" />
+                                    ) : (
+                                        <Link2 className="w-6 h-6 text-gray-700" />
+                                    )}
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="border border-white">
+                                <p>{copied ? "コピーしました" : "URLをコピー"}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </div>
+                </TooltipProvider>
+
                 <ComicNavCard previous={previous} next={next} />
             </ContentLayout>
         </>
