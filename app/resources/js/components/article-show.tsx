@@ -149,7 +149,6 @@ export default function ArticleShow({
                         p: (props) => {
                             // 子要素をチェック - 単独のYouTube URLの場合はYouTubeCardを表示
                             const { children } = props;
-                            console.log('p children:', children);
                             
                             // childrenを配列として扱う
                             const childArray = Array.isArray(children) ? children : [children];
@@ -169,12 +168,10 @@ export default function ArticleShow({
                                 // aタグの場合、そのhref属性をチェック
                                 if (typeof child === 'object' && child !== null && 'props' in child) {
                                     const href = (child as any).props?.href;
-                                    console.log('href found:', href);
                                     if (href && typeof href === 'string' && isYouTubeUrl(href)) {
                                         const videoId = extractYouTubeVideoId(href);
-                                        console.log('YouTube videoId:', videoId);
                                         if (videoId) {
-                                            return <YouTubeCard videoId={videoId} />;
+                                            return <YouTubeCard videoId={videoId} imageStyle={imageStyle} />;
                                         }
                                     }
                                 }
@@ -182,12 +179,10 @@ export default function ArticleShow({
                                 // 文字列の場合
                                 if (typeof child === 'string') {
                                     const trimmed = child.trim();
-                                    console.log('string child:', trimmed);
                                     if (isYouTubeUrl(trimmed)) {
                                         const videoId = extractYouTubeVideoId(trimmed);
-                                        console.log('YouTube videoId:', videoId);
                                         if (videoId) {
-                                            return <YouTubeCard videoId={videoId} />;
+                                            return <YouTubeCard videoId={videoId} imageStyle={imageStyle} />;
                                         }
                                     }
                                 }
