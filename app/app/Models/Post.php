@@ -8,7 +8,7 @@ class Post extends BaseArticle
 
     public function sortScope(): string
     {
-        if ($this->category_id) {
+        if ($this->content && $this->content->has_categories) {
             return 'category_id';
         } else {
             return 'content_id';
