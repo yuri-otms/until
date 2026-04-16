@@ -5,7 +5,9 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ComicNavCard from '@/components/comic-nav-card';
+import YouTubeCard from '@/components/youtube-card';
 import { formatJapaneseDate } from '@/utils/data';
+import { extractYouTubeVideoId, isYouTubeUrl } from '@/utils/youtube';
 import { home } from '@/routes'
 import { Head } from '@inertiajs/react';
 import type { ReactNode } from 'react';
@@ -144,9 +146,50 @@ export default function ArticleShow({
                         h3: (props) => (
                             <h4 className="text-lg font-semibold mt-5 mb-2" {...props} />
                         ),
-                        p: (props) => (
-                            <p className="text-base leading-7 mb-4" {...props} />
-                        ),
+                        p: (props) => {
+                            // 子要素をチェック - 単独のYouTube URLの場合はYouTubeCardを表示
+                            const { children } = props;
+                            
+                            // childrenを配列として扱う
+                            const childArray = Array.isArray(children) ? children : [children];
+                            
+                            // 空白や改行を除いた有効な要素のみフィルタリング
+                            const validChildren = childArray.filter(child => {
+                                if (typeof child === 'string') {
+                                    return child.trim().length > 0;
+                                }
+                                return true;
+                            });
+                            
+                            // 有効な子要素が1つだけの場合
+                            if (validChildren.length === 1) {
+                                const child = validChildren[0];
+                                
+                                // aタグの場合、そのhref属性をチェック
+                                if (typeof child === 'object' && child !== null && 'props' in child) {
+                                    const href = (child as any).props?.href;
+                                    if (href && typeof href === 'string' && isYouTubeUrl(href)) {
+                                        const videoId = extractYouTubeVideoId(href);
+                                        if (videoId) {
+                                            return <YouTubeCard videoId={videoId} imageStyle={imageStyle} />;
+                                        }
+                                    }
+                                }
+                                
+                                // 文字列の場合
+                                if (typeof child === 'string') {
+                                    const trimmed = child.trim();
+                                    if (isYouTubeUrl(trimmed)) {
+                                        const videoId = extractYouTubeVideoId(trimmed);
+                                        if (videoId) {
+                                            return <YouTubeCard videoId={videoId} imageStyle={imageStyle} />;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            return <p className="text-base leading-7 mb-4" {...props} />;
+                        },
                         ul: (props) => (
                             <ul className="list-disc pl-6 mb-4" {...props} />
                         ),
@@ -200,9 +243,9 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="Xで共有"
                                 >
-                                    <img 
-                                        src="/storage/images/common/x_logo.png" 
-                                        alt="X" 
+                                    <img
+                                        src="/storage/images/common/x_logo.png"
+                                        alt="X"
                                         className="w-6 h-6"
                                     />
                                 </button>
@@ -219,9 +262,9 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="LINEで共有"
                                 >
-                                    <img 
-                                        src="/storage/images/common/line_logo.png" 
-                                        alt="LINE" 
+                                    <img
+                                        src="/storage/images/common/line_logo.png"
+                                        alt="LINE"
                                         className="w-6 h-6"
                                     />
                                 </button>
@@ -238,9 +281,9 @@ export default function ArticleShow({
                                     className="p-3 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
                                     aria-label="Facebookで共有"
                                 >
-                                    <img 
-                                        src="/storage/images/common/facebook_logo.png" 
-                                        alt="Facebook" 
+                                    <img
+                                        src="/storage/images/common/facebook_logo.png"
+                                        alt="Facebook"
                                         className="w-6 h-6"
                                     />
                                 </button>
