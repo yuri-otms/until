@@ -25,11 +25,13 @@ export default function Edit({
     categories,
     post,
     postStatusOptions,
+    contentsWithoutCategories,
 }: {
     content: Content;
     categories: Category[] | null;
     post: Post;
     postStatusOptions: PostStatus[];
+    contentsWithoutCategories: Content[];
 }) {
     const pageName = content.name + '記事投稿';
     const breadcrubms: BreadcrumbItem[] = [
@@ -93,10 +95,27 @@ export default function Edit({
                                         message={errors.category_id}
                                         className="mt-2"
                                     />
+                                    <input type="hidden" name="content_id" value={content.id} />
                                     </div>
                                     :
-                                    <input type="hidden" name="category_id"
-                                    value="0" />
+                                    <div>
+                                    <input type="hidden" name="category_id" value="0" />
+                                    <Label htmlFor="content_id">コンテンツ</Label>
+                                    <RadioGroup defaultValue={post.content_id.toString()} name="content_id">
+                                        {contentsWithoutCategories.map((row) => (
+                                            <div
+                                            key={row.id}
+                                            className="flex items-center gap-3">
+                                                <RadioGroupItem value={row.id.toString()} id={`content_${row.id}`} />
+                                                <Label htmlFor={`content_${row.id}`}>{row.name}</Label>
+                                             </div>
+                                        ))}
+                                    </RadioGroup>
+                                    <InputError
+                                        message={errors.content_id}
+                                        className="mt-2"
+                                    />
+                                    </div>
                                     }
                                     <Label htmlFor="name">本文</Label>
                                     <Textarea
@@ -138,9 +157,6 @@ export default function Edit({
                                         message={errors.status}
                                         className="mt-2"
                                     />
-                                    <input type="hidden"
-                                    name="content_id"
-                                    value={content.id} />
 
                                     <Button
                                         type="submit"

@@ -26,6 +26,11 @@ class PostUpdateRequest extends FormRequest
                 'required',
                 'numeric'
             ],
+            'content_id' => [
+                'required',
+                'numeric',
+                'exists:contents,id'
+            ],
             'body' => [
                 'required',
             ],

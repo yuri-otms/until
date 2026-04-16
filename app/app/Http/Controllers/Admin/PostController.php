@@ -81,11 +81,18 @@ class PostController extends Controller
     {
         $content = Content::find($post->content_id);
         $categories = Category::getCategoriesByContent($content->id);
+        
+        // カテゴリ無しコンテンツのリストを取得
+        $contentsWithoutCategories = Content::where('has_categories', false)
+            ->orderBy('sort_order')
+            ->get();
+        
         return Inertia::render('admin/posts/edit', [
             'content' => $content,
             'categories' => $categories,
             'post' => $post,
             'postStatusOptions' => PostStatus::keyLabelList(),
+            'contentsWithoutCategories' => $contentsWithoutCategories,
         ]);
     }
 
@@ -98,7 +105,14 @@ class PostController extends Controller
             $data['published_at'] = now();
         }
 
+        // sortScope()でcontentを参照するため、事前にロード
+        $post->load('content');
+        
         $post->update($data);
+        
+        // content_idが変更された可能性があるため、リロード
+        $post->refresh();
+        
         return to_route('admin.posts.index', [
             'content'=> $post->content->slug,
             'category_id' => $post->category_id,
